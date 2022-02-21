@@ -33,7 +33,7 @@ jobs:
           cp -r ${GITHUB_WORKSPACE}/production/. ${GITHUB_WORKSPACE}/dist/
 
       - name: Install Production Modules
-        run: cd dist && npm run install
+        run: cd dist && npm install
         
       - name: Deploy to Prodcution Branch
         uses: JamesIves/github-pages-deploy-action@4.1.5
