@@ -38,12 +38,12 @@ Setar-bot has many features, but to begin with, we would suggest, the bot has a 
     - Setar-Bot Component and Classes are compiled and ready to use in `dist` Folder
 
 ### Features
-- [x] Support YouTube, Spotify, SoundCloud, Deezer (using (music-engines)[https://npmjs.com/music-engines])
+- [x] Support YouTube, Spotify, SoundCloud, Deezer using [music-engines](https://npmjs.com/music-engines)
 - [x] Multi Language System
 - [x] Perfecte Typings and Structers
 
 ## Config
-There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at (.example.env File)[]
+There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at [.example.env File](https://github.com/SeTar-Bot/Setar-Bot/blob/main/example.env)
 
 ### Support
 You can ask about Source configuration and bot setup in [our Disocrd Server](https://discord.gg/7jgfP6j4Tc)
