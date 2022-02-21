@@ -2,7 +2,7 @@ import { ClientOptions, Intents, Permissions, } from "discord.js";
 import path from "path";
 import { botOpts } from "../../../types/classes";
 import Client from "../../Classes/Client";
-import * as pkg from "../../../package.json";
+//import * as pkg from "../../../package.json";
 const botOptions: botOpts = {
     
     client: {
@@ -28,12 +28,11 @@ const botOptions: botOpts = {
     inviteURL: process.env.inviteURL,
     supportURL: process.env.supportURL,
     websiteURL: process.env.websiteURL,
-    version: pkg.version,
+    version: "v3.0.0-beta.2.2",//pkg.version,
     perms: [
         Permissions.FLAGS.ATTACH_FILES,
         Permissions.FLAGS.CONNECT,
         Permissions.FLAGS.CREATE_INSTANT_INVITE,
-        Permissions.FLAGS.MANAGE_CHANNELS,
         Permissions.FLAGS.MANAGE_MESSAGES,
         Permissions.FLAGS.MUTE_MEMBERS,
         Permissions.FLAGS.PRIORITY_SPEAKER,
