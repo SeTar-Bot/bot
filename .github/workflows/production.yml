@@ -21,11 +21,11 @@ jobs:
           cache: "npm"
 
       - name: Install Dependcies
-        uses: npm install
+        run: npm install
       
       - name: Compile to Production
-        uses: npm run build
-        
+        run: npm run build
+
       - name: Deploy to Prodcution Branch
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
