@@ -22,7 +22,7 @@ const evalCommand: Command = new Command({
         )
         .setDescription(basicInfo.description)
         .setName(basicInfo.name),
-    isAvailable: true,
+    isAvailable: false,
     permission: BotPermissions.ADMIN,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
         try {
