@@ -1,6 +1,6 @@
 import { Intents, Permissions } from "discord.js";
 import path from "path";
-import * as pkg from "../../../package.json.mjs";
+//import * as pkg from "../../../package.json";
 const botOptions = {
   client: {
     restGlobalRateLimit: 50,
@@ -22,8 +22,9 @@ const botOptions = {
   inviteURL: process.env.inviteURL,
   supportURL: process.env.supportURL,
   websiteURL: process.env.websiteURL,
-  version: pkg.version,
-  perms: [Permissions.FLAGS.ATTACH_FILES, Permissions.FLAGS.CONNECT, Permissions.FLAGS.CREATE_INSTANT_INVITE, Permissions.FLAGS.MANAGE_CHANNELS, Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.MUTE_MEMBERS, Permissions.FLAGS.PRIORITY_SPEAKER, Permissions.FLAGS.READ_MESSAGE_HISTORY, Permissions.FLAGS.REQUEST_TO_SPEAK, Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.SPEAK, Permissions.FLAGS.START_EMBEDDED_ACTIVITIES, Permissions.FLAGS.STREAM, Permissions.FLAGS.USE_APPLICATION_COMMANDS, Permissions.FLAGS.USE_EXTERNAL_EMOJIS, Permissions.FLAGS.USE_EXTERNAL_STICKERS, Permissions.FLAGS.USE_VAD, Permissions.FLAGS.VIEW_CHANNEL, Permissions.FLAGS.VIEW_GUILD_INSIGHTS],
+  version: "v3.0.0-beta.2.2",
+  //pkg.version,
+  perms: [Permissions.FLAGS.ATTACH_FILES, Permissions.FLAGS.CONNECT, Permissions.FLAGS.CREATE_INSTANT_INVITE, Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.MUTE_MEMBERS, Permissions.FLAGS.PRIORITY_SPEAKER, Permissions.FLAGS.READ_MESSAGE_HISTORY, Permissions.FLAGS.REQUEST_TO_SPEAK, Permissions.FLAGS.SEND_MESSAGES, Permissions.FLAGS.SPEAK, Permissions.FLAGS.START_EMBEDDED_ACTIVITIES, Permissions.FLAGS.STREAM, Permissions.FLAGS.USE_APPLICATION_COMMANDS, Permissions.FLAGS.USE_EXTERNAL_EMOJIS, Permissions.FLAGS.USE_EXTERNAL_STICKERS, Permissions.FLAGS.USE_VAD, Permissions.FLAGS.VIEW_CHANNEL, Permissions.FLAGS.VIEW_GUILD_INSIGHTS],
   readyPresence: client => {
     return {
       afk: false,

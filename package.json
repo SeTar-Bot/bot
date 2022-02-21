@@ -6,12 +6,15 @@
   "main": "main.mjs",
   "scripts": {
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
-    "start": "node main.mjs"
+    "start": "node --experimental-json-modules main.mjs"
   },
   "author": {
     "email": "ehsan8184@gmail.com",
     "name": "Ehsan Golmakani",
     "url": "https://ehsan.js.org"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "license": "MIT",
   "dependencies": {
