@@ -3,9 +3,10 @@
   "version": "3.0.0-beta.2.2",
   "description": "One of the Best Music Bots written TypeScript by Setar-Team",
   "type": "module",
-  "main": "dist/main.mjs",
+  "main": "main.mjs",
   "scripts": {
-    "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs"
+    "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
+    "start": "node main.mjs"
   },
   "author": {
     "email": "ehsan8184@gmail.com",
