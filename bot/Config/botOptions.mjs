@@ -14,10 +14,10 @@ const botOptions = {
       }]
     }
   },
-  events: path.resolve(path.resolve(), "dist", "bot", "Events"),
-  commands: path.resolve(path.resolve(), "dist", "bot", "Components", "Commands"),
-  buttons: path.resolve(path.resolve(), "dist", "bot", "Components", "Buttons"),
-  contexts: path.resolve(path.resolve(), "dist", "bot", "Components", "Contexts"),
+  events: path.resolve(path.resolve(), "bot", "Events"),
+  commands: path.resolve(path.resolve(), "bot", "Components", "Commands"),
+  buttons: path.resolve(path.resolve(), "bot", "Components", "Buttons"),
+  contexts: path.resolve(path.resolve(), "bot", "Components", "Contexts"),
   databaseURI: process.env.databaseURI,
   inviteURL: process.env.inviteURL,
   supportURL: process.env.supportURL,
