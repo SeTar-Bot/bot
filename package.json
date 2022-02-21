@@ -5,7 +5,6 @@
   "type": "module",
   "main": "main.mjs",
   "scripts": {
-    "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
     "start": "node --experimental-json-modules main.mjs"
   },
   "author": {
