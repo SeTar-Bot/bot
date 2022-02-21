@@ -13,6 +13,9 @@
     "name": "Ehsan Golmakani",
     "url": "https://ehsan.js.org"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",

@@ -33,7 +33,6 @@ const botOptions: botOpts = {
         Permissions.FLAGS.ATTACH_FILES,
         Permissions.FLAGS.CONNECT,
         Permissions.FLAGS.CREATE_INSTANT_INVITE,
-        Permissions.FLAGS.MANAGE_CHANNELS,
         Permissions.FLAGS.MANAGE_MESSAGES,
         Permissions.FLAGS.MUTE_MEMBERS,
         Permissions.FLAGS.PRIORITY_SPEAKER,
