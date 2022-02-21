@@ -43,8 +43,7 @@ Setar-bot has many features, but to begin with, we would suggest, the bot has a 
 - [x] Perfecte Typings and Structers
 
 ## Config
-There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at [.example.env File](https://github.com/SeTar-Bot/Setar-Bot/blob/main/example.env)
-
+There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at [.example.env](https://github.com/SeTar-Bot/Setar-Bot/blob/main/example.env) File
 ### Support
 You can ask about Source configuration and bot setup in [our Disocrd Server](https://discord.gg/7jgfP6j4Tc)
 
