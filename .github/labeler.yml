@@ -1,0 +1,29 @@
+'typings':
+  - types/*
+  - src/typings/*
+
+'classes':
+  - src/Classes/*
+
+'database':
+  - src/Database/*
+  - src/Database/**/*
+
+'locale':
+  - types/localeSchema.ts
+  - src/locales/*
+  - src/locales/**/*
+
+'components':
+  - src/bot/Components/**/*
+  - src/bot/Components/*
+
+'events':
+  - src/bot/Events/*
+  - src/bot/index.ts
+
+'source':
+  - src/*
+  - src/**/*
+  - src/**/**/*
+  - src/**/**/**/*

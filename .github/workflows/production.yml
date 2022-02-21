@@ -1,0 +1,33 @@
+name: Production Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Install Dependcies
+        uses: npm install
+      
+      - name: Compile to Production
+        uses: npm run build
+        
+      - name: Deploy to Prodcution Branch
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: production
+          folder: dist
