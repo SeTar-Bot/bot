@@ -1,0 +1,48 @@
+{
+  "name": "setar-bot",
+  "version": "3.0.0-beta.2",
+  "description": "One of the Best Music Bots written TypeScript by Setar-Team",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "scripts": {
+    "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs"
+  },
+  "author": {
+    "email": "ehsan8184@gmail.com",
+    "name": "Ehsan Golmakani",
+    "url": "https://ehsan.js.org"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "@discordjs/voice": "^0.8.0",
+    "@setar/cache": "^1.0.1",
+    "@types/node": "^17.0.18",
+    "axios": "^0.26.0",
+    "bin-converter": "^1.1.2",
+    "bufferutil": "^4.0.6",
+    "chalk": "^5.0.0",
+    "discord-api-types": "^0.27.1",
+    "discord.js": "^13.6.0",
+    "erlpack": "github:discord/erlpack",
+    "ffmetadata": "^1.7.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "i18n": "^0.14.1",
+    "json-variables": "^11.0.12",
+    "mongoose": "^6.2.2",
+    "ora": "^6.0.1",
+    "os": "^0.1.2",
+    "utf-8-validate": "^5.0.8",
+    "uuid": "^8.3.2",
+    "zlib-sync": "^0.1.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.5",
+    "@babel/preset-typescript": "^7.16.7",
+    "babel-plugin-add-import-extension": "^1.6.0",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  }
+}
