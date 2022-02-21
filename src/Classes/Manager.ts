@@ -84,7 +84,7 @@ export default class Manager implements botManager {
                     const importState = await import(`file://${path.resolve(this.cmdDir, cmdFile)}`);
                     const command: Command = importState.default;          
                     this.commands.set(command.name, command);
-                    if(!command.guild)
+                    if(!command.guild && command.isAvailable)
                         restBuilder.push(command.builder.toJSON());
                     else    
                         await this.client.restClient.updateCommand(this.client.application.commands, command.guild, command.builder.toJSON());
@@ -109,7 +109,8 @@ export default class Manager implements botManager {
                     const importState = await import(`file://${path.resolve(this.ctxDir, ctxFile)}`);
                     const context: Context = importState.default;          
                     this.contexts.set(context.name, context);
-                    restBuilder.push({ name: context.name, type: context.type });
+                    if(context.isAvailable)
+                        restBuilder.push({ name: context.name, type: context.type });
                 } catch (error) {
                     ctxLoading.fail(`Contexts ${ctxFile} Failed to load Due Error: ${error}`);
                 }
