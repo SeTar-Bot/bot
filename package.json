@@ -1,6 +1,6 @@
 {
   "name": "setar-bot",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.2.1",
   "description": "One of the Best Music Bots written TypeScript by Setar-Team",
   "type": "module",
   "main": "dist/index.mjs",
