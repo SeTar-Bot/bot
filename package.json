@@ -5,6 +5,7 @@
   "type": "module",
   "main": "main.mjs",
   "scripts": {
+    "heroku-postbuild": "echo \"Error: no post-build specified\" && exit 1",
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
     "start": "node --experimental-json-modules main.mjs"
   },
