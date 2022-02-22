@@ -6,6 +6,7 @@ import langCommand from "./Commands/language.mjs";
 import permCommand from "./Commands/permission.mjs";
 import statsCommand from "./Commands/stats.mjs";
 import testContext from "./Contexts/testContext.mjs";
+import liveEndpoint from "./Endpoints/Live.mjs";
 const Buttons = {
   refreshStats: refreshStatsButton
 };
@@ -20,9 +21,13 @@ const Commands = {
 const Contexts = {
   test: testContext
 };
+const Endpoints = {
+  live: liveEndpoint
+};
 const Components = {
   Buttons,
   Commands,
-  Contexts
+  Contexts,
+  Endpoints
 };
 export default Components;

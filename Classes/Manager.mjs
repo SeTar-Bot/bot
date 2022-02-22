@@ -8,18 +8,21 @@ export default class Manager {
   commands = new Collection();
   contexts = new Collection();
   buttons = new Collection();
+  endpoints = new Collection();
 
-  constructor(client, cmdDir, eventDir, buttonDir, contextDir) {
-    if (!fs.existsSync(cmdDir) || !fs.existsSync(eventDir) || !fs.existsSync(buttonDir) || !fs.existsSync(contextDir)) throw new Error(`Directions does not exist. | Recived: ${cmdDir} | ${eventDir} | ${buttonDir} | ${contextDir}`);
+  constructor(client, cmdDir, eventDir, buttonDir, contextDir, endpointDir) {
+    if (!fs.existsSync(cmdDir) || !fs.existsSync(eventDir) || !fs.existsSync(buttonDir) || !fs.existsSync(contextDir) || !fs.existsSync(endpointDir)) throw new Error(`Directions does not exist. | Recived: ${cmdDir} | ${eventDir} | ${buttonDir} | ${contextDir} | ${endpointDir}`);
     this.client = client;
     this.cmdDir = cmdDir;
     this.ctxDir = contextDir;
     this.eventDir = eventDir;
     this.buttonDir = buttonDir;
+    this.endpointtDir = endpointDir;
     this.commandFiles = fs.readdirSync(cmdDir);
     this.contextFiles = fs.readdirSync(contextDir);
     this.eventFiles = fs.readdirSync(eventDir);
     this.buttonFiles = fs.readdirSync(buttonDir);
+    this.endpointFiles = fs.readdirSync(endpointDir);
     this.applicationClient = client.application.commands;
   }
 
@@ -114,11 +117,34 @@ export default class Manager {
         }
       }
 
-      buttonLoading.succeed(`${chalk.bgGray(this.buttonFiles.length)} Buttons has been loaded.`);
+      buttonLoading.succeed(`${chalk.bgGray(this.buttonFiles.length)} Buttons has been loaded.`); // Endpoints
+
+      const endpointLoading = ora({
+        text: `Loading ${chalk.blue(`Endpoints`)}`,
+        color: "yellow",
+        spinner: "bluePulse"
+      });
+
+      for (let i = 0; i < this.endpointFiles.length; i++) {
+        const endpFile = this.endpointFiles[i];
+
+        try {
+          const importState = await import(`file://${path.resolve(this.endpointtDir, endpFile)}`);
+          const endpoint = importState.default;
+          this.endpoints.set(endpoint.uri, endpoint);
+          this.client.expressServer.handle(endpoint.uri, endpoint.method, endpoint.handler);
+        } catch (error) {
+          endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
+        }
+      }
+
+      endpointLoading.succeed(`${chalk.bgGray(this.endpointFiles.length)} Endpoints has been loaded.`);
       return {
         events: this.events.size,
         commands: this.commands.size,
-        buttons: this.buttons.size
+        buttons: this.buttons.size,
+        contexts: this.contexts.size,
+        endpoints: this.endpoints.size
       };
     } catch (err) {
       throw err;

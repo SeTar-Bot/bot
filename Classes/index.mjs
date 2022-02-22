@@ -3,7 +3,9 @@ import Client from "./Client.mjs";
 import Command from "./Command.mjs";
 import Context from "./Context.mjs";
 import EmbedBuilder from "./EmbedBuilder.mjs";
+import Endpoint from "./Endpoint.mjs";
 import Event from "./Event.mjs";
+import ExpressServer from "./Express.mjs";
 import Manager from "./Manager.mjs";
 import RestClient from "./Rest.mjs";
 const Classes = {
@@ -14,6 +16,8 @@ const Classes = {
   Event,
   Command,
   Button,
-  Context
+  Context,
+  ExpressServer,
+  Endpoint
 };
 export default Classes;

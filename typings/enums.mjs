@@ -50,3 +50,9 @@ export let localeList;
 (function (localeList) {
   localeList["ENGLISH"] = "en-us";
 })(localeList || (localeList = {}));
+
+export let expreessEndpoints;
+
+(function (expreessEndpoints) {
+  expreessEndpoints["LIVE"] = "/live";
+})(expreessEndpoints || (expreessEndpoints = {}));
