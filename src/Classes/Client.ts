@@ -8,6 +8,7 @@ import ora from "ora";
 import { CacheTypes } from "../typings/enums";
 import { localeManager } from "../locales";
 import axios from "axios";
+import ExpressServer from "./Express";
 
 export default class Client extends DjsClient {
 
@@ -19,14 +20,16 @@ export default class Client extends DjsClient {
     readonly version: string;
     public localeManager: localeManager;
     public axiosClient: typeof axios = axios;
+    public expressServer: ExpressServer;
     constructor(token: string, clientId: string, opts: botOpts = botOptions)
     {
         super(opts.client);
         this.botToken = token;
         this.botId = clientId;
+        this.expressServer = new ExpressServer(opts.serverPort);
         this.login(this.botToken)
         .then(() => {
-            this.manager = new Manager(this, opts.commands, opts.events, opts.buttons, opts.contexts);
+            this.manager = new Manager(this, opts.commands, opts.events, opts.buttons, opts.contexts, opts.endpoints);
             this.restClient = new RestClient(this.botToken, this.botId);
             this.database = new SetarDB(opts.databaseURI);
             this.localeManager = new localeManager();

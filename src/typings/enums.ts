@@ -43,3 +43,9 @@ export enum localeList {
     ENGLISH = "en-us",
 
 }
+
+export enum expreessEndpoints {
+
+    LIVE = "/live",
+    
+}

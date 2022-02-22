@@ -6,6 +6,7 @@ import langCommand from "./Commands/language";
 import permCommand from "./Commands/permission";
 import statsCommand from "./Commands/stats";
 import testContext from "./Contexts/testContext";
+import liveEndpoint from "./Endpoints/Live";
 
 
 const Buttons = {
@@ -28,10 +29,15 @@ const Contexts = {
 
 }
 
+const Endpoints = {
+    live: liveEndpoint
+}
+
 const Components = {
     Buttons,
     Commands,
-    Contexts
+    Contexts,
+    Endpoints
 }
 
 export default Components;
