@@ -4,8 +4,8 @@
   "description": "One of the Best Music Bots written TypeScript by Setar-Team",
   "type": "module",
   "main": "main.mjs",
-  "heroku-run-build-script": false,
   "scripts": {
+    "heroku-postbuild": "echo a useless script",
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
     "start": "node --experimental-json-modules main.mjs"
   },
