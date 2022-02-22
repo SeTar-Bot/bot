@@ -23,6 +23,7 @@ const botOptions = {
   inviteURL: process.env.inviteURL,
   supportURL: process.env.supportURL,
   websiteURL: process.env.websiteURL,
+  serverURl: process.env.serverURL,
   serverPort: Number(process.env.expressPort),
   version: "v3.0.0-beta.2.2",
   //pkg.version,

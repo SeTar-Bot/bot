@@ -56,3 +56,12 @@ export let expreessEndpoints;
 (function (expreessEndpoints) {
   expreessEndpoints["LIVE"] = "/live";
 })(expreessEndpoints || (expreessEndpoints = {}));
+
+export let expressMethods;
+
+(function (expressMethods) {
+  expressMethods["GET"] = "get";
+  expressMethods["POST"] = "post";
+  expressMethods["PUT"] = "put";
+  expressMethods["PATCH"] = "patch";
+})(expressMethods || (expressMethods = {}));

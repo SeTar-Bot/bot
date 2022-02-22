@@ -5,6 +5,8 @@
   "type": "module",
   "main": "main.mjs",
   "scripts": {
+    "heroku-postbuild": "echo \"Error: no post-build specified\" && exit 1",
+    "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
     "start": "node --experimental-json-modules main.mjs"
   },
   "author": {
@@ -21,6 +23,7 @@
     "@discordjs/rest": "^0.3.0",
     "@discordjs/voice": "^0.8.0",
     "@setar/cache": "^1.0.1",
+    "@types/express": "^4.17.13",
     "@types/node": "^17.0.18",
     "axios": "^0.26.0",
     "bin-converter": "^1.1.2",
@@ -29,6 +32,7 @@
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
     "erlpack": "github:discord/erlpack",
+    "express": "^4.17.3",
     "ffmetadata": "^1.7.0",
     "fluent-ffmpeg": "^2.1.2",
     "i18n": "^0.14.1",
