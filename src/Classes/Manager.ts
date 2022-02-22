@@ -10,37 +10,44 @@ import chalk from "chalk";
 import Button from "./Button";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import Context from "./Context";
+import { expreessEndpoints } from "../typings/enums";
+import Endpoint from "./Endpoint";
 
 export default class Manager implements botManager {
     readonly commandFiles: string[];
     readonly contextFiles: string[];
     readonly eventFiles: string[];
     readonly buttonFiles: string[];
+    readonly endpointFiles: string[];
     readonly events: Collection<string, Event> = new Collection();
     readonly commands: Collection<string, Command> = new Collection();
     readonly contexts: Collection<string, Context> = new Collection(); 
     readonly buttons: Collection<string, Button> = new Collection();
+    readonly endpoints: Collection<expreessEndpoints, Endpoint> = new Collection();
     private cmdDir: string;
     private ctxDir: string;
     private eventDir: string;
     private buttonDir: string;
+    private endpointtDir: string;
     private client: Client;
     private applicationClient: ApplicationCommandManager;
 
-    constructor(client: Client, cmdDir: string, eventDir: string, buttonDir: string, contextDir: string)
+    constructor(client: Client, cmdDir: string, eventDir: string, buttonDir: string, contextDir: string, endpointDir: string)
     {
-        if (!fs.existsSync(cmdDir) || !fs.existsSync(eventDir) || !fs.existsSync(buttonDir) || !fs.existsSync(contextDir))
-            throw new Error(`Directions does not exist. | Recived: ${cmdDir} | ${eventDir} | ${buttonDir} | ${contextDir}`);
+        if (!fs.existsSync(cmdDir) || !fs.existsSync(eventDir) || !fs.existsSync(buttonDir) || !fs.existsSync(contextDir) || !fs.existsSync(endpointDir))
+            throw new Error(`Directions does not exist. | Recived: ${cmdDir} | ${eventDir} | ${buttonDir} | ${contextDir} | ${endpointDir}`);
 
         this.client = client;
         this.cmdDir = cmdDir;
         this.ctxDir = contextDir
         this.eventDir = eventDir;
         this.buttonDir = buttonDir;
+        this.endpointtDir = endpointDir;
         this.commandFiles = fs.readdirSync(cmdDir);
         this.contextFiles = fs.readdirSync(contextDir)
         this.eventFiles = fs.readdirSync(eventDir);
         this.buttonFiles = fs.readdirSync(buttonDir);
+        this.endpointFiles = fs.readdirSync(endpointDir);
         this.applicationClient = client.application.commands;
     }
 
@@ -139,11 +146,35 @@ export default class Manager implements botManager {
         
             buttonLoading.succeed(`${chalk.bgGray(this.buttonFiles.length)} Buttons has been loaded.`);
 
+            // Endpoints
+            const endpointLoading = ora({
+                text: `Loading ${chalk.blue(`Endpoints`)}`,
+                color: "yellow",
+                spinner: "bluePulse",
+            });
+            for (let i = 0; i < this.endpointFiles.length; i++) {
+                const endpFile = this.endpointFiles[i]
+
+                try {
+                    const importState = await import(`file://${path.resolve(this.endpointtDir, endpFile)}`);
+                    const endpoint: Endpoint = importState.default;
+                    this.endpoints.set(endpoint.uri, endpoint);
+                    this.client.expressServer.handle(endpoint.uri, endpoint.method, endpoint.handler);
+                } catch (error) {
+                    endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
+                }
+            }
+
+            endpointLoading.succeed(`${chalk.bgGray(this.endpointFiles.length)} Endpoints has been loaded.`);
+
             return {
                 events: this.events.size,
                 commands: this.commands.size,
                 buttons: this.buttons.size,
+                contexts: this.contexts.size,
+                endpoints: this.endpoints.size
             } as botSetupResult;
+            
         } catch (err) {
             throw err;
         }

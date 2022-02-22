@@ -24,10 +24,12 @@ const botOptions: botOpts = {
     commands: path.resolve(path.resolve(),  "bot", "Components", "Commands"),
     buttons: path.resolve(path.resolve(), "bot", "Components", "Buttons"),
     contexts: path.resolve(path.resolve(), "bot", "Components", "Contexts"),
+    endpoints: path.resolve(path.resolve(), "bot", "Components", "Endpoints"),
     databaseURI: process.env.databaseURI,
     inviteURL: process.env.inviteURL,
     supportURL: process.env.supportURL,
     websiteURL: process.env.websiteURL,
+    serverPort: Number(process.env.expressPort),
     version: "v3.0.0-beta.2.2",//pkg.version,
     perms: [
         Permissions.FLAGS.ATTACH_FILES,

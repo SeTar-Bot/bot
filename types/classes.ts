@@ -1,12 +1,14 @@
 import { Collection, ClientOptions, GuildResolvable, Permissions, PresenceData } from "discord.js";
 import Command from "../src/Classes/Command";
-import { BotPermissions, BotRoles, ContextTypes } from "../src/typings/enums";
+import { BotPermissions, BotRoles, ContextTypes, expreessEndpoints } from "../src/typings/enums";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import Inhibitor from "../src/Classes/Inhibitor";
 import Event from "../src/Classes/Event";
 import Client from "../src/Classes/Client";
 import Button from "../src/Classes/Button";
 import Context from "../src/Classes/Context";
+import { RequestHandler } from "express";
+import Endpoint from "../src/Classes/Endpoint";
 
 export interface botOpts {
     client: ClientOptions;
@@ -14,10 +16,12 @@ export interface botOpts {
     events: string;
     buttons: string;
     contexts: string;
+    endpoints: string;
     databaseURI: string;
     inviteURL: string;
     supportURL: string;
     websiteURL: string;
+    serverPort: number;
     version: string;
     perms: bigint[];
     readyPresence: (client: Client) => PresenceData;
@@ -65,12 +69,24 @@ export interface botContenxts {
 }
 export interface botContextArgs extends botContenxts {}
 
+export type EndpointMethods = "get" | "post" | "put" | "patch";
+
+export interface botEndpoints {
+    uri: expreessEndpoints;
+    method: EndpointMethods;
+    isAvailable: boolean;
+    handler: RequestHandler;
+}
+export interface botEndpointArgs extends botEndpoints {}
+
 //-----------------
 
 export interface botSetupResult {
     events: number;
     commands: number;
     buttons: number;
+    contexts: number;
+    endpoints: number;
 }
 
 export interface botManager {
@@ -79,10 +95,12 @@ export interface botManager {
     contextFiles: string[];
     eventFiles: string[];
     buttonFiles: string[];
+    endpointFiles : string[];
     commands: Collection<string, Command>;
     contexts: Collection<string, Context>;
     events: Collection<string, Event>;
     buttons: Collection<string, Button>;
+    endpoints: Collection<expreessEndpoints, Endpoint>;
     setup: () => Promise<botSetupResult>;
 
 }
