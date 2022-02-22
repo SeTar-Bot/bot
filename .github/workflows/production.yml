@@ -28,7 +28,7 @@ jobs:
 
       - name: Copy Required Files
         run: |
-        cp ${GITHUB_WORKSPACE}/package.json ${GITHUB_WORKSPACE}/dist/package.json
+          cp ${GITHUB_WORKSPACE}/package.json ${GITHUB_WORKSPACE}/dist/package.json
           cp ${GITHUB_WORKSPACE}/package-lock.json ${GITHUB_WORKSPACE}/dist/package-lock.json
           cp -r ${GITHUB_WORKSPACE}/production/. ${GITHUB_WORKSPACE}/dist/
 
