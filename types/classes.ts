@@ -1,13 +1,13 @@
 import { Collection, ClientOptions, GuildResolvable, Permissions, PresenceData } from "discord.js";
 import Command from "../src/Classes/Command";
-import { BotPermissions, BotRoles, ContextTypes, expreessEndpoints } from "../src/typings/enums";
+import { BotPermissions, BotRoles, ContextTypes, expreessEndpoints, expressMethods } from "../src/typings/enums";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import Inhibitor from "../src/Classes/Inhibitor";
 import Event from "../src/Classes/Event";
 import Client from "../src/Classes/Client";
 import Button from "../src/Classes/Button";
 import Context from "../src/Classes/Context";
-import { RequestHandler } from "express";
+import { Request, RequestHandler, Response } from "express";
 import Endpoint from "../src/Classes/Endpoint";
 
 export interface botOpts {
@@ -22,6 +22,7 @@ export interface botOpts {
     supportURL: string;
     websiteURL: string;
     serverPort: number;
+    serverURl: string;
     version: string;
     perms: bigint[];
     readyPresence: (client: Client) => PresenceData;
@@ -69,13 +70,12 @@ export interface botContenxts {
 }
 export interface botContextArgs extends botContenxts {}
 
-export type EndpointMethods = "get" | "post" | "put" | "patch";
 
 export interface botEndpoints {
     uri: expreessEndpoints;
-    method: EndpointMethods;
+    method: expressMethods;
     isAvailable: boolean;
-    handler: RequestHandler;
+    handler: (client: Client, req: Request, res: Response) => Promise<any | void>;
 }
 export interface botEndpointArgs extends botEndpoints {}
 

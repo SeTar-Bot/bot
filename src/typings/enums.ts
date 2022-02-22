@@ -49,3 +49,11 @@ export enum expreessEndpoints {
     LIVE = "/live",
     
 }
+
+export enum expressMethods {
+    GET = "get",
+    POST = "post",
+    PUT = "put",
+    PATCH = "patch",
+    
+}
