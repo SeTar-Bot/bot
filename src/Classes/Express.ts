@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import express, { Express, RequestHandler } from "express";
-import { EndpointMethods } from "../../types/classes";
-import { expreessEndpoints } from "../typings/enums";
+import { expreessEndpoints, expressMethods } from "../typings/enums";
 
 export default class ExpressServer {
 
@@ -15,12 +14,12 @@ export default class ExpressServer {
         this.server
     }
 
-    handle(uri: expreessEndpoints, method: EndpointMethods, cb: RequestHandler)
+    handle(uri: expreessEndpoints, method: expressMethods, cb: RequestHandler)
     {
         if(!this[method])
             throw new Error(`${method} is invalid.`);
 
-        this[method](uri, cb);
+        this[method as string](uri, cb);
     }
 
     getEndpoint(endpoint: expreessEndpoints, cb: RequestHandler)
