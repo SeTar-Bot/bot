@@ -15,8 +15,26 @@ const liveEndpoint: Endpoint = new Endpoint({
         try {
             res.status(200).send({ result: 'ok' });
 
+            let replyRes;
             setTimeout(async () => {
-                const replyRes = await client.axiosClient[basicInfo.method as string](botOptions.serverURl + basicInfo.uri);
+                switch (basicInfo.method) {
+                    case expressMethods.GET:
+                        replyRes = await client.axiosClient.get(botOptions.serverURl + basicInfo.uri);
+                        break;
+                
+                    case expressMethods.POST:
+                        replyRes = await client.axiosClient.post(botOptions.serverURl + basicInfo.uri)
+                        break;
+                    
+                    case expressMethods.PUT:
+                        replyRes = await client.axiosClient.put(botOptions.serverURl + basicInfo.uri);
+                        break;
+
+                    case expressMethods.PATCH:
+                        replyRes = await client.axiosClient.patch(botOptions.serverURl + basicInfo.uri);
+                        break;
+                }
+                
                 if(replyRes.status == 200)
                     console.log(`Server has been refreshed.`);
                 else
