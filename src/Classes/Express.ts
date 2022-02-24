@@ -19,24 +19,7 @@ export default class ExpressServer {
         if(!this.server[method])
             throw new Error(`${method} is invalid.`);
 
-        switch (method) {
-            case expressMethods.GET:
-                this.server.get(uri, cb);
-                break;
-            
-            case expressMethods.POST:
-                this.server.post(uri, cb);
-                break;
-                
-            case expressMethods.PUT:
-                this.server.put(uri, cb);
-                break;
-
-            case expressMethods.PATCH:
-                this.server.patch(uri, cb);
-                break;
-        }
-        
+        this.server[method as string](uri, cb);
     }
 
     getEndpoint(endpoint: expreessEndpoints, cb: RequestHandler)

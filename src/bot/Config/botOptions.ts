@@ -30,7 +30,7 @@ const botOptions: botOpts = {
     supportURL: process.env.supportURL,
     websiteURL: process.env.websiteURL,
     serverURl: process.env.serverURL,
-    serverPort: Number(process.env.expressPort),
+    serverPort: Number(process.env.PORT) || Number(process.env.expressPort),
     version: "v3.0.0-beta.2.2",//pkg.version,
     perms: [
         Permissions.FLAGS.ATTACH_FILES,
