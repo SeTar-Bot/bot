@@ -135,7 +135,6 @@ export default class Manager {
           this.client.expressServer.handle(endpoint.uri, endpoint.method, endpoint.handler);
         } catch (error) {
           endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
-          console.error(error)
         }
       }
 

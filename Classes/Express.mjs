@@ -10,7 +10,7 @@ export default class ExpressServer {
   }
 
   handle(uri, method, cb) {
-    if (!this[method]) throw new Error(`${method} is invalid.`);
+    if (!this.server[method]) throw new Error(`${method} is invalid.`);
 
     switch (method) {
       case expressMethods.GET:
