@@ -2,12 +2,15 @@ import chalk from "chalk";
 import express, { Express, RequestHandler } from "express";
 import { expressCallback } from "../../types/classes";
 import { expreessEndpoints, expressMethods } from "../typings/enums";
+import Client from "./Client";
 
 export default class ExpressServer {
 
     public server: Express;
-    constructor(port: number = Number(process.env.expressPort))
+    private client: Client;
+    constructor(client: Client, port: number = Number(process.env.expressPort))
     {
+
         this.server = express();
         this.server.listen(port, () => {
             console.log('Express Server intialized');
@@ -20,7 +23,9 @@ export default class ExpressServer {
         if(!this.server[method])
             throw new Error(`${method} is invalid.`);
 
-        this.server[method as string](uri, cb);
+        this.server[method as string](uri, (req: express.Request, res: express.Response) => {
+            cb(this.client, req, res)
+        });
     }
 
     getEndpoint(endpoint: expreessEndpoints, cb: RequestHandler)
