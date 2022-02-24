@@ -9,7 +9,7 @@ const liveEndpoint = new Endpoint({ ...basicInfo,
   isAvailable: true,
   handler: async (client, req, res) => {
     try {
-      res.status(200).send({
+      res.send({
         result: 'ok'
       });
       setTimeout(async () => {
