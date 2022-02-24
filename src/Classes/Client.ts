@@ -27,9 +27,9 @@ export default class Client extends DjsClient {
         this.botToken = token;
         this.botId = clientId;
         this.axiosClient = axios;
+        this.expressServer = new ExpressServer(opts.serverPort);
         this.login(this.botToken)
         .then(() => {
-            this.expressServer = new ExpressServer(this, opts.serverPort);
             this.manager = new Manager(this, opts.commands, opts.events, opts.buttons, opts.contexts, opts.endpoints);
             this.restClient = new RestClient(this.botToken, this.botId);
             this.database = new SetarDB(opts.databaseURI);

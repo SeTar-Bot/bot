@@ -12,6 +12,7 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import Context from "./Context";
 import { expreessEndpoints } from "../typings/enums";
 import Endpoint from "./Endpoint";
+import express from "express";
 
 export default class Manager implements botManager {
     readonly commandFiles: string[];
@@ -159,7 +160,9 @@ export default class Manager implements botManager {
                     const importState = await import(`file://${path.resolve(this.endpointtDir, endpFile)}`);
                     const endpoint: Endpoint = importState.default;
                     this.endpoints.set(endpoint.uri, endpoint);
-                    this.client.expressServer.handle(endpoint.uri, endpoint.method, endpoint.handler);
+                    this.client.expressServer.server[endpoint.method](endpoint.uri, (req: express.Request, res: express.Response) => {
+                        endpoint.handler(this.client, req, res);
+                    })
                 } catch (error) {
                     endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
                 }
