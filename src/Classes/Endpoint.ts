@@ -1,15 +1,15 @@
-import { RequestHandler } from "express";
+import { Express } from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import { botEndpointArgs, botEndpoints, EndpointMethods } from "../../types/classes";
-import { expreessEndpoints } from "../typings/enums";
+import { botEndpointArgs, botEndpoints, expressCallback } from "../../types/classes";
+import { expreessEndpoints, expressMethods } from "../typings/enums";
 
 export default class Endpoint implements botEndpoints {
 
     readonly uri: expreessEndpoints;
-    readonly method: EndpointMethods;
+    readonly method: expressMethods;
     public isAvailable: boolean;
-    public handler: RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>;
+    public handler: expressCallback;
 
     constructor(args: botEndpointArgs)
     {

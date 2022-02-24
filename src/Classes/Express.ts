@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import express, { Express, RequestHandler } from "express";
+import { expressCallback } from "../../types/classes";
 import { expreessEndpoints, expressMethods } from "../typings/enums";
 
 export default class ExpressServer {
@@ -14,7 +15,7 @@ export default class ExpressServer {
         this.server
     }
 
-    handle(uri: expreessEndpoints, method: expressMethods, cb: RequestHandler)
+    handle(uri: expreessEndpoints, method: expressMethods, cb: expressCallback)
     {
         if(!this.server[method])
             throw new Error(`${method} is invalid.`);
