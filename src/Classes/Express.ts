@@ -16,7 +16,7 @@ export default class ExpressServer {
 
     handle(uri: expreessEndpoints, method: expressMethods, cb: RequestHandler)
     {
-        if(!this[method])
+        if(!this.server[method])
             throw new Error(`${method} is invalid.`);
 
         switch (method) {
