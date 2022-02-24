@@ -7,7 +7,7 @@ import Event from "../src/Classes/Event";
 import Client from "../src/Classes/Client";
 import Button from "../src/Classes/Button";
 import Context from "../src/Classes/Context";
-import { Request, RequestHandler, Response } from "express";
+import express from "express";
 import Endpoint from "../src/Classes/Endpoint";
 
 export interface botOpts {
@@ -75,7 +75,7 @@ export interface botEndpoints {
     uri: expreessEndpoints;
     method: expressMethods;
     isAvailable: boolean;
-    handler: (client: Client, req: Request, res: Response) => Promise<any | void>;
+    handler: expressCallback;
 }
 export interface botEndpointArgs extends botEndpoints {}
 
@@ -151,3 +151,5 @@ export interface EmbedBuilderObjOpts {
     fetchReply?: boolean;
     ephemeral?: boolean;
 }
+
+export type expressCallback = (client: Client, req: express.Request, res: express.Response) => void;

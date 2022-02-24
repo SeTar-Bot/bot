@@ -2,6 +2,7 @@ import Client from "../../../Classes/Client";
 import Endpoint from "../../../Classes/Endpoint";
 import { expreessEndpoints, expressMethods } from "../../../typings/enums";
 import botOptions from "../../Config/botOptions";
+import express from "express";
 
 const basicInfo = {
     uri: expreessEndpoints.LIVE,
@@ -11,7 +12,7 @@ const basicInfo = {
 const liveEndpoint: Endpoint = new Endpoint({
     ...basicInfo,
     isAvailable: true,
-    handler: async (client: Client, req, res) => {
+    handler: async (client: Client, req: express.Request, res: express.Response) => {
         try {
             res.send({ result: 'ok' });
 
