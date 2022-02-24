@@ -132,7 +132,9 @@ export default class Manager {
           const importState = await import(`file://${path.resolve(this.endpointtDir, endpFile)}`);
           const endpoint = importState.default;
           this.endpoints.set(endpoint.uri, endpoint);
-          this.client.expressServer.handle(endpoint.uri, endpoint.method, endpoint.handler);
+          this.client.expressServer.server[endpoint.method](endpoint.uri, (req, res) => {
+            endpoint.handler(this.client, req, res);
+          });
         } catch (error) {
           endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
         }
