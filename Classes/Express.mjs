@@ -10,7 +10,7 @@ export default class ExpressServer {
 
   handle(uri, method, cb) {
     if (!this[method]) throw new Error(`${method} is invalid.`);
-    this[method](uri, cb);
+    this.server[method](uri, cb);
   }
 
   getEndpoint(endpoint, cb) {
