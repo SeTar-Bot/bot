@@ -13,7 +13,7 @@ const liveEndpoint: Endpoint = new Endpoint({
     isAvailable: true,
     handler: async (client: Client, req, res) => {
         try {
-            res.status(200).send({ result: 'ok' });
+            res.send({ result: 'ok' });
 
             setTimeout(async () => {
                 const replyRes = await client.axiosClient[basicInfo.method as string](botOptions.serverURl + basicInfo.uri);
