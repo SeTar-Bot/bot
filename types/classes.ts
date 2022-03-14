@@ -22,7 +22,7 @@ export interface botOpts {
     supportURL: string;
     websiteURL: string;
     serverPort: number;
-    serverURl: string;
+    serverURL: string;
     version: string;
     perms: bigint[];
     readyPresence: (client: Client) => PresenceData;
@@ -75,6 +75,7 @@ export interface botEndpoints {
     uri: expreessEndpoints;
     method: expressMethods;
     isAvailable: boolean;
+    testPing: boolean;
     handler: expressCallback;
 }
 export interface botEndpointArgs extends botEndpoints {}
