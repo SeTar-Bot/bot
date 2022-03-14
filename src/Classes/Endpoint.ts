@@ -9,6 +9,7 @@ export default class Endpoint implements botEndpoints {
     readonly uri: expreessEndpoints;
     readonly method: expressMethods;
     public isAvailable: boolean;
+    public testPing: boolean;
     public handler: expressCallback;
 
     constructor(args: botEndpointArgs)
@@ -16,6 +17,7 @@ export default class Endpoint implements botEndpoints {
         this.uri = args.uri;
         this.method = args.method;
         this.isAvailable = args.isAvailable;
+        this.testPing = args.testPing;
         this.handler = args.handler;
     }
 

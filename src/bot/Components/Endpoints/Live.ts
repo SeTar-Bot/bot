@@ -12,12 +12,13 @@ const basicInfo = {
 const liveEndpoint: Endpoint = new Endpoint({
     ...basicInfo,
     isAvailable: true,
+    testPing: true,
     handler: async (client: Client, req: express.Request, res: express.Response) => {
         try {
             res.send({ result: 'ok' });
 
             setTimeout(async () => {
-                const replyRes = await client.axiosClient[basicInfo.method as string](botOptions.serverURl + basicInfo.uri);
+                const replyRes = await client.axiosClient[basicInfo.method as string](botOptions.serverURL + basicInfo.uri);
                 
                 if(replyRes.status == 200)
                     console.log(`Server has been refreshed.`);

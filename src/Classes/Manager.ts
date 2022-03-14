@@ -13,6 +13,7 @@ import Context from "./Context";
 import { expreessEndpoints } from "../typings/enums";
 import Endpoint from "./Endpoint";
 import express from "express";
+import botOptions from "../bot/Config/botOptions";
 
 export default class Manager implements botManager {
     readonly commandFiles: string[];
@@ -159,10 +160,19 @@ export default class Manager implements botManager {
                 try {
                     const importState = await import(`file://${path.resolve(this.endpointtDir, endpFile)}`);
                     const endpoint: Endpoint = importState.default;
-                    this.endpoints.set(endpoint.uri, endpoint);
-                    this.client.expressServer.server[endpoint.method](endpoint.uri, (req: express.Request, res: express.Response) => {
-                        endpoint.handler(this.client, req, res);
-                    })
+                    if(endpoint.isAvailable)
+                    {
+                        this.endpoints.set(endpoint.uri, endpoint);
+                        this.client.expressServer.server[endpoint.method](endpoint.uri, (req: express.Request, res: express.Response) => {
+                            endpoint.handler(this.client, req, res);
+                        });
+                        if(endpoint.testPing)
+                        {
+                            const testPingReesult = await this.client.axiosClient[endpoint.method](botOptions.serverURL + endpoint.uri);
+                            if(testPingReesult.status !== 200)
+                                console.error(new Error(`[Endpoint ${endpFile}]: Test ping failed due: ${testPingReesult.statusText}`));
+                        }
+                    }
                 } catch (error) {
                     endpointLoading.fail(`Endpoint ${endpFile} Failed to load Due Error: ${error}`);
                 }
