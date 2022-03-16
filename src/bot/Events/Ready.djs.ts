@@ -7,6 +7,7 @@ import botOptions from "../Config/botOptions";
 const ReadyEvent: Event = new Event({
     name: 'ready',
     isAvailable: true,
+    type: "discord.js",
     run: async (client: Client) => {
 
         const myConsole = ora({
