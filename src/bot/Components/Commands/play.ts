@@ -12,7 +12,7 @@ const basicInfo = {
     description: 'Play some music for your self (BETA VERSION)'
 }
 
-const infoCommand: Command = new Command({
+const playCommand: Command = new Command({
     ...basicInfo,
     builder: new SlashCommandBuilder()
         .addStringOption(
@@ -57,4 +57,4 @@ const infoCommand: Command = new Command({
     }
 })
 
-export default infoCommand;
+export default playCommand;
