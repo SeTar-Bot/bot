@@ -5,6 +5,7 @@ import Event from "../../Classes/Event";
 const WarnEvent = new Event({
     name: 'warn',
     isAvailable: true,
+    type: "discord.js",
     run: async (client: Client, error: string): Promise<any> => {
         try {
             console.warn(chalk.bgYellow(`----- Warning -----`), `\n`, error, `\n`, chalk.bgYellow(`----- Warning -----`))

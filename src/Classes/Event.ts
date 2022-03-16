@@ -1,4 +1,4 @@
-import { botEvents, botEventsArgs } from "../../types/classes";
+import { botEvents, botEventsArgs, EventTypes } from "../../types/classes";
 import Client from "./Client";
 import Inhibitor from "./Inhibitor";
 
@@ -6,6 +6,7 @@ export default class Event implements botEvents {
 
     public name: string;
     public isAvailable: boolean;
+    public type: EventTypes;
     public executer: (...any: any) => Promise<any | void>;
     readonly inhibitors?: Inhibitor[];
 
@@ -15,6 +16,7 @@ export default class Event implements botEvents {
     {
         this.name = setupArgs.name
         this.isAvailable = setupArgs.isAvailable;
+        this.type = setupArgs.type;
         this.executer = setupArgs.run;
 
         if(setupArgs.inhibitors && setupArgs.inhibitors.length > 0)

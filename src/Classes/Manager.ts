@@ -70,7 +70,7 @@ export default class Manager implements botManager {
                     const importState = await import(`file://${path.resolve(this.eventDir, eventFile)}`);
                     const event: Event = importState.default;
                     this.events.set(event.name, event);
-                    if(event.isAvailable)
+                    if(event.isAvailable && event.type == "discord.js")
                         this.client.on(event.name, (...args: any) => event.run(this.client, ...args));
                 } catch (error) {
                     eventLoading.fail(`Event ${eventFile} Failed to load Due Error: ${error}`);

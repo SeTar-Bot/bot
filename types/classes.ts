@@ -42,11 +42,14 @@ export interface botCommands {
 }
 export interface botCommandsArgs extends botCommands {}
 
+export type EventTypes = "discord.js" | "player"; 
+
 export interface botEvents {
 
     name: string;
     isAvailable: boolean;
-    run: (...any: any) => Promise<any | void>
+    type: EventTypes;
+    run: (...any: any) => Promise<any | void>;
     inhibitors?: Inhibitor[]
 
 }
