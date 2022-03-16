@@ -3,6 +3,7 @@ import Event from "../../Classes/Event.mjs";
 const InvalidateEvent = new Event({
   name: 'invalidated',
   isAvailable: true,
+  type: "discord.js",
   run: async client => {
     try {
       console.log(chalk.bgRed(`----- CLIENT INVALIDATED -----`), `\n`, `Client just got invalidated, ${chalk.bgRed(`Restarting Process`)}...!`);

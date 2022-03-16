@@ -3,6 +3,7 @@ import Event from "../../Classes/Event.mjs";
 const GuildDeleteEvent = new Event({
   name: 'guildDelete',
   isAvailable: true,
+  type: "discord.js",
   run: async (client, guild) => {
     const myConsole = ora({
       text: 'an old guild Removed, Removeing from Database',

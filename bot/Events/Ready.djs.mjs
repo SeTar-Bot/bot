@@ -5,6 +5,7 @@ import botOptions from "../Config/botOptions.mjs";
 const ReadyEvent = new Event({
   name: 'ready',
   isAvailable: true,
+  type: "discord.js",
   run: async client => {
     const myConsole = ora({
       text: 'Syncing Database',

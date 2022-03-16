@@ -4,6 +4,7 @@ import { BotPermissions, ContextTypes, localeList } from "../../typings/enums.mj
 const InteractionEvent = new Event({
   name: 'interactionCreate',
   isAvailable: true,
+  type: "discord.js",
   run: async (client, interaction) => {
     // Wait for Database
     const intc = interaction;

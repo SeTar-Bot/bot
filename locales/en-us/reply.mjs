@@ -45,6 +45,7 @@ const en_usReplies = {
     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
   }).setTitle(`Error Stack`).setDescription(`\`\`\`js\n${errorStack}\n\`\`\``)] : [new EmbedBuilder().setFooter({
     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-  }).setTitle('Evaluated Result').setDescription(`\`\`\`js\n${result}\n\`\`\``)])
+  }).setTitle('Evaluated Result').setDescription(`\`\`\`js\n${result}\n\`\`\``)]),
+  beta: () => new EmbedBuilder().setTitle('BETA ONLY!').setDescription('Sorry but this command is in beta stage at the moment.')
 };
 export default en_usReplies;

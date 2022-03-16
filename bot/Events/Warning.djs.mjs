@@ -3,6 +3,7 @@ import Event from "../../Classes/Event.mjs";
 const WarnEvent = new Event({
   name: 'warn',
   isAvailable: true,
+  type: "discord.js",
   run: async (client, error) => {
     try {
       console.warn(chalk.bgYellow(`----- Warning -----`), `\n`, error, `\n`, chalk.bgYellow(`----- Warning -----`));

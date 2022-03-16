@@ -45,7 +45,7 @@ export default class Manager {
           const importState = await import(`file://${path.resolve(this.eventDir, eventFile)}`);
           const event = importState.default;
           this.events.set(event.name, event);
-          if (event.isAvailable) this.client.on(event.name, (...args) => event.run(this.client, ...args));
+          if (event.isAvailable && event.type == "discord.js") this.client.on(event.name, (...args) => event.run(this.client, ...args));
         } catch (error) {
           eventLoading.fail(`Event ${eventFile} Failed to load Due Error: ${error}`);
         }
