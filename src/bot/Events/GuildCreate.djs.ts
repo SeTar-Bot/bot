@@ -8,6 +8,7 @@ import botOptions from "../Config/botOptions";
 const GuildCreateEvent = new Event({
     name: 'guildCreate',
     isAvailable: true,
+    type: "discord.js",
     run: async (client: Client, guild: Guild): Promise<any> => {
         const myConsole = ora({
             text: 'New guild created, Adding to Database',

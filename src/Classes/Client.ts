@@ -9,7 +9,7 @@ import { CacheTypes } from "../typings/enums";
 import { localeManager } from "../locales";
 import axios from "axios";
 import ExpressServer from "./Express";
-
+import { Client as PlayerClient } from "player-engine"
 export default class Client extends DjsClient {
 
     public manager: Manager;
@@ -21,6 +21,7 @@ export default class Client extends DjsClient {
     public localeManager: localeManager;
     public axiosClient: typeof axios = axios;
     public expressServer: ExpressServer;
+    public playerClient: PlayerClient;
     constructor(token: string, clientId: string, opts: botOpts = botOptions)
     {
         super(opts.client);
@@ -34,7 +35,8 @@ export default class Client extends DjsClient {
             this.restClient = new RestClient(this.botToken, this.botId);
             this.database = new SetarDB(opts.databaseURI);
             this.localeManager = new localeManager();
-
+            this.playerClient = new PlayerClient(this); 
+            
             this.intialize();
         })
         .catch(e => { throw e });

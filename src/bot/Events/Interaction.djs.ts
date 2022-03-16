@@ -9,6 +9,7 @@ import { BotPermissions, ContextTypes, localeList } from "../../typings/enums";
 const InteractionEvent = new Event({
     name: 'interactionCreate',
     isAvailable: true,
+    type: "discord.js",
     run: async (client: Client, interaction: Interaction): Promise<void> => {
 
         // Wait for Database

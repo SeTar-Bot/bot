@@ -4,6 +4,7 @@ import infoCommand from "./Commands/info";
 import inviteCommand from "./Commands/invite";
 import langCommand from "./Commands/language";
 import permCommand from "./Commands/permission";
+import playCommand from "./Commands/play";
 import statsCommand from "./Commands/stats";
 import testContext from "./Contexts/testContext";
 import liveEndpoint from "./Endpoints/Live";
@@ -21,7 +22,8 @@ const Commands = {
     permission: permCommand,
     stats: statsCommand,
     eval: evalCommand,
-    
+    play: playCommand,
+
 }
 
 const Contexts = {
@@ -30,7 +32,8 @@ const Contexts = {
 }
 
 const Endpoints = {
-    live: liveEndpoint
+    live: liveEndpoint,
+    
 }
 
 const Components = {

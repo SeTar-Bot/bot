@@ -5,6 +5,7 @@ import Event from "../../Classes/Event";
 const InvalidateEvent = new Event({
     name: 'invalidated',
     isAvailable: true,
+    type: "discord.js",
     run: async (client: Client): Promise<any> => {
         try {
             console.log(
