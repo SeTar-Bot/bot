@@ -6,6 +6,7 @@ import Command from "../../../Classes/Command";
 import EmbedBuilder from "../../../Classes/EmbedBuilder";
 import { BotPermissions, localeList } from "../../../typings/enums";
 import { SoundCloud } from "music-engines";
+import { SupportedEngines } from "player-engine/dist/typings/Classes/Player";
 const basicInfo = {
     name: 'play',
     description: 'Play some music for your self (BETA VERSION)'
@@ -39,8 +40,17 @@ const infoCommand: Command = new Command({
     permission: BotPermissions.ALL,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
         try {
-            
-            await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.info(client).toOBJECT());
+            const input = ctx.options.getString('input', true);
+            const engineChoice = ctx.options.getString('engine', false);
+
+            const player = client.playerClient.createPlayer(ctx.guild, {
+                engine: engineChoice as SupportedEngines ?? 'youtube',
+                leaveOnEnd: true,
+                selfDeaf: true,
+                selfMute: false
+            });
+            console.log(await player.search(input))
+            await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
         } catch (error) {
             throw error;
         }

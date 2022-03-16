@@ -12,6 +12,7 @@ export interface localeReplies {
     language: (c: Client, g: Guild) => EmbedBuilder;
     cache: (c: CacheTypes, r: CacheTypeResult) => EmbedBuilder;
     eval: (code: string, result: string, isError: boolean, errorStack?: string) => EmbedBuilder;
+    beta: () => EmbedBuilder;
 }
 
 export interface localeErrors {

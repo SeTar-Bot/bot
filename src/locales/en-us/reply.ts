@@ -128,6 +128,11 @@ const en_usReplies: localeReplies = {
                 .setTitle('Evaluated Result')
                 .setDescription(`\`\`\`js\n${result}\n\`\`\``),
         ]),
+
+    beta: (): EmbedBuilder => new EmbedBuilder()
+        .setTitle('BETA ONLY!')
+        .setDescription('Sorry but this command is in beta stage at the moment.')
+        
 };
 
 export default en_usReplies;
