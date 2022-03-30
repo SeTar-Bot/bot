@@ -165,7 +165,7 @@ export default class Manager {
   loadEvent(name, type, emitter) {
     if (!this.events.has(name)) return false;
     const eventFilter = this.events.filter(x => x.type == type);
-    if (eventFilter.has(name)) return false;
+    if (!eventFilter.has(name)) return false;
     let selectedEvent;
 
     if (name !== "all") {
