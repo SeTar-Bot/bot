@@ -7,7 +7,7 @@
   "scripts": {
     "heroku-postbuild": "echo a useless script",
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
-    "start": "node --experimental-json-modules main.mjs"
+    "start": "node main.mjs"
   },
   "author": {
     "email": "ehsan8184@gmail.com",
