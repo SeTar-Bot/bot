@@ -201,7 +201,7 @@ export default class Manager implements botManager {
 
         const eventFilter = this.events.filter(x => x.type == type);
 
-        if(eventFilter.has(name))
+        if(!eventFilter.has(name))
             return false;
 
         let selectedEvent: Event;
