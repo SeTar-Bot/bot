@@ -1,12 +1,12 @@
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
-import { CommandInteraction, MessageButton } from "discord.js";
+import { CommandInteraction } from "discord.js";
 import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
-import EmbedBuilder from "../../../Classes/EmbedBuilder";
 import { BotPermissions, localeList } from "../../../typings/enums";
 import { SoundCloud } from "music-engines";
 import { SupportedEngines } from "player-engine/dist/typings/Classes/Player";
+
 const basicInfo = {
     name: 'play',
     description: 'Play some music for your self (BETA VERSION)'
@@ -37,14 +37,14 @@ const playCommand: Command = new Command({
         .setName(basicInfo.name)
         ,
     isAvailable: true,
-    permission: BotPermissions.ALL,
+    permission: BotPermissions.SUPPORT,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
         try {
             const input = ctx.options.getString('input', true);
-            const engineChoice = ctx.options.getString('engine', false);
+            const engineChoice = ctx.options.getString('engine', false) as SupportedEngines ?? 'YouTube' as SupportedEngines;
 
             const player = client.playerClient.createPlayer(ctx.guild, {
-                engine: engineChoice as SupportedEngines ?? 'youtube',
+                engine: engineChoice,
                 leaveOnEnd: true,
                 selfDeaf: true,
                 selfMute: false

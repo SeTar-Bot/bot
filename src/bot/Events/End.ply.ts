@@ -8,7 +8,7 @@ import { Interaction } from "discord.js";
 const PlayerEndEvent = new Event({
     name: PlayerEvents.END,
     type: 'player',
-    isAvailable: true,
+    isAvailable: false,
     run: async (client: Client, lastTrack: PlayerTrack): Promise<void> => {
         console.log(`a player has ended playing music.`);
     }

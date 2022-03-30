@@ -7,7 +7,7 @@ import { PlayerError } from "player-engine/dist/utils";
 const PlayerErrorEvent = new Event({
     name: PlayerEvents.ERROR,
     type: 'player',
-    isAvailable: true,
+    isAvailable: false,
     run: async (client: Client, error: any | PlayerError): Promise<void> => {
         console.error(`Error from Player-Engine: `, error);
     }
