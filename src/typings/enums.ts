@@ -57,3 +57,11 @@ export enum expressMethods {
     PATCH = "patch",
     
 }
+
+export enum PlayerEvents {
+    CONNECT = "connect",
+    DISCONNECT = "disconnect",
+    END = "finish",
+    ERROR = "error",
+    TRACK = "track"
+}
