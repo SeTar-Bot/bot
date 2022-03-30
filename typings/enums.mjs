@@ -65,3 +65,13 @@ export let expressMethods;
   expressMethods["PUT"] = "put";
   expressMethods["PATCH"] = "patch";
 })(expressMethods || (expressMethods = {}));
+
+export let PlayerEvents;
+
+(function (PlayerEvents) {
+  PlayerEvents["CONNECT"] = "connect";
+  PlayerEvents["DISCONNECT"] = "disconnect";
+  PlayerEvents["END"] = "finish";
+  PlayerEvents["ERROR"] = "error";
+  PlayerEvents["TRACK"] = "track";
+})(PlayerEvents || (PlayerEvents = {}));

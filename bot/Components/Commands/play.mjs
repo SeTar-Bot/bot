@@ -26,10 +26,16 @@ const playCommand = new Command({ ...basicInfo,
         selfMute: false
       });
       const song = await player.search(input);
-      const connection = player.connection(member.voice?.channel);
-      if (!connection) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
-        ephemeral: true
-      }));
+      const connection = player.connection(member.voice.channel);
+
+      if (!connection) {
+        await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
+          ephemeral: true
+        }));
+        throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
+      }
+
+      client.manager.loadEvent('all', 'player', connection);
       await player.play([song], ctx);
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {

@@ -1,9 +1,9 @@
 import Event from "../../Classes/Event.mjs";
-import { PlayerEvents } from "player-engine/dist/utils/Enums";
+import { PlayerEvents } from "../../typings/enums.mjs";
 const PlayerErrorEvent = new Event({
   name: PlayerEvents.ERROR,
   type: 'player',
-  isAvailable: false,
+  isAvailable: true,
   run: async (client, error) => {
     console.error(`Error from Player-Engine: `, error);
   }
