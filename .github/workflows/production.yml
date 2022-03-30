@@ -1,8 +1,8 @@
-name: Dev-Production Release
+name: Production Release
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
 
 jobs:
   build:
@@ -38,5 +38,5 @@ jobs:
       - name: Deploy to Prodcution Branch
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          branch: dev-prod
+          branch: produciton
           folder: dist
