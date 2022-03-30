@@ -8,13 +8,13 @@ const basicInfo = {
 const playCommand = new Command({ ...basicInfo,
   builder: new SlashCommandBuilder().addStringOption(new SlashCommandStringOption().setName("input").setDescription("Give me a URL or text to search for").setRequired(true)).addStringOption(new SlashCommandStringOption().setName("engine").setDescription("What platform you want us to search for music").setRequired(false).addChoices([['YouTube', "YouTube"], ["Spotify", "Spotify"], ["SoundCloud", "SoundCloud"], ["Deezer", "Deezer"]])).setDescription(basicInfo.description).setName(basicInfo.name),
   isAvailable: true,
-  permission: BotPermissions.ALL,
+  permission: BotPermissions.SUPPORT,
   run: async (client, database, ctx) => {
     try {
       const input = ctx.options.getString('input', true);
-      const engineChoice = ctx.options.getString('engine', false);
+      const engineChoice = ctx.options.getString('engine', false) ?? 'YouTube';
       const player = client.playerClient.createPlayer(ctx.guild, {
-        engine: engineChoice ?? 'youtube',
+        engine: engineChoice,
         leaveOnEnd: true,
         selfDeaf: true,
         selfMute: false

@@ -3,7 +3,7 @@ import { PlayerEvents } from "player-engine/dist/utils/Enums";
 const PlayerErrorEvent = new Event({
   name: PlayerEvents.ERROR,
   type: 'player',
-  isAvailable: true,
+  isAvailable: false,
   run: async (client, error) => {
     console.error(`Error from Player-Engine: `, error);
   }
