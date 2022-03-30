@@ -74,12 +74,7 @@ const playCommand: Command = new Command({
             
             client.manager.loadEvent('all', 'player', connection);
 
-            //song.addMetadata({ interaction: ctx, });
-            //player.tracks.addTracks([song]);
-
             await player.play([song], ctx);
-
-            console.log(player.tracks.current(), player.tracks.nextTracks());
 
             await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
         } catch (error) {
