@@ -79,6 +79,8 @@ const playCommand: Command = new Command({
 
             await player.play(ctx, [song]);
 
+            console.log(player.tracks.current(), player.tracks.nextTracks());
+
             await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
         } catch (error) {
             throw error;
