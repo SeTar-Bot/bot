@@ -1,7 +1,7 @@
 {
   "name": "player-engine",
   "description": "Play your Musics in Your Discord Music Bot | Discord.js V13 Only",
-  "version": "0.1.4",
+  "version": "0.1.4-beta.1",
   "main": "dist/index.js",
   "files": [
     "dist"

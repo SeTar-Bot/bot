@@ -38,7 +38,7 @@ const playCommand = new Command({ ...basicInfo,
       client.manager.loadEvent('all', 'player', connection); //song.addMetadata({ interaction: ctx, });
       //player.tracks.addTracks([song]);
 
-      await player.play(ctx, [song]);
+      await player.play([song], ctx);
       console.log(player.tracks.current(), player.tracks.nextTracks());
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {
