@@ -1,8 +1,8 @@
-name: Production Release
+name: Dev-Production Release
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
 
 jobs:
   build:
@@ -31,12 +31,11 @@ jobs:
           cp ${GITHUB_WORKSPACE}/package.json ${GITHUB_WORKSPACE}/dist/package.json
           cp ${GITHUB_WORKSPACE}/package-lock.json ${GITHUB_WORKSPACE}/dist/package-lock.json
           cp -r ${GITHUB_WORKSPACE}/production/. ${GITHUB_WORKSPACE}/dist/
-
       - name: Install Production Modules
         run: cd dist && npm install
 
       - name: Deploy to Prodcution Branch
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          branch: produciton
+          branch: dev-prod
           folder: dist
