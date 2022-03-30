@@ -25,6 +25,8 @@ const playCommand = new Command({ ...basicInfo,
         selfDeaf: true,
         selfMute: false
       });
+      const res = client.manager.loadEvent('all', 'player', player);
+      console.log(res);
       const song = await player.search(input);
       const connection = player.connection(member.voice.channel);
 
@@ -35,8 +37,6 @@ const playCommand = new Command({ ...basicInfo,
         throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
       }
 
-      const res = client.manager.loadEvent('all', 'player', player);
-      console.log(res);
       await player.play([song], ctx);
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {
