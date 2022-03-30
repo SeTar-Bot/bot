@@ -51,10 +51,10 @@ const playCommand: Command = new Command({
 
             // Handle User Errors
             if(!member.voice?.channel)
-                await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
+                return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
             if(ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel)
-                await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
+                return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
             const player = client.playerClient.createPlayer(ctx.guild, {
                 engine: engineChoice,
@@ -67,7 +67,7 @@ const playCommand: Command = new Command({
             const connection: VoiceConnection = player.connection(member.voice?.channel) as VoiceConnection;
             
             if(!connection)
-                await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));
+                return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));
             
             await player.play([song], ctx);
 
