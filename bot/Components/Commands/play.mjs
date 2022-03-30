@@ -35,8 +35,7 @@ const playCommand = new Command({ ...basicInfo,
         throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
       }
 
-      client.manager.loadEvent('all', 'player', connection);
-      console.log(`Connection: `, connection); //song.addMetadata({ interaction: ctx, });
+      client.manager.loadEvent('all', 'player', connection); //song.addMetadata({ interaction: ctx, });
       //player.tracks.addTracks([song]);
 
       await player.play(ctx, [song]);
