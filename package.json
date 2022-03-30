@@ -40,7 +40,7 @@
     "mongoose": "^6.2.2",
     "ora": "^6.0.1",
     "os": "^0.1.2",
-    "player-engine": "^0.1.5",
+    "player-engine": "^0.1.6",
     "utf-8-validate": "^5.0.8",
     "uuid": "^8.3.2",
     "zlib-sync": "^0.1.7"
