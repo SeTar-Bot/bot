@@ -5,7 +5,7 @@ const PlayerReadyEvent = new Event({
   type: 'player',
   isAvailable: true,
   run: async (client, oldState, newState) => {
-    console.log(`a player has ended playing music.`);
+    console.log(`a player is ready.`);
   }
 });
 export default PlayerReadyEvent;
