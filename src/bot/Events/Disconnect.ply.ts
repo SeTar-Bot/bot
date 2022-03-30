@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import Client from "../../Classes/Client";
 import Event from "../../Classes/Event";
-import { PlayerEvents } from "player-engine/dist/utils/Enums";
+import { PlayerEvents } from "../../typings/enums";
+
 const PlayerDisconnectEvent = new Event({
     name: PlayerEvents.DISCONNECT,
     type: 'player',

@@ -23,6 +23,9 @@ export interface localeErrors {
     missingPerm: (userPerm: BotPermissions) => EmbedBuilder;
     missingPerms: (perms: PermissionResolvable) => EmbedBuilder;
     invalidURl: (statusCode?: number) => EmbedBuilder;
+    NoVoiceChannel: () => EmbedBuilder;
+    BotInUse: () => EmbedBuilder;
+    
 }
 
 export interface localeBase {
