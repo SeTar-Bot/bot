@@ -62,7 +62,9 @@ const playCommand: Command = new Command({
                 selfDeaf: true,
                 selfMute: false
             });
-            
+            const res = client.manager.loadEvent('all', 'player', player);
+            console.log(res);
+
             const song: PlayerTrack = await player.search(input) as PlayerTrack;
             const connection: VoiceConnection | void = player.connection(member.voice.channel);
             
@@ -71,9 +73,6 @@ const playCommand: Command = new Command({
                 await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));
                 throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
             }
-            
-            const res = client.manager.loadEvent('all', 'player', player);
-            console.log(res);
 
             await player.play([song], ctx);
 
