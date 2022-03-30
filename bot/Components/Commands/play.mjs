@@ -17,8 +17,8 @@ const playCommand = new Command({ ...basicInfo,
         user: ctx.user
       }); // Handle User Errors
 
-      if (!member.voice?.channel) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
-      if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
+      if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
+      if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
       const player = client.playerClient.createPlayer(ctx.guild, {
         engine: engineChoice,
         leaveOnEnd: true,
@@ -27,7 +27,7 @@ const playCommand = new Command({ ...basicInfo,
       });
       const song = await player.search(input);
       const connection = player.connection(member.voice?.channel);
-      if (!connection) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
+      if (!connection) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
         ephemeral: true
       }));
       await player.play([song], ctx);

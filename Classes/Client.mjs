@@ -24,7 +24,11 @@ export default class Client extends DjsClient {
       this.database = new SetarDB(opts.databaseURI);
       this.localeManager = new localeManager();
       this.playerClient = new PlayerClient(this);
-      this.intialize();
+      this.intialize().then(() => {
+        this.emit("ready", this);
+      }).catch(e => {
+        throw e;
+      });
     }).catch(e => {
       throw e;
     });
