@@ -8,7 +8,7 @@ const PlayerReadyEvent = new Event({
     type: 'player',
     isAvailable: true,
     run: async (client: Client, oldState: VoiceConnectionState, newState: VoiceConnectionState): Promise<void> => {
-        console.log(`a player has ended playing music.`);
+        console.log(`a player is ready.`);
     }
 });
 
