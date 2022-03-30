@@ -64,7 +64,7 @@ const playCommand: Command = new Command({
             });
             
             const song: PlayerTrack = await player.search(input) as PlayerTrack;
-            const connection: VoiceConnection = player.connection(member.voice.channel) as VoiceConnection;
+            const connection: VoiceConnection | void = player.connection(member.voice.channel);
             
             if(!connection)
             {
@@ -73,6 +73,8 @@ const playCommand: Command = new Command({
             }
             
             client.manager.loadEvent('all', 'player', connection);
+
+            console.log(`Connection: `, connection);
 
             await player.play([song], ctx);
 
