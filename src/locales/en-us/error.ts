@@ -81,7 +81,21 @@ const en_usErrors: localeErrors = {
         .setDescription((statusCode !== 200) ? `Sorry, but the URl is invalid, Supported URL's are only Github Gist and Pastebin.` : `Sorry, Request has been failed with Error code of \`${statusCode}\``)
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-        })
+        }),
+
+    NoVoiceChannel: (): EmbedBuilder => new EmbedBuilder()
+        .setTitle(`❌ Ooopsie...`)
+        .setDescription(`Try joining a voice channel and try again.`)
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        }),
+
+    BotInUse: (): EmbedBuilder => new EmbedBuilder()
+    .setTitle(`❌ Ooopsie...`)
+    .setDescription(`Bot is playing music in other channel at the moment, maybe join us? 🤔`)
+    .setFooter({
+        text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    })
 
 };
 

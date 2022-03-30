@@ -53,7 +53,6 @@ const evalCommand: Command = new Command({
             }
             else if(PasteBinData)
             {
-                console.log(PasteBinData);
                 const apidata = await client.axiosClient.get(`https://pastebin.com/raw/${PasteBinData[2]}`);;
                 if(apidata.status !== 200)
                     await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.invalidURl(apidata.status).toOBJECT());

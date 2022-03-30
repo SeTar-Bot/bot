@@ -1,5 +1,5 @@
 import { ApplicationCommandManager, Collection } from "discord.js";
-import { botManager, botSetupResult } from "../../types/classes";
+import { botManager, botSetupResult, EventTypes } from "../../types/classes";
 import Command from "./Command";
 import fs from "fs";
 import path from "path";
@@ -14,6 +14,7 @@ import { expreessEndpoints } from "../typings/enums";
 import Endpoint from "./Endpoint";
 import express from "express";
 import botOptions from "../bot/Config/botOptions";
+import EventEmitter from "events";
 
 export default class Manager implements botManager {
     readonly commandFiles: string[];
@@ -190,6 +191,34 @@ export default class Manager implements botManager {
             
         } catch (err) {
             throw err;
+        }
+    }
+
+    loadEvent(name: string, type: EventTypes, emitter: EventEmitter): boolean
+    {
+        if(!this.events.has(name))
+            return false;
+
+        const eventFilter = this.events.filter(x => x.type == type);
+
+        if(eventFilter.has(name))
+            return false;
+
+        let selectedEvent: Event;
+        if(name !== "all")
+        {
+            selectedEvent = eventFilter.get(name);
+            emitter.on(name, (...args) => selectedEvent.run(...args));
+            console.log(`✔ | ${name} Event has been Loaded for Custom Emitter.`);
+            return true;
+        }
+        else
+        {
+            eventFilter.forEach((e) => {
+                emitter.on(e.name, (...args) => e.run(...args));
+            });
+            console.log(`✔ | ${eventFilter.size} Events has been Loaded for Custom Emitter.`);
+            return true;
         }
     }
 }

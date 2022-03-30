@@ -7,7 +7,7 @@
   "scripts": {
     "heroku-postbuild": "echo a useless script",
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
-    "start": "node --experimental-json-modules main.mjs"
+    "start": "node main.mjs"
   },
   "author": {
     "email": "ehsan8184@gmail.com",
@@ -40,7 +40,7 @@
     "mongoose": "^6.2.2",
     "ora": "^6.0.1",
     "os": "^0.1.2",
-    "player-engine": "^0.0.3",
+    "player-engine": "^0.1.4-beta.2",
     "utf-8-validate": "^5.0.8",
     "uuid": "^8.3.2",
     "zlib-sync": "^0.1.7"
