@@ -72,7 +72,8 @@ const playCommand: Command = new Command({
                 throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
             }
             
-            client.manager.loadEvent('all', 'player', connection);
+            const res = client.manager.loadEvent('all', 'player', player);
+            console.log(res);
 
             await player.play([song], ctx);
 
