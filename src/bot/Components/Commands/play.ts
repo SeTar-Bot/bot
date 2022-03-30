@@ -77,7 +77,7 @@ const playCommand: Command = new Command({
             //song.addMetadata({ interaction: ctx, });
             //player.tracks.addTracks([song]);
 
-            await player.play(ctx, [song]);
+            await player.play([song], ctx);
 
             console.log(player.tracks.current(), player.tracks.nextTracks());
 
