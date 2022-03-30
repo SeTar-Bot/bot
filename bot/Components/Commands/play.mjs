@@ -13,13 +13,24 @@ const playCommand = new Command({ ...basicInfo,
     try {
       const input = ctx.options.getString('input', true);
       const engineChoice = ctx.options.getString('engine', false) ?? 'YouTube';
+      const member = await ctx.guild.members.fetch({
+        user: ctx.user
+      }); // Handle User Errors
+
+      if (!member.voice?.channel) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
+      if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
       const player = client.playerClient.createPlayer(ctx.guild, {
         engine: engineChoice,
         leaveOnEnd: true,
         selfDeaf: true,
         selfMute: false
       });
-      console.log(await player.search(input));
+      const song = await player.search(input);
+      const connection = player.connection(member.voice?.channel);
+      if (!connection) await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
+        ephemeral: true
+      }));
+      await player.play([song], ctx);
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {
       throw error;
