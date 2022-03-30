@@ -36,6 +36,7 @@ const playCommand = new Command({ ...basicInfo,
       }
 
       client.manager.loadEvent('all', 'player', connection);
+      console.log(`Connection: `, connection);
       await player.play([song], ctx);
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {
