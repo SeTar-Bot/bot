@@ -1,5 +1,5 @@
 import Event from "../../Classes/Event.mjs";
-import { PlayerEvents } from "player-engine/dist/utils/Enums";
+import { PlayerEvents } from "../../typings/enums.mjs";
 const PlayerDisconnectEvent = new Event({
   name: PlayerEvents.DISCONNECT,
   type: 'player',
