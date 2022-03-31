@@ -4,7 +4,9 @@ import path from "path";
 const botOptions = {
   client: {
     restGlobalRateLimit: 50,
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_PRESENCES, Intents.FLAGS.GUILD_VOICE_STATES],
+    intents: [Intents.FLAGS.GUILDS, //Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MEMBERS, //Intents.FLAGS.GUILD_PRESENCES,
+    Intents.FLAGS.GUILD_VOICE_STATES],
     presence: {
       afk: false,
       status: 'dnd',
