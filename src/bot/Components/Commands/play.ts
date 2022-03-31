@@ -62,8 +62,7 @@ const playCommand: Command = new Command({
                 selfDeaf: true,
                 selfMute: false
             });
-            const res = client.manager.loadEvent('all', 'player', player);
-            console.log(res);
+            client.manager.loadEvent('all', 'player', player);
 
             const song: PlayerTrack = await player.search(input) as PlayerTrack;
             const connection: VoiceConnection | void = player.connection(member.voice.channel);
