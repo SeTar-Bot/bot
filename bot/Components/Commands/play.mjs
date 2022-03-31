@@ -25,8 +25,7 @@ const playCommand = new Command({ ...basicInfo,
         selfDeaf: true,
         selfMute: false
       });
-      const res = client.manager.loadEvent('all', 'player', player);
-      console.log(res);
+      client.manager.loadEvent('all', 'player', player);
       const song = await player.search(input);
       const connection = player.connection(member.voice.channel);
 

@@ -164,11 +164,9 @@ export default class Manager {
 
   loadEvent(name, type, emitter) {
     const searchFilter = this.events.filter(e => e.type == type);
-    console.log(`filter: `, searchFilter);
 
     if (name !== "all") {
       const searchResult = searchFilter.find(e => e.name == name);
-      console.log(`result: `, searchResult);
       if (!searchResult) return false;
       emitter.on(name, (...args) => searchResult.run(...args));
       return true;
