@@ -10,19 +10,15 @@ const langCommand = new Command({ ...basicInfo,
   isAvailable: false,
   permission: BotPermissions.ALL,
   run: async (client, database, ctx) => {
-    try {
-      const requiredPerm = ['ADMINISTRATOR'];
+    const requiredPerm = ['ADMINISTRATOR'];
 
-      if (database.user.permission > BotPermissions.ALL || ctx.memberPermissions.has(requiredPerm)) {
-        const localeChoise = ctx.options.getString('locale', true);
-        const dbRes = await client.database.guilds.update(ctx.guild, {
-          locale: localeChoise
-        });
-        await ctx.editReply(client.localeManager.getLocale(dbRes.locale).reply.language(client, ctx.guild).toOBJECT());
-      } else await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.missingPerms(requiredPerm).toOBJECT());
-    } catch (error) {
-      throw error;
-    }
+    if (database.user.permission > BotPermissions.ALL || ctx.memberPermissions.has(requiredPerm)) {
+      const localeChoise = ctx.options.getString('locale', true);
+      const dbRes = await client.database.guilds.update(ctx.guild, {
+        locale: localeChoise
+      });
+      await ctx.editReply(client.localeManager.getLocale(dbRes.locale).reply.language(client, ctx.guild).toOBJECT());
+    } else await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.missingPerms(requiredPerm).toOBJECT());
   }
 });
 export default langCommand;

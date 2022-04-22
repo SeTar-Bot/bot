@@ -13,7 +13,7 @@ const GuildDeleteEvent = new Event({
 
     try {
       const res = await client.database.guilds.remove(guild.id);
-      myConsole.succeed(`Guild [${guild.id}] has been Removed from Database.`);
+      if (res) myConsole.succeed(`Guild [${guild.id}] has been Removed from Database.`);
     } catch (error) {
       myConsole.fail(`Failed to remove guild from Database due Error: ${error}`);
     }

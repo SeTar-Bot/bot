@@ -33,14 +33,14 @@ export default class EmbedBuilder extends MessageEmbed {
   toOBJECT(opts = {
     fetchReply: true
   }) {
-    let json = this.toJSON();
+    const json = this.toJSON();
 
     if (this.otherEmbeds.length > 0) {
       this.otherEmbeds.push(this);
       this.otherEmbeds.map(x => x.toJSON());
     }
 
-    let result = {
+    const result = {
       fetchReply: opts.fetchReply,
       embeds: this.otherEmbeds.length > 0 ? this.otherEmbeds : [json]
     };

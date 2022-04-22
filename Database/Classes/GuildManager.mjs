@@ -12,68 +12,52 @@ export default class GuildManager {
   }
 
   async add(g) {
-    try {
-      const data = await this.model.findOneAndUpdate({
-        id: g.id
-      }, {
-        id: g.id
-      }, {
-        new: true,
-        upsert: true
-      });
-      this.cache.Set(g.id, data);
-      return data;
-    } catch (error) {
-      throw error;
-    }
+    const data = await this.model.findOneAndUpdate({
+      id: g.id
+    }, {
+      id: g.id
+    }, {
+      new: true,
+      upsert: true
+    });
+    this.cache.Set(g.id, data);
+    return data;
   }
 
   async remove(gId) {
-    try {
-      if (this.cache.Exist(gId)) this.cache.Delete(gId);
-      return await this.model.findOneAndDelete({
-        id: gId
-      });
-    } catch (error) {
-      throw error;
-    }
+    if (this.cache.Exist(gId)) this.cache.Delete(gId);
+    return await this.model.findOneAndDelete({
+      id: gId
+    });
   }
 
   async fetch(g, skipCache = false) {
-    try {
-      if (!skipCache) if (this.cache.Exist(g.id)) return this.cache.Get(g.id);
-      const res = await this.model.findOne({
+    if (!skipCache) if (this.cache.Exist(g.id)) return this.cache.Get(g.id);
+    const res = await this.model.findOne({
+      id: g.id
+    });
+
+    if (res) {
+      this.cache.Set(g.id, res);
+      return res;
+    } else {
+      const newGuildModel = new this.model({
         id: g.id
       });
-
-      if (res) {
-        this.cache.Set(g.id, res);
-        return res;
-      } else {
-        const newGuildModel = new this.model({
-          id: g.id
-        });
-        const result = await newGuildModel.save();
-        this.cache.Set(g.id, result);
-        return result;
-      }
-    } catch (error) {
-      throw error;
+      const result = await newGuildModel.save();
+      this.cache.Set(g.id, result);
+      return result;
     }
   }
 
   async update(g, opts) {
-    try {
-      const res = await this.model.findOneAndUpdate({
-        id: g.id
-      }, opts, {
-        new: true
-      });
-      this.cache.Set(g.id, res);
-      return res;
-    } catch (error) {
-      throw error;
-    }
+    const res = await this.model.findOneAndUpdate({
+      id: g.id
+    }, opts, {
+      new: true
+    });
+    this.cache.Set(g.id, res);
+    return res;
   }
 
 }

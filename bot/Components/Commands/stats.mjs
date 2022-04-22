@@ -10,11 +10,7 @@ const statsCommand = new Command({ ...basicInfo,
   isAvailable: true,
   permission: BotPermissions.ALL,
   run: async (client, database, ctx) => {
-    try {
-      await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.stats(client).toOBJECT());
-    } catch (error) {
-      throw error;
-    }
+    await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.stats(client).toOBJECT());
   }
 });
 export default statsCommand;

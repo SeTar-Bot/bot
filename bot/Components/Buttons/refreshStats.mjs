@@ -6,14 +6,10 @@ const refreshStatsButton = new Button({
   isAvailable: false,
   permission: BotPermissions.ALL,
   run: async (client, database, ctx) => {
-    try {
-      const msg = client.localeManager.getLocale(database.guild.locale).reply.stats(client);
-      msg.ActionRows = [];
-      await ctx.deferUpdate();
-      await ctx.update(msg.toOBJECT());
-    } catch (error) {
-      throw error;
-    }
+    const msg = client.localeManager.getLocale(database.guild.locale).reply.stats(client);
+    msg.ActionRows = [];
+    await ctx.deferUpdate();
+    await ctx.update(msg.toOBJECT());
   }
 });
 export default refreshStatsButton;

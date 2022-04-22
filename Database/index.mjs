@@ -9,56 +9,42 @@ export default class SetarDB {
   }
 
   async intialize() {
-    try {
-      await this.client.connect(this.URI);
-      this.guilds = new GuildManager(this.client);
-      this.users = new UserManager(this.client);
-    } catch (error) {
-      throw error;
-    }
+    await this.client.connect(this.URI);
+    this.guilds = new GuildManager(this.client);
+    this.users = new UserManager(this.client);
   }
 
-  sync(guilds) {
-    return new Promise((resolve, reject) => {
-      /*const myConsole = ora({
-          text: 'Syncing Database',
-          spinner: 'betaWave',
-          color: 'white'
-      }).start();*/
-      const botGuilds = [...guilds].map(([name, body]) => body);
-      let addedGuilds = 0,
-          removedGuilds = 0;
-      this.guilds.model.find().then(async dbGuilds => {
-        try {
-          for await (const guild of botGuilds) {
-            const dbGuild = dbGuilds.find(v => v.id == guild.id);
+  async sync(guilds) {
+    // eslint-disable-next-line
+    const botGuilds = [...guilds].map(([name, body]) => body);
+    let addedGuilds = 0,
+        removedGuilds = 0;
+    const dbGuilds = await this.guilds.model.find();
 
-            if (!dbGuild) {
-              // Add
-              await this.guilds.add(guild);
-              addedGuilds++;
-            }
-          }
+    for await (const guild of botGuilds) {
+      const dbGuild = dbGuilds.find(v => v.id == guild.id);
 
-          for await (const dbGuild of dbGuilds) {
-            const botGuild = botGuilds.find(v => v.id == dbGuild.id);
+      if (!dbGuild) {
+        // Add
+        await this.guilds.add(guild);
+        addedGuilds++;
+      }
+    }
 
-            if (!botGuild) {
-              // Remove
-              await this.guilds.remove(dbGuild.id);
-              removedGuilds++;
-            }
-          }
+    for await (const dbGuild of dbGuilds) {
+      const botGuild = botGuilds.find(v => v.id == dbGuild.id);
 
-          resolve({
-            new: addedGuilds,
-            old: removedGuilds
-          });
-        } catch (error) {
-          reject(error);
-        }
-      }).catch(reject);
-    });
+      if (!botGuild) {
+        // Remove
+        await this.guilds.remove(dbGuild.id);
+        removedGuilds++;
+      }
+    }
+
+    return {
+      new: addedGuilds,
+      old: removedGuilds
+    };
   }
 
 }

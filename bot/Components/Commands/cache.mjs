@@ -10,13 +10,9 @@ const cacheCommand = new Command({ ...basicInfo,
   isAvailable: true,
   permission: BotPermissions.ADMIN,
   run: async (client, database, ctx) => {
-    try {
-      const choice = ctx.options.getString('cache_type', true);
-      const result = client.clean(choice);
-      await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.cache(choice, result).toOBJECT());
-    } catch (error) {
-      throw error;
-    }
+    const choice = ctx.options.getString('cache_type', true);
+    const result = client.clean(choice);
+    await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.cache(choice, result).toOBJECT());
   }
 });
 export default cacheCommand;

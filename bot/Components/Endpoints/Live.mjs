@@ -9,6 +9,7 @@ const liveEndpoint = new Endpoint({ ...basicInfo,
   isAvailable: true,
   testPing: true,
   handler: async (client, req, res) => {
+    // eslint-disable-next-line
     try {
       res.send({
         result: 'ok'

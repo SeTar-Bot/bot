@@ -10,27 +10,19 @@ export default class RestClient extends REST {
   }
 
   async addCommand(cmds, guild) {
-    try {
-      if (!guild) {
-        return await this.put(Routes.applicationCommands(this.appId), {
-          body: cmds
-        });
-      }
-
-      return await this.put(Routes.applicationGuildCommands(this.appId, guild), {
+    if (!guild) {
+      return await this.put(Routes.applicationCommands(this.appId), {
         body: cmds
       });
-    } catch (error) {
-      throw error;
     }
+
+    return await this.put(Routes.applicationGuildCommands(this.appId, guild), {
+      body: cmds
+    });
   }
 
   async updateCommand(cmdManager, guild, data) {
-    try {
-      return await cmdManager.create(data, guild);
-    } catch (error) {
-      throw error;
-    }
+    return await cmdManager.create(data, guild);
   }
 
 }

@@ -27,7 +27,7 @@ const GuildCreateEvent = new Event({
         }
       } else {
         const dbGuildObject = await client.database.guilds.add(guild);
-        myConsole.succeed(`Guild [${guild.id}] has been Created in Database.`);
+        if (dbGuildObject) myConsole.succeed(`Guild [${guild.id}] has been Created in Database.`);
       }
     } catch (error) {
       myConsole.fail(`Failed to add guild to Database due Error: ${error}`);

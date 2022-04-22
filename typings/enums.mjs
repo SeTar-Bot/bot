@@ -7,7 +7,6 @@ export let BotPermissions;
   BotPermissions[BotPermissions["ADMIN"] = 3] = "ADMIN";
 })(BotPermissions || (BotPermissions = {}));
 
-;
 export let BotRoles;
 
 (function (BotRoles) {
@@ -44,7 +43,6 @@ export let ContextTypes;
   ContextTypes[ContextTypes["MESSAGE"] = 3] = "MESSAGE";
 })(ContextTypes || (ContextTypes = {}));
 
-;
 export let localeList;
 
 (function (localeList) {

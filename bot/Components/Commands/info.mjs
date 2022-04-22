@@ -10,11 +10,7 @@ const infoCommand = new Command({ ...basicInfo,
   isAvailable: true,
   permission: BotPermissions.ALL,
   run: async (client, database, ctx) => {
-    try {
-      await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.info(client).toOBJECT());
-    } catch (error) {
-      throw error;
-    }
+    await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.info(client).toOBJECT());
   }
 });
 export default infoCommand;
