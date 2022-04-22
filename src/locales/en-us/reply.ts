@@ -5,7 +5,7 @@ import { localeReplies } from "../../../types/localeSchema";
 import botOptions from "../../bot/Config/botOptions";
 import Client from "../../Classes/Client";
 import EmbedBuilder from "../../Classes/EmbedBuilder";
-import { BotPermissions, BotRoles, CacheTypes, localeList } from "../../typings/enums";
+import { BotPermissions, BotRoles, CacheTypes } from "../../typings/enums";
 
 const en_usReplies: localeReplies = {
 

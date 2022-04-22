@@ -71,11 +71,11 @@ export default class Client extends DjsClient {
             }).start();
             // 1- Connects Database
             this.database.intialize()
-            .then(dbStatus => {
+            .then(() => {
                 myConsole.text = 'Initializing Client [2/2]'
                 // 2- Load Events & Commands
                 this.manager.setup()
-                .then(mngData => {
+                .then(() => {
                     myConsole.succeed(`Initializing Complete`);
                     resolve(true);
                 })
@@ -116,8 +116,10 @@ export default class Client extends DjsClient {
                 messages = this.sweepers.sweepMessages(s => s instanceof Message);
                 presences = this.sweepers.sweepPresences(s => s instanceof Presence);
                 reactions = this.sweepers.sweepReactions(s => s instanceof MessageReaction);
+                /* eslint-disable */
                 /* @ts-ignore */
                 stages = this.sweepers.sweepStageInstances(s => s instanceof StageInstance);
+                /* eslint-enable */
                 threads = this.sweepers.sweepThreads(s => s instanceof ThreadChannel);
                 threadMembers = this.sweepers.sweepThreadMembers(s => s instanceof ThreadMember);
                 users = this.sweepers.sweepUsers(s => s instanceof User);

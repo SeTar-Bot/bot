@@ -3,7 +3,7 @@ export enum BotPermissions {
     ALL = 1,
     SUPPORT = 2,
     ADMIN = 3
-};
+}
 
 export enum BotRoles {
     BAN = "banned",
@@ -36,7 +36,7 @@ export enum CacheTypes {
 export enum ContextTypes {
     USER = 2,
     MESSAGE = 3
-};
+}
 
 export enum localeList {
 

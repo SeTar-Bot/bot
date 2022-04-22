@@ -1,7 +1,8 @@
 import pkg from 'mongoose';
+import { dbGuildSchema } from "../../../types/database"
 const { Schema } = pkg;
 
-const GuildSchema = new Schema({
+const GuildSchema = new Schema<dbGuildSchema>({
     id: {
         type: String,
         required: true,

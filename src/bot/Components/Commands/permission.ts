@@ -1,9 +1,8 @@
-import { SlashCommandBuilder, SlashCommandMentionableOption, SlashCommandStringOption, SlashCommandUserOption } from "@discordjs/builders";
-import { CommandInteraction, GuildMember, MessageButton, User, UserResolvable } from "discord.js";
+import { SlashCommandBuilder, SlashCommandStringOption, SlashCommandUserOption } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 import { dbObject, dbUserSchema } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
-import EmbedBuilder from "../../../Classes/EmbedBuilder";
 import { BotPermissions, BotRoles, localeList } from "../../../typings/enums";
 
 const basicInfo = {
@@ -37,40 +36,35 @@ const permCommand: Command = new Command({
     isAvailable: true,
     permission: BotPermissions.ADMIN,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
-        try {
-            let mentionedUser = ctx.options.getUser('user', true);
-            let targetPerm = Number(ctx.options.getString('permission')) as BotPermissions;
-            let targetRole: BotRoles;
+        const mentionedUser = ctx.options.getUser('user', true);
+        const targetPerm = Number(ctx.options.getString('permission')) as BotPermissions;
+        let targetRole: BotRoles;
             
-            const uData: dbUserSchema = await client.database.users.fetch(mentionedUser);
-            const res: dbUserSchema = await client.database.users.update(mentionedUser, {
-                permission: targetPerm
-            });
+        const uData: dbUserSchema = await client.database.users.fetch(mentionedUser);
+        const res: dbUserSchema = await client.database.users.update(mentionedUser, {
+            permission: targetPerm
+        });
 
-            switch (targetPerm) {
-                case BotPermissions.BAN:
-                    targetRole = BotRoles.BAN;
-                    break;
+        switch (targetPerm) {
+            case BotPermissions.BAN:
+                targetRole = BotRoles.BAN;
+            break;
                 
-                case BotPermissions.ALL:
-                    targetRole = BotRoles.ALL
-                    break;
+            case BotPermissions.ALL:
+                targetRole = BotRoles.ALL
+            break;
 
-                case BotPermissions.SUPPORT:
-                    targetRole = BotRoles.SUPPORT;
-                    break;
+            case BotPermissions.SUPPORT:
+                targetRole = BotRoles.SUPPORT;
+            break;
 
-                case BotPermissions.ADMIN:
-                    targetRole = BotRoles.ADMIN;
-                    break;
-            }
-
-            if(res)
-                ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.permission(mentionedUser, targetRole, uData.permission, res.permission).toOBJECT())
-            
-        } catch (error) {
-            throw error;
+            case BotPermissions.ADMIN:
+                targetRole = BotRoles.ADMIN;
+            break;
         }
+
+        if(res)
+            ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.permission(mentionedUser, targetRole, uData.permission, res.permission).toOBJECT())
     }
 })
 

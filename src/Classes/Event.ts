@@ -1,5 +1,4 @@
 import { botEvents, botEventsArgs, EventTypes } from "../../types/classes";
-import Client from "./Client";
 import Inhibitor from "./Inhibitor";
 
 export default class Event implements botEvents {
@@ -10,7 +9,7 @@ export default class Event implements botEvents {
     public executer: (...any: any) => Promise<any | void>;
     readonly inhibitors?: Inhibitor[];
 
-    private hasInhibitors: boolean = false;
+    private hasInhibitors = false;
 
     constructor(setupArgs: botEventsArgs)
     {
@@ -27,26 +26,22 @@ export default class Event implements botEvents {
     }
 
     async run(...any: any): Promise<any> {
-        try {
-            if(this.hasInhibitors && this.inhibitors)
+        if(this.hasInhibitors && this.inhibitors)
+        {
+            for (const inhibitor of this.inhibitors)
             {
-                for (const inhibitor of this.inhibitors)
-                {
-                    try {
-                        const bool = await inhibitor.execute(...any);
-                        if(!bool)
-                            throw new Error(`Inhibitor ${inhibitor.name} didn't passed it.`);
-                    } catch (error) {
-                        throw new Error(`Inhibitor ${inhibitor.name} has been failed due Error: ${error}`);
-                    } 
-                }
-
-                return await this.executer(...any)
+                try {
+                    const bool = await inhibitor.execute(...any);
+                    if(!bool)
+                        throw new Error(`Inhibitor ${inhibitor.name} didn't passed it.`);
+                } catch (error) {
+                    throw new Error(`Inhibitor ${inhibitor.name} has been failed due Error: ${error}`);
+                } 
             }
-            else
-                return await this.executer(...any)
-        } catch (error) {
-            
+
+            return await this.executer(...any)
         }
+        else
+            return await this.executer(...any)
     }
 }

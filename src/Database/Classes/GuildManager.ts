@@ -1,9 +1,10 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 import { CacheManager } from "@setar/cache";
-import { Guild, User } from "discord.js";
+import { Guild } from "discord.js";
 import GuildModel from "../Models/Guild";
 import GuildSchema from "../Schemas/Guild";
 import { guildUpdateOpts } from "../../../types/classes";
+import { dbGuildSchema } from "../../../types/database";
 
 export default class GuildManager {
 
@@ -21,40 +22,32 @@ export default class GuildManager {
         this.cache = new CacheManager();
     }
 
-    async add(g: Guild): Promise<any>
+    async add(g: Guild): Promise<ReturnType<mongoose.Model<dbGuildSchema>["findOneAndUpdate"]>>
     {
-        try {
-            const data = await this.model.findOneAndUpdate({ id: g.id }, { id: g.id }, {
-                new: true,
-                upsert: true
-            });
-            this.cache.Set(g.id, data);
-            return data;
-        } catch (error) {
-            throw error
-        }
+        const data = await this.model.findOneAndUpdate({ id: g.id }, { id: g.id }, {
+            new: true,
+            upsert: true
+        });
+        this.cache.Set(g.id, data);
+        return data;
     }
 
-    async remove(gId: string): Promise<any>
+    async remove(gId: string): Promise<ReturnType<mongoose.Model<dbGuildSchema>["findOneAndDelete"]>>
     {
-        try {
-            if(this.cache.Exist(gId))
-                this.cache.Delete(gId);
+        if(this.cache.Exist(gId))
+            this.cache.Delete(gId);
 
-            return await this.model.findOneAndDelete({ id: gId });
-        } catch (error) {
-            throw error;
-        }
+        return await this.model.findOneAndDelete({ id: gId });
     }
 
-    async fetch(g: Guild, skipCache: boolean = false): Promise<any>
+    async fetch(g: Guild, skipCache = false): Promise<ReturnType<mongoose.Model<dbGuildSchema>["findOne"]> | ReturnType<mongoose.Document<unknown, any, dbGuildSchema>["save"]>>
     {
-        try {
-            if(!skipCache)
-                if(this.cache.Exist(g.id))
-                    return this.cache.Get(g.id);
+        if(!skipCache)
+            if(this.cache.Exist(g.id))
+                return this.cache.Get(g.id);
 
-            const res = await this.model.findOne({ id: g.id });
+        this.model.findOne({ id: g.id })
+        .then(async res => {
             if(res)
             {
                 this.cache.Set(g.id, res);
@@ -67,20 +60,14 @@ export default class GuildManager {
                 this.cache.Set(g.id, result);
                 return result;
             }
-            
-        } catch (error) {
-            throw error;
-        }
+        })
+        .catch(e => { throw e });
     }
 
-    async update(g: Guild, opts: guildUpdateOpts): Promise<any>
+    async update(g: Guild, opts: guildUpdateOpts): Promise<ReturnType<mongoose.Model<dbGuildSchema>["findOneAndUpdate"]>>
     {
-        try {
-            const res = await this.model.findOneAndUpdate({ id: g.id }, opts, { new: true });
-            this.cache.Set(g.id, res);
-            return res;
-        } catch (error) {
-            throw error;
-        }
+        const res = await this.model.findOneAndUpdate({ id: g.id }, opts, { new: true });
+        this.cache.Set(g.id, res);
+        return res;
     }
 }

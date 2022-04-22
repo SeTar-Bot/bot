@@ -14,6 +14,7 @@ const liveEndpoint: Endpoint = new Endpoint({
     isAvailable: true,
     testPing: true,
     handler: async (client: Client, req: express.Request, res: express.Response) => {
+        // eslint-disable-next-line
         try {
             res.send({ result: 'ok' });
 
