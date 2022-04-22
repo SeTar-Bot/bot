@@ -33,21 +33,23 @@ export default class GuildManager {
 
   async fetch(g, skipCache = false) {
     if (!skipCache) if (this.cache.Exist(g.id)) return this.cache.Get(g.id);
-    const res = await this.model.findOne({
+    this.model.findOne({
       id: g.id
+    }).then(async res => {
+      if (res) {
+        this.cache.Set(g.id, res);
+        return res;
+      } else {
+        const newGuildModel = new this.model({
+          id: g.id
+        });
+        const result = await newGuildModel.save();
+        this.cache.Set(g.id, result);
+        return result;
+      }
+    }).catch(e => {
+      throw e;
     });
-
-    if (res) {
-      this.cache.Set(g.id, res);
-      return res;
-    } else {
-      const newGuildModel = new this.model({
-        id: g.id
-      });
-      const result = await newGuildModel.save();
-      this.cache.Set(g.id, result);
-      return result;
-    }
   }
 
   async update(g, opts) {

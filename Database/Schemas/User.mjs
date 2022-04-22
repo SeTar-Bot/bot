@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     required: false
   },
   playlist: {
-    type: Array,
+    type: [{}],
     default: [],
     required: false,
     length: 20
