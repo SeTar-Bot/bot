@@ -1,7 +1,7 @@
 # Setar-Bot
 
-<a href="https://github.com/Setar-Bot/Setar-Bot/">
-    <img src="https://github.com/Setar-Bot/Setar-Bot/raw/main/img/logo.png" width="260" align="right" alt="setar-bot-logo">
+<a href="https://github.com/Setar-Bot/bot/">
+    <img src="https://github.com/Setar-Bot/bot/raw/main/img/logo.png" width="260" align="right" alt="setar-bot-logo">
 </a>
 
 > Setar-bot was originally founded in 2019, by the time passes, we update the bot and now, in the very beginning of version 3, we are making bot an open-source project
@@ -43,7 +43,7 @@ Setar-bot has many features, but to begin with, we would suggest, the bot has a 
 - [x] Perfecte Typings and Structers
 
 ## Config
-There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at [.example.env](https://github.com/SeTar-Bot/Setar-Bot/blob/main/example.env) File
+There is no need to change the source code at all, you can easily setup your bot by Changing Environment, You can take a look at [.example.env](https://github.com/SeTar-Bot/bot/blob/main/example.env) File
 ### Support
 You can ask about Source configuration and bot setup in [our Disocrd Server](https://discord.gg/7jgfP6j4Tc)
 
