@@ -7,6 +7,8 @@
   "scripts": {
     "heroku-postbuild": "echo a useless script",
     "format": "prettier --write src/**/*.{ts,js,json,yaml,yml}",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
     "build": "npx babel --extensions .ts ./src -d ./dist --copy-files --out-file-extension .mjs",
     "start": "node main.mjs"
   },
