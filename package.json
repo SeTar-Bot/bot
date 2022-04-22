@@ -29,6 +29,7 @@
     "bin-converter": "^1.1.2",
     "bufferutil": "^4.0.6",
     "chalk": "^5.0.0",
+    "dartjs": "^1.2.0",
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
     "erlpack": "github:discord/erlpack",
@@ -38,9 +39,9 @@
     "i18n": "^0.14.1",
     "json-variables": "^11.0.12",
     "mongoose": "^6.2.2",
+    "music-engines": "^1.0.7",
     "ora": "^6.0.1",
     "os": "^0.1.2",
-    "player-engine": "^0.1.6",
     "utf-8-validate": "^5.0.8",
     "uuid": "^8.3.2",
     "zlib-sync": "^0.1.7"

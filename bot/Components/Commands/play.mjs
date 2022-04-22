@@ -19,24 +19,12 @@ const playCommand = new Command({ ...basicInfo,
 
       if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
       if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
-      const player = client.playerClient.createPlayer(ctx.guild, {
-        engine: engineChoice,
-        leaveOnEnd: true,
-        selfDeaf: true,
-        selfMute: false
+      const search = await client.playerEngines.youtube.use('Shayea', {
+        type: 'video',
+        format: true,
+        limit: 1
       });
-      client.manager.loadEvent('all', 'player', player);
-      const song = await player.search(input);
-      const connection = player.connection(member.voice.channel);
-
-      if (!connection) {
-        await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.noContent().toOBJECT({
-          ephemeral: true
-        }));
-        throw new Error(`Connection seems to be lost or something, Recived: ${connection}`);
-      }
-
-      await player.play([song], ctx);
+      console.log(typeof search, search);
       await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
     } catch (error) {
       throw error;

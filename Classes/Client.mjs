@@ -8,9 +8,16 @@ import { CacheTypes } from "../typings/enums.mjs";
 import { localeManager } from "../locales/index.mjs";
 import axios from "axios";
 import ExpressServer from "./Express.mjs";
-import { Client as PlayerClient } from "player-engine";
+import { DartVoiceManager } from "dartjs";
+import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
 export default class Client extends DjsClient {
   axiosClient = axios;
+  playerEngines = {
+    youtube: new YouTube(),
+    soundcloud: new SoundCloud(),
+    deezer: new Deezer(),
+    spotify: new Spotify()
+  };
 
   constructor(token, clientId, opts = botOptions) {
     super(opts.client);
@@ -23,7 +30,7 @@ export default class Client extends DjsClient {
       this.restClient = new RestClient(this.botToken, this.botId);
       this.database = new SetarDB(opts.databaseURI);
       this.localeManager = new localeManager();
-      this.playerClient = new PlayerClient(this);
+      this.playerClient = new DartVoiceManager(this);
       this.intialize().then(() => {
         this.emit("ready", this);
       }).catch(e => {
