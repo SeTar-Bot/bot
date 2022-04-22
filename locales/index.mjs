@@ -1,8 +1,5 @@
 import { localeList } from "../typings/enums.mjs";
-import en_us from "./en-us/index.mjs";
-const locales = {
-  'en-us': en_us
-};
+import locales from "./list.mjs";
 
 class localeManager {
   all = locales;
