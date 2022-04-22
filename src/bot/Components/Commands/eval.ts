@@ -29,7 +29,7 @@ const evalCommand: Command = new Command({
             const choice = ctx.options.getString('url', true);
             const pasteBinRegex = /http(s)?:\/\/pastebin.com\/([0-9a-zA-Z]+)/g;
             const gistRegex = /http(s)?:\/\/gist.github.com\/([0-9a-zA-Z]+)\/([0-9a-zA-Z]+)/g;
-            let GistData = gistRegex.exec(choice),
+            const GistData = gistRegex.exec(choice),
                 PasteBinData = pasteBinRegex.exec(choice);
 
             if(GistData)
@@ -39,7 +39,7 @@ const evalCommand: Command = new Command({
                     await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.invalidURl(apidata.status).toOBJECT());
                 else
                 {
-                    let code = apidata.data;
+                    const code = apidata.data;
                     let evalResult: string;
                     try {
                         evalResult = await eval(code);
@@ -53,12 +53,12 @@ const evalCommand: Command = new Command({
             }
             else if(PasteBinData)
             {
-                const apidata = await client.axiosClient.get(`https://pastebin.com/raw/${PasteBinData[2]}`);;
+                const apidata = await client.axiosClient.get(`https://pastebin.com/raw/${PasteBinData[2]}`);
                 if(apidata.status !== 200)
                     await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.invalidURl(apidata.status).toOBJECT());
                 else
                 {
-                    let code = apidata.data;
+                    const code = apidata.data;
                     let evalResult: string;
                     try {
                         evalResult = await eval(code);

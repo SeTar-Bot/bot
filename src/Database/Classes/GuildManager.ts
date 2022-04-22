@@ -47,7 +47,7 @@ export default class GuildManager {
         }
     }
 
-    async fetch(g: Guild, skipCache: boolean = false): Promise<any>
+    async fetch(g: Guild, skipCache = false): Promise<any>
     {
         try {
             if(!skipCache)

@@ -59,7 +59,7 @@ export default class UserManager {
         }
     }
 
-    async fetch(u: User, skipCache: boolean = false): Promise<any>
+    async fetch(u: User, skipCache = false): Promise<any>
     {
         try {
             if(!skipCache)

@@ -7,7 +7,7 @@ import Client from "./Client";
 export default class ExpressServer {
 
     public server: Express;
-    constructor(port: number = Number(process.env.expressPort))
+    constructor(port = Number(process.env.expressPort))
     {
 
         this.server = express();

@@ -14,7 +14,7 @@ export default class Command implements botCommands {
     readonly inhibitors?: Inhibitor[];
     readonly builder: SlashCommandBuilder;
 
-    private hasInhibitors: boolean = false;
+    private hasInhibitors = false;
     private executer: (...any: any) => Promise<any | void>;
     constructor(setupArgs: botCommandsArgs)
     {

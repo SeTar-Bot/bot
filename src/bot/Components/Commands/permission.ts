@@ -38,8 +38,8 @@ const permCommand: Command = new Command({
     permission: BotPermissions.ADMIN,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
         try {
-            let mentionedUser = ctx.options.getUser('user', true);
-            let targetPerm = Number(ctx.options.getString('permission')) as BotPermissions;
+            const mentionedUser = ctx.options.getUser('user', true);
+            const targetPerm = Number(ctx.options.getString('permission')) as BotPermissions;
             let targetRole: BotRoles;
             
             const uData: dbUserSchema = await client.database.users.fetch(mentionedUser);

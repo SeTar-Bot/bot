@@ -10,7 +10,7 @@ export default class Event implements botEvents {
     public executer: (...any: any) => Promise<any | void>;
     readonly inhibitors?: Inhibitor[];
 
-    private hasInhibitors: boolean = false;
+    private hasInhibitors = false;
 
     constructor(setupArgs: botEventsArgs)
     {
