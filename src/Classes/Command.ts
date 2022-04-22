@@ -33,26 +33,22 @@ export default class Command implements botCommands {
     }
 
     public async run(...any: any): Promise<any> {
-        try {
-            if(this.hasInhibitors && this.inhibitors)
+        if(this.hasInhibitors && this.inhibitors)
+        {
+            for (const inhibitor of this.inhibitors)
             {
-                for (const inhibitor of this.inhibitors)
-                {
-                    try {
-                        const bool = await inhibitor.execute(...any);
-                        if(!bool)
-                            throw new Error(`Inhibitor ${inhibitor.name} didn't passed it.`);
-                    } catch (error) {
-                        throw new Error(`Inhibitor ${inhibitor.name} has been failed due Error: ${error}`);
-                    } 
-                }
-
-                return await this.executer(...any)
+                try {
+                    const bool = await inhibitor.execute(...any);
+                    if(!bool)
+                        throw new Error(`Inhibitor ${inhibitor.name} didn't passed it.`);
+                } catch (error) {
+                    throw new Error(`Inhibitor ${inhibitor.name} has been failed due Error: ${error}`);
+                } 
             }
-            else
-                return await this.executer(...any)
-        } catch (error) {
-            throw error;
+
+            return await this.executer(...any)
         }
+        else
+            return await this.executer(...any)
     }
 }

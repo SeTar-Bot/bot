@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { Guild } from "discord.js";
 import ora from "ora";
 import Client from "../../Classes/Client";
@@ -16,7 +15,8 @@ const GuildDeleteEvent = new Event({
         }).start();
         try {
             const res = await client.database.guilds.remove(guild.id);
-            myConsole.succeed(`Guild [${guild.id}] has been Removed from Database.`)
+            if(res)
+                myConsole.succeed(`Guild [${guild.id}] has been Removed from Database.`)
         } catch (error) {
             myConsole.fail(`Failed to remove guild from Database due Error: ${error}`);
         }

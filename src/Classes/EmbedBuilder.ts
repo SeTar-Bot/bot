@@ -1,5 +1,4 @@
 import { InteractionReplyOptions, MessageActionRow, MessageButton, MessageEmbed, MessageEmbedOptions, MessageSelectMenu } from "discord.js";
-import { APIEmbed } from "discord-api-types/v9";
 import { EmbedBuilderObjOpts } from "../../types/classes";
 
 export default class EmbedBuilder extends MessageEmbed {

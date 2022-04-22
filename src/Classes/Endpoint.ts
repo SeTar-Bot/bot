@@ -1,6 +1,3 @@
-import { Express } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 import { botEndpointArgs, botEndpoints, expressCallback } from "../../types/classes";
 import { expreessEndpoints, expressMethods } from "../typings/enums";
 
