@@ -1,4 +1,4 @@
-name: Tests
+name: ESLint Test
 on: [push, pull_request]
 jobs:
   Compile:
@@ -17,5 +17,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Compile
+      - name: Lint
+        run: npm run lint
+        
+      - name: Build
         run: npm run build
