@@ -1,5 +1,6 @@
 import pkg from 'mongoose';
 const { model } = pkg;
 import UserSchema from "../Schemas/User";
-const UserModel = model('Users', UserSchema);
+import { dbUserSchema } from "../../../types/database"
+const UserModel = model<dbUserSchema>('Users', UserSchema);
 export default UserModel;

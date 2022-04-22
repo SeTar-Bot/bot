@@ -4,6 +4,7 @@ import { User } from "discord.js";
 import UserSchema from "../Schemas/User";
 import UserModel from "../Models/User";
 import { userUpdateOpts } from "../../../types/classes";
+import { dbUserSchema } from "../../../types/database"
 
 export default class UserManager {
 
@@ -21,7 +22,7 @@ export default class UserManager {
         this.cache = new CacheManager();
     }
 
-    async add(u: User): Promise<any>
+    async add(u: User): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndUpdate"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
     {
         const data = await this.model.findOneAndUpdate({ id: u.id }, { id: u.id }, {
             new: true,
@@ -42,7 +43,7 @@ export default class UserManager {
         }
     }
 
-    async remove(uId: string): Promise<any>
+    async remove(uId: string): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndDelete"]>>
     {
         if(this.cache.Exist(uId))
             this.cache.Delete(uId);
@@ -50,7 +51,7 @@ export default class UserManager {
         return await this.model.findOneAndDelete({ id: uId })
     }
 
-    async fetch(u: User, skipCache = false): Promise<any>
+    async fetch(u: User, skipCache = false): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOne"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
     {
         if(!skipCache)
             if(this.cache.Exist(u.id))
@@ -71,7 +72,7 @@ export default class UserManager {
         }
     }
 
-    async update(u: User, opts: userUpdateOpts): Promise<any>
+    async update(u: User, opts: userUpdateOpts): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndUpdate"]>>
     {
         const res = await this.model.findOneAndUpdate({ id: u.id }, opts, { new: true })
         
