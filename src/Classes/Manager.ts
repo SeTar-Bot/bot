@@ -196,28 +196,22 @@ export default class Manager implements botManager {
 
     loadEvent(name: string, type: EventTypes, emitter: EventEmitter): boolean
     {
-        if(!this.events.has(name))
-            return false;
-
-        const eventFilter = this.events.filter(x => x.type == type);
-
-        if(eventFilter.has(name))
-            return false;
-
-        let selectedEvent: Event;
+        const searchFilter = this.events.filter(e => e.type == type);
         if(name !== "all")
         {
-            selectedEvent = eventFilter.get(name);
-            emitter.on(name, (...args) => selectedEvent.run(...args));
-            console.log(`✔ | ${name} Event has been Loaded for Custom Emitter.`);
+            const searchResult = searchFilter.find(e => e.name == name);
+            if(!searchResult)
+                return false;
+
+            emitter.on(name, (...args) => searchResult.run(...args));
             return true;
         }
         else
         {
-            eventFilter.forEach((e) => {
+            searchFilter.forEach(e => {
                 emitter.on(e.name, (...args) => e.run(...args));
             });
-            console.log(`✔ | ${eventFilter.size} Events has been Loaded for Custom Emitter.`);
+            console.log(`✔ | ${searchFilter.size} Events has been Loaded for Custom Emitter.`);
             return true;
         }
     }
