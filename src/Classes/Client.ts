@@ -11,10 +11,11 @@ import axios from "axios";
 import ExpressServer from "./Express";
 import { DartVoiceManager } from "dartjs";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
-
+import UtilClient from "@setar/utils";
 export default class Client extends DjsClient {
 
     public manager: Manager;
+    public Utils: UtilClient;
     public restClient: RestClient;
     public database: SetarDB;
     private botToken: string;
@@ -38,6 +39,7 @@ export default class Client extends DjsClient {
         this.botId = clientId;
         this.axiosClient = axios;
         this.expressServer = new ExpressServer(opts.serverPort);
+        this.Utils = new UtilClient(this);
         this.login(this.botToken)
         .then(() => {
             this.manager = new Manager(this, opts.commands, opts.events, opts.buttons, opts.contexts, opts.endpoints);
