@@ -1,6 +1,6 @@
-import { CacheManager } from "@setar/cache";
 import GuildModel from "../Models/Guild.mjs";
 import GuildSchema from "../Schemas/Guild.mjs";
+import CacheManager from "../../Classes/Cache.mjs";
 export default class GuildManager {
   model = GuildModel;
   schema = GuildSchema;
@@ -20,31 +20,31 @@ export default class GuildManager {
       new: true,
       upsert: true
     });
-    this.cache.Set(g.id, data);
+    await this.cache.set(g.id, data);
     return data;
   }
 
   async remove(gId) {
-    if (this.cache.Exist(gId)) this.cache.Delete(gId);
+    if (await this.cache.check(gId)) await this.cache.remove(gId, false);
     return await this.model.findOneAndDelete({
       id: gId
     });
   }
 
   async fetch(g, skipCache = false) {
-    if (!skipCache) if (this.cache.Exist(g.id)) return this.cache.Get(g.id);
+    if (!skipCache) if (await this.cache.check(g.id)) return await this.cache.get(g.id);
     this.model.findOne({
       id: g.id
     }).then(async res => {
       if (res) {
-        this.cache.Set(g.id, res);
+        await this.cache.set(g.id, res);
         return res;
       } else {
         const newGuildModel = new this.model({
           id: g.id
         });
         const result = await newGuildModel.save();
-        this.cache.Set(g.id, result);
+        await this.cache.set(g.id, result);
         return result;
       }
     }).catch(e => {
@@ -58,7 +58,7 @@ export default class GuildManager {
     }, opts, {
       new: true
     });
-    this.cache.Set(g.id, res);
+    await this.cache.set(g.id, res);
     return res;
   }
 
