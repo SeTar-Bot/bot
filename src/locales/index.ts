@@ -1,11 +1,6 @@
 import { localeBase } from "../../types/localeSchema";
 import { localeList } from "../typings/enums";
-import en_us from "./en-us";
-
-const locales = {
-    'en-us': en_us,
-}
-
+import locales from "./list";
 class localeManager {
 
     public language: localeBase;

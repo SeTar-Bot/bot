@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { GuildResolvable } from "discord.js";
-import { botCommands, botCommandsArgs } from "../../types/classes";
+import { botCommands } from "../../types/classes";
 import { BotPermissions } from "../typings/enums";
 import Inhibitor from "./Inhibitor";
 
@@ -16,7 +16,7 @@ export default class Command implements botCommands {
 
     private hasInhibitors = false;
     private executer: (...any: any) => Promise<any | void>;
-    constructor(setupArgs: botCommandsArgs)
+    constructor(setupArgs: botCommands)
     {
         this.name = setupArgs.name;
         this.description = setupArgs.description;
