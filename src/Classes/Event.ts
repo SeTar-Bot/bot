@@ -1,4 +1,4 @@
-import { botEvents, botEventsArgs, EventTypes } from "../../types/classes";
+import { botEvents, EventTypes } from "../../types/classes";
 import Inhibitor from "./Inhibitor";
 
 export default class Event implements botEvents {
@@ -11,7 +11,7 @@ export default class Event implements botEvents {
 
     private hasInhibitors = false;
 
-    constructor(setupArgs: botEventsArgs)
+    constructor(setupArgs: botEvents)
     {
         this.name = setupArgs.name
         this.isAvailable = setupArgs.isAvailable;

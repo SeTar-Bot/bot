@@ -126,8 +126,8 @@ export default class Client extends DjsClient {
                 threadMembers = this.sweepers.sweepThreadMembers(s => s instanceof ThreadMember);
                 users = this.sweepers.sweepUsers(s => s instanceof User);
                 voiceStates = this.sweepers.sweepVoiceStates(s => s instanceof VoiceState);
-                dbUsers = this.database.users.cache.Reset('all');
-                dbGuilds = this.database.guilds.cache.Reset('all');
+                dbUsers = this.database.users.cache.clear();
+                dbGuilds = this.database.guilds.cache.clear();
                 return { bans, emojis, members, invites, messages, presences, reactions, stages, threads, users, voiceStates, dbUsers, dbGuilds, 
                     total: bans + emojis + members + invites + messages + presences + reactions + stages + users + voiceStates };
             break;
@@ -193,7 +193,7 @@ export default class Client extends DjsClient {
             break;
 
             case CacheTypes.DB_USERS:
-                dbUsers = this.database.users.cache.Reset('all');
+                dbUsers = this.database.users.cache.clear();
                 if(dbUsers)
                     return { dbUsers };
                 else
@@ -201,7 +201,7 @@ export default class Client extends DjsClient {
             break;
 
             case CacheTypes.DB_GUILDS:
-                dbGuilds = this.database.guilds.cache.Reset('all');
+                dbGuilds = this.database.guilds.cache.clear();
                 if(dbGuilds)
                     return { dbGuilds };
                 else

@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
-import { CacheManager } from "@setar/cache";
 import { User } from "discord.js";
 import UserSchema from "../Schemas/User";
 import UserModel from "../Models/User";
 import { userUpdateOpts } from "../../../types/classes";
 import { dbUserSchema } from "../../../types/database"
+import CacheManager from "../../Classes/Cache";
 
 export default class UserManager {
 
     private client: typeof mongoose;
-    public cache: CacheManager;
+    public cache: CacheManager<dbUserSchema>;
     readonly model = UserModel;
     readonly schema = UserSchema;
 
@@ -31,22 +31,22 @@ export default class UserManager {
         
         if(data)
         {
-            this.cache.Set(u.id, data);
+            await this.cache.set(u.id, data);
             return data;
         }
         else
         {
             const newUserModel = new this.model({ id: u.id });
             const result = await newUserModel.save();
-            this.cache.Set(u.id, result);
+            await this.cache.set(u.id, result);
             return result;
         }
     }
 
     async remove(uId: string): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndDelete"]>>
     {
-        if(this.cache.Exist(uId))
-            this.cache.Delete(uId);
+        if(await this.cache.check(uId))
+            await this.cache.remove(uId, false);
 
         return await this.model.findOneAndDelete({ id: uId })
     }
@@ -54,20 +54,20 @@ export default class UserManager {
     async fetch(u: User, skipCache = false): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOne"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
     {
         if(!skipCache)
-            if(this.cache.Exist(u.id))
-                return this.cache.Get(u.id);
+            if(await this.cache.check(u.id))
+                return await this.cache.get(u.id);
 
         const res = await this.model.findOne({ id: u.id });
         if(res)
         {
-            this.cache.Set(u.id, res);
+            await this.cache.set(u.id, res);
             return res;
         }
         else
         {
             const newUserModel = new this.model({ id: u.id });
             const result = await newUserModel.save();
-            this.cache.Set(u.id, result);
+            await this.cache.set(u.id, result);
             return result;
         }
     }
@@ -76,7 +76,7 @@ export default class UserManager {
     {
         const res = await this.model.findOneAndUpdate({ id: u.id }, opts, { new: true })
         
-        this.cache.Set(u.id, res);
+        await this.cache.set(u.id, res);
         return res;
     }
 }

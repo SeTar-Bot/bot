@@ -1,4 +1,4 @@
-import { Collection, ClientOptions, GuildResolvable, Permissions, PresenceData } from "discord.js";
+import { Collection, ClientOptions, GuildResolvable, PresenceData } from "discord.js";
 import Command from "../src/Classes/Command";
 import { BotPermissions, BotRoles, ContextTypes, expreessEndpoints, expressMethods } from "../src/typings/enums";
 import { SlashCommandBuilder } from "@discordjs/builders";
@@ -26,7 +26,7 @@ export interface botOpts {
     version: string;
     perms: bigint[];
     readyPresence: (client: Client) => PresenceData;
-};
+}
 
 export interface botCommands {
 
@@ -40,7 +40,6 @@ export interface botCommands {
     inhibitors?: Inhibitor[]
 
 }
-export interface botCommandsArgs extends botCommands {}
 
 export type EventTypes = "discord.js" | "player"; 
 
@@ -53,7 +52,6 @@ export interface botEvents {
     inhibitors?: Inhibitor[]
 
 }
-export interface botEventsArgs extends botEvents {}
 
 export interface botButtons {
     name: string;
@@ -62,7 +60,6 @@ export interface botButtons {
     isAvailable: boolean;
     run: (...any: any) => Promise<any | void>;
 }
-export interface botButtonsArgs extends botButtons {}
 
 export interface botContenxts {
     name: string;
@@ -71,7 +68,6 @@ export interface botContenxts {
     permission: BotPermissions;
     run: (...any: any) => Promise<any | void>;
 }
-export interface botContextArgs extends botContenxts {}
 
 
 export interface botEndpoints {
@@ -81,7 +77,6 @@ export interface botEndpoints {
     testPing: boolean;
     handler: expressCallback;
 }
-export interface botEndpointArgs extends botEndpoints {}
 
 //-----------------
 

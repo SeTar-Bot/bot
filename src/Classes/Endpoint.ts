@@ -1,4 +1,4 @@
-import { botEndpointArgs, botEndpoints, expressCallback } from "../../types/classes";
+import { botEndpoints, expressCallback } from "../../types/classes";
 import { expreessEndpoints, expressMethods } from "../typings/enums";
 
 export default class Endpoint implements botEndpoints {
@@ -9,7 +9,7 @@ export default class Endpoint implements botEndpoints {
     public testPing: boolean;
     public handler: expressCallback;
 
-    constructor(args: botEndpointArgs)
+    constructor(args: botEndpoints)
     {
         this.uri = args.uri;
         this.method = args.method;
