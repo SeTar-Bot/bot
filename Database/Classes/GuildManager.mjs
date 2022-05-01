@@ -1,14 +1,14 @@
+import { Collection } from "discord.js";
 import GuildModel from "../Models/Guild.mjs";
 import GuildSchema from "../Schemas/Guild.mjs";
-import CacheManager from "../../Classes/Cache.mjs";
 export default class GuildManager {
   model = GuildModel;
   schema = GuildSchema;
+  cache = new Collection();
 
   constructor(client) {
     if (client.connection.readyState !== 1) throw new Error(`Database connection is not established, Please try again later.`);
     this.client = client;
-    this.cache = new CacheManager();
   }
 
   async add(g) {
@@ -20,36 +20,33 @@ export default class GuildManager {
       new: true,
       upsert: true
     });
-    await this.cache.set(g.id, data);
+    this.cache.set(g.id, data);
     return data;
   }
 
   async remove(gId) {
-    if (await this.cache.check(gId)) await this.cache.remove(gId, false);
+    if (this.cache.has(gId)) this.cache.delete(gId);
     return await this.model.findOneAndDelete({
       id: gId
     });
   }
 
-  async fetch(g, skipCache = false) {
-    if (!skipCache) if (await this.cache.check(g.id)) return await this.cache.get(g.id);
-    this.model.findOne({
+  async fetch(g) {
+    const res = await this.model.findOne({
       id: g.id
-    }).then(async res => {
-      if (res) {
-        await this.cache.set(g.id, res);
-        return res;
-      } else {
-        const newGuildModel = new this.model({
-          id: g.id
-        });
-        const result = await newGuildModel.save();
-        await this.cache.set(g.id, result);
-        return result;
-      }
-    }).catch(e => {
-      throw e;
     });
+
+    if (res) {
+      this.cache.set(g.id, res);
+      return res;
+    } else {
+      const newGuildModel = new this.model({
+        id: g.id
+      });
+      const result = await newGuildModel.save();
+      this.cache.set(g.id, result);
+      return result;
+    }
   }
 
   async update(g, opts) {
@@ -58,7 +55,7 @@ export default class GuildManager {
     }, opts, {
       new: true
     });
-    await this.cache.set(g.id, res);
+    this.cache.set(g.id, res);
     return res;
   }
 

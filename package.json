@@ -43,8 +43,6 @@
     "json-variables": "^11.0.12",
     "mongoose": "^6.2.2",
     "music-engines": "^1.0.7",
-    "node-ts-cache": "^4.4.0",
-    "node-ts-cache-storage-memory": "^4.4.0",
     "ora": "^6.0.1",
     "os": "^0.1.2",
     "utf-8-validate": "^5.0.8",

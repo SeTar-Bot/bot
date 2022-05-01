@@ -1,14 +1,14 @@
+import { Collection } from "discord.js";
 import UserSchema from "../Schemas/User.mjs";
 import UserModel from "../Models/User.mjs";
-import CacheManager from "../../Classes/Cache.mjs";
 export default class UserManager {
+  cache = new Collection();
   model = UserModel;
   schema = UserSchema;
 
   constructor(client) {
     if (client.connection.readyState !== 1) throw new Error(`Database connection is not established, Please try again later.`);
     this.client = client;
-    this.cache = new CacheManager();
   }
 
   async add(u) {
@@ -22,40 +22,39 @@ export default class UserManager {
     });
 
     if (data) {
-      await this.cache.set(u.id, data);
+      this.cache.set(u.id, data);
       return data;
     } else {
       const newUserModel = new this.model({
         id: u.id
       });
       const result = await newUserModel.save();
-      await this.cache.set(u.id, result);
+      this.cache.set(u.id, result);
       return result;
     }
   }
 
   async remove(uId) {
-    if (await this.cache.check(uId)) await this.cache.remove(uId, false);
+    if (this.cache.has(uId)) this.cache.delete(uId);
     return await this.model.findOneAndDelete({
       id: uId
     });
   }
 
-  async fetch(u, skipCache = false) {
-    if (!skipCache) if (await this.cache.check(u.id)) return await this.cache.get(u.id);
+  async fetch(u) {
     const res = await this.model.findOne({
       id: u.id
     });
 
     if (res) {
-      await this.cache.set(u.id, res);
+      this.cache.set(u.id, res);
       return res;
     } else {
       const newUserModel = new this.model({
         id: u.id
       });
       const result = await newUserModel.save();
-      await this.cache.set(u.id, result);
+      this.cache.set(u.id, result);
       return result;
     }
   }
@@ -66,7 +65,7 @@ export default class UserManager {
     }, opts, {
       new: true
     });
-    await this.cache.set(u.id, res);
+    this.cache.set(u.id, res);
     return res;
   }
 
