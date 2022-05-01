@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-import { User } from "discord.js";
+import { Collection, User, UserResolvable } from "discord.js";
 import UserSchema from "../Schemas/User";
 import UserModel from "../Models/User";
 import { userUpdateOpts } from "../../../types/classes";
 import { dbUserSchema } from "../../../types/database"
-import CacheManager from "../../Classes/Cache";
 
 export default class UserManager {
 
     private client: typeof mongoose;
-    public cache: CacheManager<dbUserSchema>;
+    public readonly cache: Collection<UserResolvable, dbUserSchema> = new Collection();
     readonly model = UserModel;
     readonly schema = UserSchema;
 
@@ -19,7 +18,6 @@ export default class UserManager {
             throw new Error(`Database connection is not established, Please try again later.`);
 
         this.client = client;
-        this.cache = new CacheManager();
     }
 
     async add(u: User): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndUpdate"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
@@ -31,43 +29,39 @@ export default class UserManager {
         
         if(data)
         {
-            await this.cache.set(u.id, data);
+            this.cache.set(u.id, data);
             return data;
         }
         else
         {
             const newUserModel = new this.model({ id: u.id });
             const result = await newUserModel.save();
-            await this.cache.set(u.id, result);
+            this.cache.set(u.id, result);
             return result;
         }
     }
 
     async remove(uId: string): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOneAndDelete"]>>
     {
-        if(await this.cache.check(uId))
-            await this.cache.remove(uId, false);
+        if(this.cache.has(uId))
+            this.cache.delete(uId);
 
         return await this.model.findOneAndDelete({ id: uId })
     }
 
-    async fetch(u: User, skipCache = false): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOne"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
+    async fetch(u: User): Promise<ReturnType<mongoose.Model<dbUserSchema>["findOne"]> | ReturnType<mongoose.Document<unknown, any, dbUserSchema>["save"]>>
     {
-        if(!skipCache)
-            if(await this.cache.check(u.id))
-                return await this.cache.get(u.id);
-
         const res = await this.model.findOne({ id: u.id });
         if(res)
         {
-            await this.cache.set(u.id, res);
+            this.cache.set(u.id, res);
             return res;
         }
         else
         {
             const newUserModel = new this.model({ id: u.id });
             const result = await newUserModel.save();
-            await this.cache.set(u.id, result);
+            this.cache.set(u.id, result);
             return result;
         }
     }
@@ -76,7 +70,7 @@ export default class UserManager {
     {
         const res = await this.model.findOneAndUpdate({ id: u.id }, opts, { new: true })
         
-        await this.cache.set(u.id, res);
+        this.cache.set(u.id, res);
         return res;
     }
 }
