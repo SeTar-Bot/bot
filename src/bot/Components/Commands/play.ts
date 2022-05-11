@@ -111,6 +111,9 @@ const playCommand: Command = new Command({
 
         const dispatcher = connection.play(stream, DispatcherOptions)
         client.manager.loadEvent("start", "voice", dispatcher);
+        client.manager.loadEvent("finish", "voice", dispatcher);
+        client.manager.loadEvent("error", "voice", dispatcher);
+        client.manager.loadEvent("debug", "voice", dispatcher);
     }
 })
 
