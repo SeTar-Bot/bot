@@ -74,7 +74,7 @@ const playCommand: Command = new Command({
         const streamParams: YTDLStreamOptions = { 
             filter: 'audioonly',
             quality: 'highestaudio',
-            highWaterMark: 1 << 24,
+            highWaterMark: 1 << 25,
             dlChunkSize: 0
         }
 
