@@ -4,7 +4,7 @@ import { PlayOptions, VoiceConnection } from "dartjs";
 import { CommandInteraction } from "discord.js";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
 import { Base } from "music-engines/dist/Base";
-import { YTDLStreamOptions } from "music-engines/dist/typings/youtube";
+import { downloadOptions } from "ytdl-core"
 import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
@@ -71,7 +71,7 @@ const playCommand: Command = new Command({
                     client.manager.loadEvent("debug", "connection", connection),
                     client.manager.loadEvent("error", "connection", connection));
 
-        const streamParams: YTDLStreamOptions = { 
+        const streamParams: downloadOptions = { 
             filter: 'audioonly',
             quality: 'highestaudio',
             highWaterMark: 1 << 25,
