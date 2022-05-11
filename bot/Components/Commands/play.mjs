@@ -24,7 +24,7 @@ const playCommand = new Command({ ...basicInfo,
     if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
     if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
     const search = await engine.use(input);
-    const track = search[0];
+    const track = Array.isArray(search) ? search[0] : search;
     const connection = client.playerClient.connections.get(ctx.guild.id) ?? (await client.playerClient.join(member.voice?.channel, {
       selfDeaf: true,
       selfMute: false,
