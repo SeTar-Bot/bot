@@ -1,5 +1,5 @@
 import Event from "../../Classes/Event.mjs";
-const ConnectionEnd = new Event({
+const ConnectionDC = new Event({
   name: 'disconnect',
   type: 'connection',
   runTime: "on",
@@ -9,4 +9,4 @@ const ConnectionEnd = new Event({
     console.log(`dartjs: Conneciton is closed now.`);
   }
 });
-export default ConnectionEnd;
+export default ConnectionDC;

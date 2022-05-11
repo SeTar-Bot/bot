@@ -25,11 +25,12 @@ const InteractionEvent = new Event({
         const command = client.manager.commands.get(interaction.commandName);
         if (command && command.isAvailable && command.permission <= uData.permission) try {
           await command.run(client, databaseFetchedObj, interaction);
-        } catch (error) {
+        } catch (e) {
+          const error = e;
           await intc.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.internal().toOBJECT({
             ephemeral: true
           }));
-          console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Commands/${command.name}\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`);
+          console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Commands/${command.name}\nName: ${error.name}\nError: ${error.message}\nStack: ${error.stack}\n${chalk.bgRed(`----- ERROR -----`)}`);
         } else if (command.permission !== uData.permission) await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.missingPerm(uData.permission).toOBJECT({
           ephemeral: true
         }));else await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.noContent().toOBJECT({

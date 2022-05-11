@@ -1,5 +1,5 @@
 import Event from "../../Classes/Event.mjs";
-const ConnectionEnd = new Event({
+const ConnectionDebug = new Event({
   name: 'debug',
   type: 'connection',
   runTime: "on",
@@ -9,4 +9,4 @@ const ConnectionEnd = new Event({
     console.log(`dartjs: connection: `, msg);
   }
 });
-export default ConnectionEnd;
+export default ConnectionDebug;

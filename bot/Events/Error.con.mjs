@@ -1,5 +1,5 @@
 import Event from "../../Classes/Event.mjs";
-const ConnectionEnd = new Event({
+const ConnectionError = new Event({
   name: 'error',
   type: 'connection',
   runTime: "on",
@@ -9,4 +9,4 @@ const ConnectionEnd = new Event({
     console.error(e);
   }
 });
-export default ConnectionEnd;
+export default ConnectionError;

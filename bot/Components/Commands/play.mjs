@@ -51,6 +51,7 @@ const playCommand = new Command({ ...basicInfo,
     };
     let stream;
     if (track.isYoutube()) stream = track.stream(streamParams);else if (track.isSpotify()) stream = await track.stream(streamParams);else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
+    console.log('Steam object: ', stream);
     const dispatcher = connection.play(stream, DispatcherOptions);
     client.manager.loadEvent("start", "voice", dispatcher);
     client.manager.loadEvent("finish", "voice", dispatcher);
