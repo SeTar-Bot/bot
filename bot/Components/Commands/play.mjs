@@ -30,9 +30,7 @@ const playCommand = new Command({ ...basicInfo,
       selfMute: false,
       group: 'player'
     }));
-    client.manager.loadEvent("disconnect", "connection", connection);
-    client.manager.loadEvent("debug", "connection", connection);
-    client.manager.loadEvent("error", "connection", connection);
+    console.log(client.manager.loadEvent("disconnect", "connection", connection), client.manager.loadEvent("debug", "connection", connection), client.manager.loadEvent("error", "connection", connection));
     const streamParams = {
       filter: 'audioonly',
       quality: 'highestaudio',

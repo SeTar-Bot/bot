@@ -6,7 +6,7 @@ const ConnectionEnd = new Event({
   isAvailable: true,
   // eslint-disable-next-line
   run: async (client, dispatcher, e) => {
-    console.warn(e);
+    console.error(e);
   }
 });
 export default ConnectionEnd;
