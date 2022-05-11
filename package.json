@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
+    "@discordjs/opus": "^0.5.3",
     "@discordjs/rest": "^0.3.0",
     "@discordjs/voice": "^0.8.0",
     "@flazepe/deezer.js": "^1.1.0",
@@ -43,6 +44,8 @@
     "json-variables": "^11.0.12",
     "mongoose": "^6.2.2",
     "music-engines": "^1.1.1",
+    "node-opus": "^0.3.3",
+    "opusscript": "^0.0.8",
     "ora": "^6.0.1",
     "os": "^0.1.2",
     "utf-8-validate": "^5.0.8",
