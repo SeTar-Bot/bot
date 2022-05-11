@@ -160,6 +160,7 @@ export default class Manager {
   loadEvent(name, type, emitter) {
     const searchFilter = this.events.filter(e => e.type == type);
     const searchResult = searchFilter.find(e => e.name == name);
+    console.log('manager result: ', searchResult);
     if (!searchResult) return false;
     if (searchResult.runTime == "on") emitter.on(name, (...args) => searchResult.run(this.client, emitter, ...args));else emitter.once(name, (...args) => searchResult.run(this.client, emitter, ...args));
     return true;
