@@ -2,7 +2,7 @@ import { StreamDispatcher } from "dartjs";
 import { Client } from "discord.js";
 import Event from "../../Classes/Event";
 
-const ConnectionEnd = new Event({
+const ConnectionDC = new Event({
     name: 'disconnect',
     type: 'connection',
     runTime: "on",
@@ -13,4 +13,4 @@ const ConnectionEnd = new Event({
     }
 })
 
-export default ConnectionEnd
+export default ConnectionDC

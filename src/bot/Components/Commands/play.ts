@@ -111,6 +111,8 @@ const playCommand: Command = new Command({
         else if(track.isDeezer())
             stream = await track.stream()
 
+        console.log('Steam object: ', stream);
+
         const dispatcher = connection.play(stream, DispatcherOptions)
         client.manager.loadEvent("start", "voice", dispatcher);
         client.manager.loadEvent("finish", "voice", dispatcher);

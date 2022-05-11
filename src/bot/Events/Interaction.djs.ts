@@ -34,9 +34,10 @@ const InteractionEvent = new Event({
                 if(command && command.isAvailable && command.permission <= uData.permission)
                     try {
                         await command.run(client, databaseFetchedObj, interaction)
-                    } catch (error) {
+                    } catch (e) {
+                        const error: Error = e;
                         await intc.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.internal().toOBJECT({ ephemeral: true }))
-                        console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Commands/${command.name}\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`)
+                        console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Commands/${command.name}\nName: ${error.name}\nError: ${error.message}\nStack: ${error.stack}\n${chalk.bgRed(`----- ERROR -----`)}`)
                     }
 
                 else if(command.permission !== uData.permission)
