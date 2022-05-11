@@ -39,7 +39,7 @@ const playCommand: Command = new Command({
         // eslint-disable-next-line
         const input = ctx.options.getString('input', true);
         // eslint-disable-next-line
-        const engineChoice: "youtube" | "spotify" | "soundcloud" | "deezer" = ctx.options.getString('engine', false).toLowerCase() as "youtube" | "spotify" | "soundcloud" | "deezer" ?? 'youtube';
+        const engineChoice: "youtube" | "spotify" | "soundcloud" | "deezer" = ctx.options.getString('engine', false) as "youtube" | "spotify" | "soundcloud" | "deezer" ?? 'youtube'
         const member = await ctx.guild.members.fetch({
             user: ctx.user
         });
@@ -51,7 +51,7 @@ const playCommand: Command = new Command({
         if(ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel)
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
-        const search = await client.playerEngines[engineChoice].use(input);
+        const search = await client.playerEngines[engineChoice.toLowerCase()].use(input);
 
         console.log(typeof search, search);
 
