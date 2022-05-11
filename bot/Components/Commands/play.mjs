@@ -13,18 +13,14 @@ const playCommand = new Command({ ...basicInfo,
     // eslint-disable-next-line
     const input = ctx.options.getString('input', true); // eslint-disable-next-line
 
-    const engineChoice = ctx.options.getString('engine', false) ?? 'YouTube';
+    const engineChoice = ctx.options.getString('engine', false).toLowerCase() ?? 'youtube';
     const member = await ctx.guild.members.fetch({
       user: ctx.user
     }); // Handle User Errors
 
     if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
     if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
-    const search = await client.playerEngines.youtube.use('Shayea', {
-      type: 'video',
-      format: true,
-      limit: 1
-    });
+    const search = await client.playerEngines[engineChoice].use(input);
     console.log(typeof search, search);
     await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.beta().toOBJECT());
   }
