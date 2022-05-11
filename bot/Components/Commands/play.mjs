@@ -46,8 +46,14 @@ const playCommand = new Command({ ...basicInfo,
     };
     let stream;
     if (track.isYoutube()) stream = track.stream({
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 24,
       dlChunkSize: 0
     });else if (track.isSpotify()) stream = await track.stream({
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 24,
       dlChunkSize: 0
     });else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
     const dispatcher = connection.play(stream, DispatcherOptions);
