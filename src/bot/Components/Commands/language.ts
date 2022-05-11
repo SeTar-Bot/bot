@@ -33,7 +33,7 @@ const langCommand: Command = new Command({
             const localeChoise = ctx.options.getString('locale', true);
             const dbRes: dbGuildSchema = await client.database.guilds.update(ctx.guild, {
                 locale: localeChoise
-            });
+            }) as dbGuildSchema;
                 
             await ctx.editReply(client.localeManager.getLocale(dbRes.locale as localeList).reply.language(client, ctx.guild).toOBJECT())
         }
