@@ -6,6 +6,7 @@ export default class Event {
     this.name = setupArgs.name;
     this.isAvailable = setupArgs.isAvailable;
     this.type = setupArgs.type;
+    this.runTime = setupArgs.runTime ?? "on";
     this.executer = setupArgs.run;
 
     if (setupArgs.inhibitors && setupArgs.inhibitors.length > 0) {
