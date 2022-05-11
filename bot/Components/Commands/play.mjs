@@ -50,8 +50,7 @@ const playCommand = new Command({ ...basicInfo,
       dlChunkSize: 0
     });else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
     const dispatcher = connection.play(stream, DispatcherOptions);
-    const dispatcherLoaded = client.manager.loadEvent("start", "voice", dispatcher);
-    console.log('dispathcer loaded: ', dispatcherLoaded); //await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
+    client.manager.loadEvent("start", "voice", dispatcher);
   }
 });
 export default playCommand;

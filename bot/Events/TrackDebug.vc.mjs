@@ -1,17 +1,12 @@
 import Event from "../../Classes/Event.mjs";
 const TrackFinish = new Event({
-  name: 'finish',
+  name: 'debug',
   type: 'voice',
   runTime: "once",
   isAvailable: true,
   // eslint-disable-next-line
-  run: async (client, dispatcher, data) => {
-    const {
-      ctx
-    } = data.data;
-    return await ctx.editReply({
-      content: 'PLAYER FINISHED'
-    });
+  run: async (client, dispatcher, msg) => {
+    console.log(`dartjs: `, msg);
   }
 });
 export default TrackFinish;
