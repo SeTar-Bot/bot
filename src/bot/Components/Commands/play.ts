@@ -59,7 +59,7 @@ const playCommand: Command = new Command({
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
         const search = await engine.use(input);
-        const track: Base = search[0];
+        const track: Base = (Array.isArray(search)) ? search[0] as Base : search as Base;
 
         const connection = client.playerClient.connections.get(ctx.guild.id) ?? await client.playerClient.join(member.voice?.channel, {
             selfDeaf: true,
