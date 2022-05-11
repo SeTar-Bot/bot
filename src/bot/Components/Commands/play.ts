@@ -4,6 +4,7 @@ import { PlayOptions, VoiceConnection } from "dartjs";
 import { CommandInteraction } from "discord.js";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
 import { Base } from "music-engines/dist/Base";
+import { YTDLStreamOptions } from "music-engines/dist/typings/youtube";
 import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
@@ -66,6 +67,13 @@ const playCommand: Command = new Command({
             group: 'player'
         });
 
+        const streamParams: YTDLStreamOptions = { 
+            filter: 'audioonly',
+            quality: 'highestaudio',
+            highWaterMark: 1 << 24,
+            dlChunkSize: 0
+        }
+
         const DispatcherOptions: PlayOptions<{
             ctx: CommandInteraction,
             track: Base,
@@ -93,19 +101,9 @@ const playCommand: Command = new Command({
         let stream;
 
         if(track.isYoutube())
-            stream = track.stream({ 
-                filter: 'audioonly',
-                quality: 'highestaudio',
-                highWaterMark: 1 << 24,
-                dlChunkSize: 0
-            });
+            stream = track.stream(streamParams);
         else if(track.isSpotify())
-            stream = await track.stream({ 
-                filter: 'audioonly',
-                quality: 'highestaudio',
-                highWaterMark: 1 << 24,
-                dlChunkSize: 0
-            })
+            stream = await track.stream(streamParams)
         else if(track.isSoundcloud())
             stream = await track.stream()
         else if(track.isDeezer())
