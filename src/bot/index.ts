@@ -1,6 +1,7 @@
 import Components from "./Components";
 import botOptions from "./Config/botOptions";
 import DebugEvent from "./Events/Debug.djs";
+import ErrorEvent from "./Events/Error.djs";
 import GuildCreateEvent from "./Events/GuildCreate.djs";
 import GuildDeleteEvent from "./Events/GuildDelete.djs";
 import InteractionEvent from "./Events/Interaction.djs";
