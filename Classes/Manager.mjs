@@ -43,7 +43,7 @@ export default class Manager {
         const importState = await import(`file://${path.resolve(this.eventDir, eventFile)}`);
         const event = importState.default;
         this.events.set(event.name, event);
-        if (event.isAvailable && event.type == "discord.js") this.client.on(event.name, (...args) => event.run(this.client, ...args));
+        if (event.isAvailable && event.type == "discord.js") if (event.runTime == "on") this.client.on(event.name, (...args) => event.run(this.client, ...args));else this.client.once(event.name, (...args) => event.run(this.client, ...args));
       } catch (error) {
         eventLoading.fail(`Event ${eventFile} Failed to load Due Error: ${error}`);
       }
@@ -159,19 +159,10 @@ export default class Manager {
 
   loadEvent(name, type, emitter) {
     const searchFilter = this.events.filter(e => e.type == type);
-
-    if (name !== "all") {
-      const searchResult = searchFilter.find(e => e.name == name);
-      if (!searchResult) return false;
-      emitter.on(name, (...args) => searchResult.run(...args));
-      return true;
-    } else {
-      searchFilter.forEach(e => {
-        emitter.on(e.name, (...args) => e.run(...args));
-      });
-      console.log(`✔ | ${searchFilter.size} Events has been Loaded for Custom Emitter.`);
-      return true;
-    }
+    const searchResult = searchFilter.find(e => e.name == name);
+    if (!searchResult) return false;
+    if (searchResult.runTime == "on") emitter.on(name, (...args) => searchResult.run(this.client, emitter, ...args));else emitter.once(name, (...args) => searchResult.run(this.client, emitter, ...args));
+    return true;
   }
 
 }

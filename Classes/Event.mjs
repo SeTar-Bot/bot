@@ -1,4 +1,5 @@
 export default class Event {
+  runTime = "on";
   hasInhibitors = false;
 
   constructor(setupArgs) {
