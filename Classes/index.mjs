@@ -8,10 +8,8 @@ import Event from "./Event.mjs";
 import ExpressServer from "./Express.mjs";
 import Manager from "./Manager.mjs";
 import RestClient from "./Rest.mjs";
-import Cache from "./Cache.mjs";
 const Classes = {
   Client,
-  Cache,
   Manager,
   RestClient,
   EmbedBuilder,

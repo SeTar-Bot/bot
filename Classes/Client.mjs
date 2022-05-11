@@ -201,17 +201,13 @@ export default class Client extends DjsClient {
         break;
 
       case CacheTypes.DB_USERS:
-        dbUsers = this.database.users.cache.clear();
-        if (dbUsers) return {
-          dbUsers
-        };else return {};
+        this.database.users.cache.clear();
+        return {};
         break;
 
       case CacheTypes.DB_GUILDS:
-        dbGuilds = this.database.guilds.cache.clear();
-        if (dbGuilds) return {
-          dbGuilds
-        };else return {};
+        this.database.guilds.cache.clear();
+        return {};
         break;
     }
   }
