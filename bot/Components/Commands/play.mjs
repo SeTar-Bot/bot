@@ -30,6 +30,12 @@ const playCommand = new Command({ ...basicInfo,
       selfMute: false,
       group: 'player'
     }));
+    const streamParams = {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 24,
+      dlChunkSize: 0
+    };
     const DispatcherOptions = {
       metadata: {
         ctx,
@@ -45,17 +51,7 @@ const playCommand = new Command({ ...basicInfo,
       ignorePrevious: true
     };
     let stream;
-    if (track.isYoutube()) stream = track.stream({
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      highWaterMark: 1 << 24,
-      dlChunkSize: 0
-    });else if (track.isSpotify()) stream = await track.stream({
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      highWaterMark: 1 << 24,
-      dlChunkSize: 0
-    });else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
+    if (track.isYoutube()) stream = track.stream(streamParams);else if (track.isSpotify()) stream = await track.stream(streamParams);else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
     const dispatcher = connection.play(stream, DispatcherOptions);
     client.manager.loadEvent("start", "voice", dispatcher);
   }
