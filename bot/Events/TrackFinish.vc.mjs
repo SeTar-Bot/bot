@@ -2,6 +2,7 @@ import Event from "../../Classes/Event.mjs";
 const TrackFinish = new Event({
   name: 'finish',
   type: 'voice',
+  runTime: "once",
   isAvailable: true,
   // eslint-disable-next-line
   run: async (client, dispatcher, data) => {
