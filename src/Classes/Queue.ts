@@ -5,7 +5,7 @@ export default class Queue {
     private tracks: Base[] = [];
     private currentTrack: Base;
     private endedTracks: Base[] = [];
-    private loopMoode: "all" | "one" | "none" = "none";
+    public loopMoode: "all" | "one" | "none" = "none";
     constructor(tracks?: Base[])
     {
         this.tracks = tracks ? tracks : [];
