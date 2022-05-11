@@ -80,11 +80,12 @@ const InteractionEvent = new Event({
           ephemeral: true
         }));
       }
-    } catch (error) {
+    } catch (e) {
+      const error = e;
       await intc.editReply(client.localeManager.getLocale(localeList.ENGLISH).error.internal().toOBJECT({
         ephemeral: true
       }));
-      console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`);
+      console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs\nError: ${error.message}\nStack: ${error.stack}\n${chalk.bgRed(`----- ERROR -----`)}`);
     }
   }
 });
