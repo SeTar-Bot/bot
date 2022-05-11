@@ -163,5 +163,5 @@ export interface VoiceMetadata {
 }
 
 export interface VoiceData {
-    metadata?: VoiceMetadata
+    data?: VoiceMetadata
 }

@@ -9,7 +9,7 @@ const TrackFinish = new Event({
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, data: VoiceData) => {
-        const { ctx } = data.metadata;
+        const { ctx } = data.data;
         return await ctx.editReply({content: 'PLAYER STARTED'});
     }
 })

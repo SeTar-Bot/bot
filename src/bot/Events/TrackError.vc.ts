@@ -8,7 +8,7 @@ const TrackError = new Event({
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, msg: Error) => {
-        throw msg;
+        console.error(msg);
     }
 })
 
