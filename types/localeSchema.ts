@@ -1,8 +1,8 @@
 import { User, PermissionResolvable, Guild } from "discord.js";
 import Client from "../src/Classes/Client";
 import EmbedBuilder from "../src/Classes/EmbedBuilder";
-import { BotPermissions, BotRoles, CacheTypes, localeList } from "../src/typings/enums";
-import { CacheTypeResult } from "./classes";
+import { BotPermissions, BotRoles, CacheTypes } from "../src/typings/enums";
+import { CacheTypeResult, VoiceMetadata } from "./classes";
 
 export interface localeReplies {
     info: (client: Client) => EmbedBuilder;
@@ -12,6 +12,11 @@ export interface localeReplies {
     language: (c: Client, g: Guild) => EmbedBuilder;
     cache: (c: CacheTypes, r: CacheTypeResult) => EmbedBuilder;
     eval: (code: string, result: string, isError: boolean, errorStack?: string) => EmbedBuilder;
+    player: {
+        start: (data?: VoiceMetadata) => EmbedBuilder;
+        pause: (data?: VoiceMetadata) => EmbedBuilder;
+        resume: (data?: VoiceMetadata) => EmbedBuilder;
+    },
     beta: () => EmbedBuilder;
 }
 
@@ -25,7 +30,11 @@ export interface localeErrors {
     invalidURl: (statusCode?: number) => EmbedBuilder;
     NoVoiceChannel: () => EmbedBuilder;
     BotInUse: () => EmbedBuilder;
-    
+    NothingPlaying: () => EmbedBuilder;
+    player: {
+        AlreadyPaused: () => EmbedBuilder;
+        AlreadyResumed: () => EmbedBuilder;
+    }
 }
 
 export interface localeBase {

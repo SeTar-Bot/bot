@@ -1,7 +1,8 @@
 import { StreamDispatcher } from "dartjs";
-import { Client } from "discord.js";
 import { VoiceData } from "../../../types/classes";
+import Client from "../../Classes/Client";
 import Event from "../../Classes/Event";
+import { localeList } from "../../typings/enums";
 
 const TrackStart = new Event({
     name: 'start',
@@ -10,8 +11,9 @@ const TrackStart = new Event({
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, data: VoiceData) => {
-        const { ctx } = data.data;
-        return await ctx.editReply({content: 'PLAYER STARTED'});
+        const { data: metadata } = data;
+        const { ctx, database } = metadata;
+        return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.start(data.data).toOBJECT());
     }
 })
 

@@ -11,6 +11,7 @@ import express from "express";
 import Endpoint from "../src/Classes/Endpoint";
 import { VoiceConnection } from "dartjs";
 import { Base } from "music-engines/dist/Base";
+import { dbObject } from "./database";
 
 export interface botOpts {
     client: ClientOptions;
@@ -159,7 +160,8 @@ export type expressCallback = (client: Client, req: express.Request, res: expres
 export interface VoiceMetadata {
     ctx: CommandInteraction,
     track: Base,
-    connection: VoiceConnection
+    connection: VoiceConnection,
+    database: dbObject
 }
 
 export interface VoiceData {

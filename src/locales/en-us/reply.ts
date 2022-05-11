@@ -1,6 +1,6 @@
 import { Guild, MessageButton, User } from "discord.js";
 import { type } from "os";
-import { CacheTypeResult } from "../../../types/classes";
+import { CacheTypeResult, VoiceMetadata } from "../../../types/classes";
 import { localeReplies } from "../../../types/localeSchema";
 import botOptions from "../../bot/Config/botOptions";
 import Client from "../../Classes/Client";
@@ -8,6 +8,12 @@ import EmbedBuilder from "../../Classes/EmbedBuilder";
 import { BotPermissions, BotRoles, CacheTypes } from "../../typings/enums";
 
 const en_usReplies: localeReplies = {
+
+    player: {
+        start: (data: VoiceMetadata): EmbedBuilder => new EmbedBuilder().setDescription(data.track.platform),
+        pause: (): EmbedBuilder => new EmbedBuilder().setDescription(''),
+        resume: (): EmbedBuilder => new EmbedBuilder().setDescription(''),
+    },
 
     info: (client: Client): EmbedBuilder => new EmbedBuilder()
         .setDescription(`${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668>  **Bot Information**\n${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668> **Developer Information**\n**${client.user.username}-${botOptions.version}** Created by [BoyCode](https://github.com/EhsanFox) in **2022**\nand Originally founded in **2019** by [Setar-Team](https://github.com/SeTar-Bot/)`)
