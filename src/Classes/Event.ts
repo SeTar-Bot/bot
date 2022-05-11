@@ -8,6 +8,7 @@ export default class Event implements botEvents {
     public type: EventTypes;
     public executer: (...any: any) => Promise<any | void>;
     readonly inhibitors?: Inhibitor[];
+    public readonly runTime: "once" | "on" = "on"
 
     private hasInhibitors = false;
 

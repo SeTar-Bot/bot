@@ -69,7 +69,10 @@ export default class Manager implements botManager {
                 const event: Event = importState.default;
                 this.events.set(event.name, event);
                 if(event.isAvailable && event.type == "discord.js")
-                    this.client.on(event.name, (...args: any) => event.run(this.client, ...args));
+                    if(event.runTime == "on")
+                        this.client.on(event.name, (...args: any) => event.run(this.client, ...args));
+                    else
+                        this.client.once(event.name, (...args: any) => event.run(this.client, ...args))
             } catch (error) {
                 eventLoading.fail(`Event ${eventFile} Failed to load Due Error: ${error}`);
             }
@@ -190,22 +193,16 @@ export default class Manager implements botManager {
     loadEvent(name: string, type: EventTypes, emitter: EventEmitter): boolean
     {
         const searchFilter = this.events.filter(e => e.type == type);
-        if(name !== "all")
-        {
-            const searchResult = searchFilter.find(e => e.name == name);
-            if(!searchResult)
-                return false;
+        const searchResult = searchFilter.find(e => e.name == name);
 
-            emitter.on(name, (...args) => searchResult.run(...args));
-            return true;
-        }
+        if(!searchResult)
+            return false;
+
+        if(searchResult.runTime == "on")
+            emitter.on(name, (...args) => searchResult.run(this.client, emitter, ...args));
         else
-        {
-            searchFilter.forEach(e => {
-                emitter.on(e.name, (...args) => e.run(...args));
-            });
-            console.log(`✔ | ${searchFilter.size} Events has been Loaded for Custom Emitter.`);
-            return true;
-        }
+            emitter.once(name, (...args) => searchResult.run(this.client, emitter, ...args))
+
+        return true;
     }
 }

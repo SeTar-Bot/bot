@@ -1,4 +1,4 @@
-import { Collection, ClientOptions, GuildResolvable, PresenceData } from "discord.js";
+import { Collection, ClientOptions, GuildResolvable, PresenceData, CommandInteraction } from "discord.js";
 import Command from "../src/Classes/Command";
 import { BotPermissions, BotRoles, ContextTypes, expreessEndpoints, expressMethods } from "../src/typings/enums";
 import { SlashCommandBuilder } from "@discordjs/builders";
@@ -9,6 +9,8 @@ import Button from "../src/Classes/Button";
 import Context from "../src/Classes/Context";
 import express from "express";
 import Endpoint from "../src/Classes/Endpoint";
+import { VoiceConnection } from "dartjs";
+import { Base } from "music-engines/dist/Base";
 
 export interface botOpts {
     client: ClientOptions;
@@ -41,7 +43,7 @@ export interface botCommands {
 
 }
 
-export type EventTypes = "discord.js" | "player"; 
+export type EventTypes = "discord.js" | "voice"; 
 
 export interface botEvents {
 
@@ -49,6 +51,7 @@ export interface botEvents {
     isAvailable: boolean;
     type: EventTypes;
     run: (...any: any) => Promise<any | void>;
+    runTime?: "on" | "once";
     inhibitors?: Inhibitor[]
 
 }
@@ -152,3 +155,13 @@ export interface EmbedBuilderObjOpts {
 }
 
 export type expressCallback = (client: Client, req: express.Request, res: express.Response) => void;
+
+export interface VoiceMetadata {
+    ctx: CommandInteraction,
+    track: Base,
+    connection: VoiceConnection
+}
+
+export interface VoiceData {
+    metadata?: VoiceMetadata
+}

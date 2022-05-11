@@ -17,12 +17,12 @@ const InteractionEvent = new Event({
 
         try {
             
-            const gData: dbGuildSchema = await client.database.guilds.fetch(interaction.guild);
-            const uData: dbUserSchema = await client.database.users.fetch(interaction.user);
+            const gData: dbGuildSchema = await client.database.guilds.fetch(interaction.guild) as dbGuildSchema;
+            const uData: dbUserSchema = await client.database.users.fetch(interaction.user) as dbUserSchema;
             
             const databaseFetchedObj: dbObject = {
-                guild: gData,
-                user: uData
+                guild: gData as dbGuildSchema,
+                user: uData as dbUserSchema
             };
 
             if(uData.permission == BotPermissions.BAN)

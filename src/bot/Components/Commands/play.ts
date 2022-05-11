@@ -1,5 +1,8 @@
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
+import { NoSubscriberBehavior } from "@discordjs/voice";
 import { CommandInteraction } from "discord.js";
+import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
+import { Base } from "music-engines/dist/Base";
 import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
@@ -39,7 +42,9 @@ const playCommand: Command = new Command({
         // eslint-disable-next-line
         const input = ctx.options.getString('input', true);
         // eslint-disable-next-line
-        const engineChoice: "youtube" | "spotify" | "soundcloud" | "deezer" = ctx.options.getString('engine', false) as "youtube" | "spotify" | "soundcloud" | "deezer" ?? 'youtube'
+        let engineChoice: "youtube" | "spotify" | "soundcloud" | "deezer" = ctx.options.getString('engine', false) as "youtube" | "spotify" | "soundcloud" | "deezer" ?? 'youtube'
+        engineChoice = engineChoice.toLowerCase() as "youtube" | "spotify" | "soundcloud" | "deezer";
+        const engine: YouTube | Spotify | SoundCloud | Deezer = client.playerEngines[engineChoice.toLowerCase()]
         const member = await ctx.guild.members.fetch({
             user: ctx.user
         });
@@ -51,10 +56,41 @@ const playCommand: Command = new Command({
         if(ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel)
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
-        const search = await client.playerEngines[engineChoice.toLowerCase()].use(input);
+        const search = await engine.use(input);
+        const track: Base = search[0];
 
-        console.log(typeof search, search);
+        const connection = client.playerClient.connections.get(ctx.guild.id) ?? await client.playerClient.join(member.voice?.channel, {
+            selfDeaf: true,
+            selfMute: false,
+            group: 'player'
+        });
 
+        const DispatcherOptions = {
+            metadata: {
+                ctx,
+                track,
+                connection
+            },
+            behaviours: {
+                noSubscriber: NoSubscriberBehavior.Stop,
+                maxMissedFrames: 25
+            },
+            ignorePrevious: true
+        }
+
+        let stream;
+
+        if(track.isYoutube())
+            stream = track.stream({dlChunkSize: 0});
+        else if(track.isSpotify())
+            stream = await track.stream({dlChunkSize: 0})
+        else if(track.isSoundcloud())
+            stream = await track.stream()
+        else if(track.isDeezer())
+            stream = await track.stream()
+
+        const dispatcher = connection.play(stream, DispatcherOptions)
+        client.manager.loadEvent("start", "voice", dispatcher);
         await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
     }
 })

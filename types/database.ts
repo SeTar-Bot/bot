@@ -16,6 +16,6 @@ export interface dbUserSchema {
 }
 
 export interface dbObject {
-    guild: dbGuildSchema;
-    user: dbUserSchema;
+    guild: dbGuildSchema
+    user: dbUserSchema
 }

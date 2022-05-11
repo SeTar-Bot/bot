@@ -40,10 +40,10 @@ const permCommand: Command = new Command({
         const targetPerm = Number(ctx.options.getString('permission')) as BotPermissions;
         let targetRole: BotRoles;
             
-        const uData: dbUserSchema = await client.database.users.fetch(mentionedUser);
+        const uData: dbUserSchema = await client.database.users.fetch(mentionedUser) as dbUserSchema;
         const res: dbUserSchema = await client.database.users.update(mentionedUser, {
             permission: targetPerm
-        });
+        }) as dbUserSchema;
 
         switch (targetPerm) {
             case BotPermissions.BAN:
