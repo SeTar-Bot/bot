@@ -54,6 +54,9 @@ const playCommand = new Command({ ...basicInfo,
     if (track.isYoutube()) stream = track.stream(streamParams);else if (track.isSpotify()) stream = await track.stream(streamParams);else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
     const dispatcher = connection.play(stream, DispatcherOptions);
     client.manager.loadEvent("start", "voice", dispatcher);
+    client.manager.loadEvent("finish", "voice", dispatcher);
+    client.manager.loadEvent("error", "voice", dispatcher);
+    client.manager.loadEvent("debug", "voice", dispatcher);
   }
 });
 export default playCommand;
