@@ -46,8 +46,7 @@ const playCommand = new Command({ ...basicInfo,
         noSubscriber: NoSubscriberBehavior.Stop
       },
       inlineVolume: true,
-      initialVolume: 100 / 100,
-      ignorePrevious: true
+      initialVolume: 100 / 100
     };
     let stream;
     if (track.isYoutube()) stream = track.stream(streamParams);else if (track.isSpotify()) stream = await track.stream(streamParams);else if (track.isSoundcloud()) stream = await track.stream();else if (track.isDeezer()) stream = await track.stream();
