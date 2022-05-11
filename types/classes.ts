@@ -43,7 +43,7 @@ export interface botCommands {
 
 }
 
-export type EventTypes = "discord.js" | "voice"; 
+export type EventTypes = "discord.js" | "voice" | "connection"; 
 
 export interface botEvents {
 
