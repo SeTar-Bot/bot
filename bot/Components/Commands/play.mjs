@@ -34,7 +34,7 @@ const playCommand = new Command({ ...basicInfo,
     const streamParams = {
       filter: 'audioonly',
       quality: 'highestaudio',
-      highWaterMark: 1 << 24,
+      highWaterMark: 1 << 25,
       dlChunkSize: 0
     };
     const DispatcherOptions = {
