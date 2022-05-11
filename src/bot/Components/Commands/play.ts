@@ -90,8 +90,9 @@ const playCommand: Command = new Command({
             stream = await track.stream()
 
         const dispatcher = connection.play(stream, DispatcherOptions)
-        client.manager.loadEvent("start", "voice", dispatcher);
-        await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
+        const dispatcherLoaded = client.manager.loadEvent("start", "voice", dispatcher);
+        console.log('dispathcer loaded: ', dispatcherLoaded);
+        //await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.beta().toOBJECT());
     }
 })
 
