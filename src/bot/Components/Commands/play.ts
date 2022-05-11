@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
 import { NoSubscriberBehavior } from "@discordjs/voice";
+import { PlayOptions, VoiceConnection } from "dartjs";
 import { CommandInteraction } from "discord.js";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
 import { Base } from "music-engines/dist/Base";
@@ -65,7 +66,16 @@ const playCommand: Command = new Command({
             group: 'player'
         });
 
-        const DispatcherOptions = {
+        const DispatcherOptions: PlayOptions<{
+            ctx: CommandInteraction,
+            track: Base,
+            connection: VoiceConnection
+        }> & { 
+            behaviours?: {
+                noSubscriber?: NoSubscriberBehavior;
+                maxMissedFrames?: number;
+            };
+        } = {
             metadata: {
                 ctx,
                 track,
@@ -75,6 +85,7 @@ const playCommand: Command = new Command({
                 noSubscriber: NoSubscriberBehavior.Stop,
                 maxMissedFrames: 25
             },
+            initialVolume: 100 / 100,
             ignorePrevious: true
         }
 
