@@ -6,6 +6,7 @@ import Event from "../../Classes/Event";
 const TrackFinish = new Event({
     name: 'finish',
     type: 'voice',
+    runTime: "once",
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, data: VoiceData) => {

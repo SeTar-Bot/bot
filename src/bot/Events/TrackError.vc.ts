@@ -5,6 +5,7 @@ import Event from "../../Classes/Event";
 const TrackError = new Event({
     name: 'error',
     type: 'voice',
+    runTime: "once",
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, msg: Error) => {
