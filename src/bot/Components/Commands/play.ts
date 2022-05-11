@@ -67,9 +67,9 @@ const playCommand: Command = new Command({
             group: 'player'
         });
 
-        client.manager.loadEvent("disconnect", "connection", connection);
-        client.manager.loadEvent("debug", "connection", connection);
-        client.manager.loadEvent("error", "connection", connection);
+        console.log(client.manager.loadEvent("disconnect", "connection", connection),
+                    client.manager.loadEvent("debug", "connection", connection),
+                    client.manager.loadEvent("error", "connection", connection));
 
         const streamParams: YTDLStreamOptions = { 
             filter: 'audioonly',

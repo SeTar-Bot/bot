@@ -9,7 +9,7 @@ const ConnectionEnd = new Event({
     isAvailable: true,
     // eslint-disable-next-line
     run: async (client: Client, dispatcher: StreamDispatcher, e: Error) => {
-        console.warn(e);
+        console.error(e);
     }
 })
 
