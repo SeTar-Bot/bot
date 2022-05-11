@@ -37,6 +37,14 @@ jobs:
           cp ${GITHUB_WORKSPACE}/package.json ${GITHUB_WORKSPACE}/dist/package.json
           cp -r ${GITHUB_WORKSPACE}/production/. ${GITHUB_WORKSPACE}/dist/
 
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: "dist" # <- This will point to the api folder in your project
+
       - name: Deploy to Prodcution Branch
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
