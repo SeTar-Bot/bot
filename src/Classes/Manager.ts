@@ -195,7 +195,7 @@ export default class Manager implements botManager {
         const searchFilter = this.events.filter(e => e.type == type);
         const searchResult = searchFilter.find(e => e.name == name);
 
-        if(!searchResult)
+        if(!searchResult || !searchResult.isAvailable)
             return false;
 
         if(searchResult.runTime == "on")

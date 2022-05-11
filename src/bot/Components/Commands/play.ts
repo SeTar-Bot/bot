@@ -67,9 +67,9 @@ const playCommand: Command = new Command({
             group: 'player'
         });
 
-        console.log(client.manager.loadEvent("disconnect", "connection", connection),
-                    client.manager.loadEvent("debug", "connection", connection),
-                    client.manager.loadEvent("error", "connection", connection));
+        client.manager.loadEvent("disconnect", "connection", connection)
+        client.manager.loadEvent("debug", "connection", connection)
+        client.manager.loadEvent("error", "connection", connection)
 
         const streamParams: downloadOptions = { 
             filter: 'audioonly',
@@ -110,8 +110,6 @@ const playCommand: Command = new Command({
             stream = await track.stream()
         else if(track.isDeezer())
             stream = await track.stream()
-
-        console.log('Steam object: ', stream);
 
         const dispatcher = connection.play(stream, DispatcherOptions)
         client.manager.loadEvent("start", "voice", dispatcher);
