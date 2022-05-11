@@ -1,7 +1,8 @@
 import pkg from 'mongoose';
 const { Schema } = pkg;
+import { dbUserSchema } from "../../../types/database"
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<dbUserSchema>({
     id: {
         type: String,
         required: true,
@@ -18,7 +19,7 @@ const UserSchema = new Schema({
         required: false
     },
     playlist: {
-        type: Array,
+        type: [{}],
         default: [],
         required: false,
         length: 20

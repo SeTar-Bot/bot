@@ -1,5 +1,4 @@
 import { InteractionReplyOptions, MessageActionRow, MessageButton, MessageEmbed, MessageEmbedOptions, MessageSelectMenu } from "discord.js";
-import { APIEmbed } from "discord-api-types/v9";
 import { EmbedBuilderObjOpts } from "../../types/classes";
 
 export default class EmbedBuilder extends MessageEmbed {
@@ -46,7 +45,7 @@ export default class EmbedBuilder extends MessageEmbed {
 
     toOBJECT(opts: EmbedBuilderObjOpts = { fetchReply: true }): InteractionReplyOptions
     {
-        let json = this.toJSON();
+        const json = this.toJSON();
 
         if(this.otherEmbeds.length > 0)
         {
@@ -54,7 +53,7 @@ export default class EmbedBuilder extends MessageEmbed {
             this.otherEmbeds.map(x => x.toJSON())
         }
 
-        let result: InteractionReplyOptions = { 
+        const result: InteractionReplyOptions = { 
             fetchReply: opts.fetchReply,
             embeds: (this.otherEmbeds.length > 0) ? this.otherEmbeds : [json],
         };

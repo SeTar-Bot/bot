@@ -9,10 +9,13 @@ import { CacheTypes } from "../typings/enums";
 import { localeManager } from "../locales";
 import axios from "axios";
 import ExpressServer from "./Express";
-import { Client as PlayerClient } from "player-engine"
+import { DartVoiceManager } from "dartjs";
+import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
+import UtilClient from "@setar/utils";
 export default class Client extends DjsClient {
 
     public manager: Manager;
+    public Utils: UtilClient;
     public restClient: RestClient;
     public database: SetarDB;
     private botToken: string;
@@ -21,7 +24,14 @@ export default class Client extends DjsClient {
     public localeManager: localeManager;
     public axiosClient: typeof axios = axios;
     public expressServer: ExpressServer;
-    public playerClient: PlayerClient;
+    public playerClient: DartVoiceManager;
+    readonly playerEngines = {
+        youtube: new YouTube(),
+        soundcloud: new SoundCloud(),
+        deezer: new Deezer(),
+        spotify: new Spotify()
+    };
+
     constructor(token: string, clientId: string, opts: botOpts = botOptions)
     {
         super(opts.client);
@@ -29,13 +39,14 @@ export default class Client extends DjsClient {
         this.botId = clientId;
         this.axiosClient = axios;
         this.expressServer = new ExpressServer(opts.serverPort);
+        this.Utils = new UtilClient(this);
         this.login(this.botToken)
         .then(() => {
             this.manager = new Manager(this, opts.commands, opts.events, opts.buttons, opts.contexts, opts.endpoints);
             this.restClient = new RestClient(this.botToken, this.botId);
             this.database = new SetarDB(opts.databaseURI);
             this.localeManager = new localeManager();
-            this.playerClient = new PlayerClient(this); 
+            this.playerClient = new DartVoiceManager(this); 
             
             this.intialize()
             .then(() => {
@@ -62,11 +73,11 @@ export default class Client extends DjsClient {
             }).start();
             // 1- Connects Database
             this.database.intialize()
-            .then(dbStatus => {
+            .then(() => {
                 myConsole.text = 'Initializing Client [2/2]'
                 // 2- Load Events & Commands
                 this.manager.setup()
-                .then(mngData => {
+                .then(() => {
                     myConsole.succeed(`Initializing Complete`);
                     resolve(true);
                 })
@@ -107,14 +118,16 @@ export default class Client extends DjsClient {
                 messages = this.sweepers.sweepMessages(s => s instanceof Message);
                 presences = this.sweepers.sweepPresences(s => s instanceof Presence);
                 reactions = this.sweepers.sweepReactions(s => s instanceof MessageReaction);
+                /* eslint-disable */
                 /* @ts-ignore */
                 stages = this.sweepers.sweepStageInstances(s => s instanceof StageInstance);
+                /* eslint-enable */
                 threads = this.sweepers.sweepThreads(s => s instanceof ThreadChannel);
                 threadMembers = this.sweepers.sweepThreadMembers(s => s instanceof ThreadMember);
                 users = this.sweepers.sweepUsers(s => s instanceof User);
                 voiceStates = this.sweepers.sweepVoiceStates(s => s instanceof VoiceState);
-                dbUsers = this.database.users.cache.Reset('all');
-                dbGuilds = this.database.guilds.cache.Reset('all');
+                dbUsers = this.database.users.cache.clear();
+                dbGuilds = this.database.guilds.cache.clear();
                 return { bans, emojis, members, invites, messages, presences, reactions, stages, threads, users, voiceStates, dbUsers, dbGuilds, 
                     total: bans + emojis + members + invites + messages + presences + reactions + stages + users + voiceStates };
             break;
@@ -180,7 +193,7 @@ export default class Client extends DjsClient {
             break;
 
             case CacheTypes.DB_USERS:
-                dbUsers = this.database.users.cache.Reset('all');
+                dbUsers = this.database.users.cache.clear();
                 if(dbUsers)
                     return { dbUsers };
                 else
@@ -188,7 +201,7 @@ export default class Client extends DjsClient {
             break;
 
             case CacheTypes.DB_GUILDS:
-                dbGuilds = this.database.guilds.cache.Reset('all');
+                dbGuilds = this.database.guilds.cache.clear();
                 if(dbGuilds)
                     return { dbGuilds };
                 else

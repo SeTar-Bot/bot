@@ -8,9 +8,11 @@ import Event from "./Event";
 import ExpressServer from "./Express";
 import Manager from "./Manager";
 import RestClient from "./Rest";
+import Cache from "./Cache";
 
 const Classes = {
     Client,
+    Cache,
     Manager,
     RestClient,
     EmbedBuilder,

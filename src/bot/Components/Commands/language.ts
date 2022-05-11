@@ -1,9 +1,8 @@
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders";
-import { CommandInteraction, MessageButton, PermissionResolvable } from "discord.js";
+import { CommandInteraction, PermissionResolvable } from "discord.js";
 import { dbGuildSchema, dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
-import EmbedBuilder from "../../../Classes/EmbedBuilder";
 import { BotPermissions, localeList } from "../../../typings/enums";
 
 const basicInfo = {
@@ -28,22 +27,18 @@ const langCommand: Command = new Command({
     isAvailable: false,
     permission: BotPermissions.ALL,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
-        try {
-            const requiredPerm: PermissionResolvable = ['ADMINISTRATOR'];
-            if(database.user.permission > BotPermissions.ALL || ctx.memberPermissions.has(requiredPerm))
-            {
-                const localeChoise = ctx.options.getString('locale', true);
-                const dbRes: dbGuildSchema = await client.database.guilds.update(ctx.guild, {
-                    locale: localeChoise
-                });
+        const requiredPerm: PermissionResolvable = ['ADMINISTRATOR'];
+        if(database.user.permission > BotPermissions.ALL || ctx.memberPermissions.has(requiredPerm))
+        {
+            const localeChoise = ctx.options.getString('locale', true);
+            const dbRes: dbGuildSchema = await client.database.guilds.update(ctx.guild, {
+                locale: localeChoise
+            });
                 
-                await ctx.editReply(client.localeManager.getLocale(dbRes.locale as localeList).reply.language(client, ctx.guild).toOBJECT())
-            }
-            else
-                await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.missingPerms(requiredPerm).toOBJECT());
-        } catch (error) {
-            throw error;   
+            await ctx.editReply(client.localeManager.getLocale(dbRes.locale as localeList).reply.language(client, ctx.guild).toOBJECT())
         }
+        else
+            await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.missingPerms(requiredPerm).toOBJECT());
     }
 })
 

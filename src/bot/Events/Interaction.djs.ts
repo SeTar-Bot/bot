@@ -1,9 +1,8 @@
 import chalk from "chalk";
-import { ButtonInteraction, CommandInteraction, Interaction } from "discord.js";
+import { CommandInteraction, Interaction } from "discord.js";
 import { dbGuildSchema, dbObject, dbUserSchema } from "../../../types/database";
 import Client from "../../Classes/Client";
 import Event from "../../Classes/Event";
-import Inhibitor from "../../Classes/Inhibitor";
 import { BotPermissions, ContextTypes, localeList } from "../../typings/enums";
 
 const InteractionEvent = new Event({

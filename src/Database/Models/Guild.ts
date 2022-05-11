@@ -1,5 +1,6 @@
 import pkg from 'mongoose';
 const { model } = pkg;
 import GuildSchema from "../Schemas/Guild";
-const GuildModel = model('Guilds', GuildSchema);
+import { dbGuildSchema } from "../../../types/database"
+const GuildModel = model<dbGuildSchema>('Guilds', GuildSchema);
 export default GuildModel;

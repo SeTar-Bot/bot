@@ -1,12 +1,11 @@
 import chalk from "chalk";
-import Client from "../../Classes/Client";
 import Event from "../../Classes/Event";
 
 const InvalidateEvent = new Event({
     name: 'invalidated',
     isAvailable: true,
     type: "discord.js",
-    run: async (client: Client): Promise<any> => {
+    run: async (): Promise<any> => {
         try {
             console.log(
                 chalk.bgRed(`----- CLIENT INVALIDATED -----`), `\n`,

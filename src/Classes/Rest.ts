@@ -1,7 +1,6 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import { REST, RESTOptions } from "@discordjs/rest";
 import { Routes } from 'discord-api-types/v9';
-import { ApplicationCommandManager, ApplicationCommandDataResolvable, GuildResolvable, Snowflake } from "discord.js";
+import { ApplicationCommandManager, ApplicationCommandDataResolvable, GuildResolvable } from "discord.js";
 
 export default class RestClient extends REST {
 
@@ -15,24 +14,16 @@ export default class RestClient extends REST {
 
     async addCommand(cmds: any[], guild?: GuildResolvable | boolean): ReturnType<REST["put"]>
     {
-        try {
-            if(!guild) {
-                return await this.put(Routes.applicationCommands(this.appId), { body: cmds })
-            }
-                
-            return await this.put(Routes.applicationGuildCommands(this.appId, guild as string), { body: cmds })
-        } catch (error) {
-            throw error;
+        if(!guild) {
+            return await this.put(Routes.applicationCommands(this.appId), { body: cmds })
         }
+            
+        return await this.put(Routes.applicationGuildCommands(this.appId, guild as string), { body: cmds })
     }
 
     async updateCommand(cmdManager: ApplicationCommandManager, guild: GuildResolvable, data: any): ReturnType<ApplicationCommandManager["create"]>
     {
-        try {
-            return await cmdManager.create(data as ApplicationCommandDataResolvable, guild as string);
-        } catch (error) {
-            throw error;
-        }
+        return await cmdManager.create(data as ApplicationCommandDataResolvable, guild as string);
     }
 
 }

@@ -1,4 +1,4 @@
-import { botButtons, botButtonsArgs } from "../../types/classes";
+import { botButtons } from "../../types/classes";
 import { BotPermissions } from "../typings/enums";
 
 export default class Button implements botButtons {
@@ -8,7 +8,7 @@ export default class Button implements botButtons {
     readonly permission: BotPermissions;
     readonly isAvailable: boolean;
     public run: (...any: any) => Promise<any>;
-    constructor(args: botButtonsArgs)
+    constructor(args: botButtons)
     {
         this.name = args.name;
         this.description = args.description;

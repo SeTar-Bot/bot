@@ -4,7 +4,6 @@ import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
 import Command from "../../../Classes/Command";
 import { BotPermissions, CacheTypes, localeList } from "../../../typings/enums";
-import os from "os";
 
 const basicInfo = {
     name: 'cache',
@@ -42,15 +41,10 @@ const cacheCommand: Command = new Command({
     isAvailable: true,
     permission: BotPermissions.ADMIN,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
-        try {
-            const choice = ctx.options.getString('cache_type', true);
-            const result = client.clean(choice as CacheTypes);
+        const choice = ctx.options.getString('cache_type', true);
+        const result = client.clean(choice as CacheTypes);
 
-            await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.cache(choice as CacheTypes, result).toOBJECT())
-
-        } catch (error) {
-            throw error;
-        }
+        await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.cache(choice as CacheTypes, result).toOBJECT())
     }
 })
 
