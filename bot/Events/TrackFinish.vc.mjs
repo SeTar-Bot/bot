@@ -7,7 +7,7 @@ const TrackFinish = new Event({
   run: async (client, dispatcher, data) => {
     const {
       ctx
-    } = data.metadata;
+    } = data.data;
     return await ctx.editReply({
       content: 'PLAYER STARTED'
     });
