@@ -7,11 +7,13 @@ const TrackStart = new Event({
   // eslint-disable-next-line
   run: async (client, dispatcher, data) => {
     const {
-      ctx
-    } = data.data;
-    return await ctx.editReply({
-      content: 'PLAYER STARTED'
-    });
+      data: metadata
+    } = data;
+    const {
+      ctx,
+      database
+    } = metadata;
+    return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.start(data.data).toOBJECT());
   }
 });
 export default TrackStart;

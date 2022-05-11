@@ -3,7 +3,7 @@ const ConnectionDebug = new Event({
   name: 'debug',
   type: 'connection',
   runTime: "on",
-  isAvailable: true,
+  isAvailable: false,
   // eslint-disable-next-line
   run: async (client, dispatcher, msg) => {
     console.log(`dartjs: connection: `, msg);

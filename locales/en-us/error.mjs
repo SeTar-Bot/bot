@@ -30,6 +30,17 @@ const en_usErrors = {
   }),
   BotInUse: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Bot is playing music in other channel at the moment, maybe join us? 🤔`).setFooter({
     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-  })
+  }),
+  NothingPlaying: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Bot is not playing anything, maybe start listening to music? 🤔`).setFooter({
+    text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+  }),
+  player: {
+    AlreadyPaused: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Music is already paused.`).setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }),
+    AlreadyResumed: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Bot is already playing music, maybe turn the volume up? 🤔`).setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    })
+  }
 };
 export default en_usErrors;

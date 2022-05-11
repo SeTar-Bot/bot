@@ -11,6 +11,7 @@ import ExpressServer from "./Express.mjs";
 import { DartVoiceManager } from "dartjs";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
 import UtilClient from "@setar/utils";
+import AudioManager from "./Audio.mjs";
 export default class Client extends DjsClient {
   axiosClient = axios;
   playerEngines = {
@@ -33,6 +34,7 @@ export default class Client extends DjsClient {
       this.database = new SetarDB(opts.databaseURI);
       this.localeManager = new localeManager();
       this.playerClient = new DartVoiceManager(this);
+      this.audioClient = new AudioManager(this.playerClient);
       this.intialize().then(() => {
         this.emit("ready", this);
       }).catch(e => {
