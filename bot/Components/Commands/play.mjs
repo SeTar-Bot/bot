@@ -43,8 +43,7 @@ const playCommand = new Command({ ...basicInfo,
         connection
       },
       behaviours: {
-        noSubscriber: NoSubscriberBehavior.Stop,
-        maxMissedFrames: 25
+        noSubscriber: NoSubscriberBehavior.Stop
       },
       inlineVolume: true,
       initialVolume: 100 / 100,
