@@ -11,8 +11,18 @@ const en_usReplies: localeReplies = {
 
     player: {
         start: (data: VoiceMetadata): EmbedBuilder => new EmbedBuilder().setDescription(data.track.platform),
-        pause: (): EmbedBuilder => new EmbedBuilder().setDescription(''),
-        resume: (): EmbedBuilder => new EmbedBuilder().setDescription(''),
+        pause: (): EmbedBuilder => new EmbedBuilder()
+        .setDescription('⏸ | Music Paused!')
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        })
+        .setColor(6203346),
+        resume: (): EmbedBuilder => new EmbedBuilder()  
+        .setDescription('▶️ | Music Resumed!')
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        })
+        .setColor(6203346),
     },
 
     info: (client: Client): EmbedBuilder => new EmbedBuilder()
