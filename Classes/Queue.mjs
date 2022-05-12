@@ -1,4 +1,7 @@
-import { Base } from "music-engines/dist/Base";
+import { wrappers } from "music-engines";
+const {
+  Base
+} = wrappers;
 export default class Queue {
   tracks = [];
   endedTracks = [];
@@ -113,7 +116,7 @@ export default class Queue {
         this.tracks.splice(trackIndex, numbersToRemove);
         return true;
       }
-    } else {
+    } else if (typeof x == "number") {
       if (!numbersToRemove) numbersToRemove = 1;
       this.tracks.splice(x, numbersToRemove);
       return true;
