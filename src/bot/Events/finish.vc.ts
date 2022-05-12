@@ -1,7 +1,7 @@
 import { NoSubscriberBehavior } from "@discordjs/voice";
 import { PlayOptions, StreamDispatcher, VoiceConnection } from "dartjs";
 import { CommandInteraction } from "discord.js";
-import { Base } from "music-engines/dist/Base";
+import { Base } from "music-engines";
 import { downloadOptions } from "ytdl-core"
 import { VoiceData } from "../../../types/classes";
 import { dbObject } from "../../../types/database";

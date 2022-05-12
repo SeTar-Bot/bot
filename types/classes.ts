@@ -10,7 +10,7 @@ import Context from "../src/Classes/Context";
 import express from "express";
 import Endpoint from "../src/Classes/Endpoint";
 import { VoiceConnection } from "dartjs";
-import { Base } from "music-engines/dist/Base";
+import { Base } from "music-engines";
 import { dbObject } from "./database";
 
 export interface botOpts {
