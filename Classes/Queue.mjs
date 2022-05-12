@@ -1,7 +1,4 @@
-import { wrappers } from "music-engines";
-const {
-  Base
-} = wrappers;
+import { Base } from "music-engines";
 export default class Queue {
   tracks = [];
   endedTracks = [];
