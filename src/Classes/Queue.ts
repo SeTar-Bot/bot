@@ -1,12 +1,12 @@
-import { Base } from "music-engines/dist/Base";
-
+import { wrappers } from "music-engines";
+const { Base } = wrappers;
 export default class Queue {
 
-    private tracks: Base[] = [];
-    private currentTrack: Base;
-    private endedTracks: Base[] = [];
+    private tracks: typeof Base[] = [];
+    private currentTrack: typeof Base;
+    private endedTracks: typeof Base[] = [];
     public loopMoode: "all" | "one" | "none" = "none";
-    constructor(tracks?: Base[])
+    constructor(tracks?: typeof Base[])
     {
         this.tracks = tracks ? tracks : [];
     }
@@ -36,7 +36,7 @@ export default class Queue {
         this.tracks.unshift(this.currentTrack);
     }
 
-    nextTracks(): Base[] {
+    nextTracks(): typeof Base[] {
         if(this.tracks.length)
         {
             const currentTrack = this.tracks.shift();
@@ -55,7 +55,7 @@ export default class Queue {
         else if(this.loopMoode == "one")
             this.repeatOne();
     }
-    previousTracks(): Base[] {
+    previousTracks(): typeof Base[] {
         return this.endedTracks;
     }
 
@@ -74,7 +74,7 @@ export default class Queue {
         return true;
     }
 
-    current(): Base
+    current(): typeof Base
     {
 
         if(!this.currentTrack)
@@ -83,7 +83,7 @@ export default class Queue {
         return this.currentTrack;
     }
 
-    next(): Base
+    next(): typeof Base
     {
         this.checkLoop()
         
@@ -95,7 +95,7 @@ export default class Queue {
         return this.currentTrack;
     }
 
-    back(): Base
+    back(): typeof Base
     {
         this.checkLoop()
 
@@ -107,7 +107,7 @@ export default class Queue {
         return this.currentTrack;
     }
 
-    skip(num = 1): Base
+    skip(num = 1): typeof Base
     {
         this.checkLoop()
 
@@ -124,7 +124,7 @@ export default class Queue {
         return this.currentTrack;
     }
 
-    previous(num = 1): Base
+    previous(num = 1): typeof Base
     {
         this.checkLoop()
         num = num - 1;
@@ -136,7 +136,7 @@ export default class Queue {
         return this.currentTrack;
     }
 
-    addTracks(x: Base[]): Queue
+    addTracks(x: typeof Base[]): Queue
     {
         if(this.tracks.length > 0)
             this.tracks.concat(x);
@@ -146,7 +146,7 @@ export default class Queue {
         return this;
     }
 
-    remove(x: number | Base, numbersToRemove?: number): boolean
+    remove(x: number | typeof Base, numbersToRemove?: number): boolean
     {
         if(x instanceof Base)
         {
@@ -161,7 +161,7 @@ export default class Queue {
                 return true;
             }
         }
-        else
+        else if(typeof x == "number")
         {
             if(!numbersToRemove)
                 numbersToRemove = 1;
