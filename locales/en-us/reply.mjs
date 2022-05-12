@@ -6,8 +6,12 @@ import { CacheTypes } from "../../typings/enums.mjs";
 const en_usReplies = {
   player: {
     start: data => new EmbedBuilder().setDescription(data.track.platform),
-    pause: () => new EmbedBuilder().setDescription(''),
-    resume: () => new EmbedBuilder().setDescription('')
+    pause: () => new EmbedBuilder().setDescription('⏸ | Music Paused!').setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }).setColor(6203346),
+    resume: () => new EmbedBuilder().setDescription('▶️ | Music Resumed!').setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }).setColor(6203346)
   },
   info: client => new EmbedBuilder().setDescription(`${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668>  **Bot Information**\n${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668> **Developer Information**\n**${client.user.username}-${botOptions.version}** Created by [BoyCode](https://github.com/EhsanFox) in **2022**\nand Originally founded in **2019** by [Setar-Team](https://github.com/SeTar-Bot/)`).setFooter({
     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
