@@ -1,5 +1,4 @@
-import { Base } from "music-engines/dist/Base";
-
+import { Base } from "music-engines";
 export default class Queue {
 
     private tracks: Base[] = [];
@@ -161,7 +160,7 @@ export default class Queue {
                 return true;
             }
         }
-        else
+        else if(typeof x == "number")
         {
             if(!numbersToRemove)
                 numbersToRemove = 1;

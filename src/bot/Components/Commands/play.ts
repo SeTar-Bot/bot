@@ -3,7 +3,7 @@ import { NoSubscriberBehavior} from "@discordjs/voice";
 import { PlayOptions, VoiceConnection } from "dartjs";
 import { CommandInteraction } from "discord.js";
 import { Deezer, SoundCloud, Spotify, YouTube } from "music-engines";
-import { Base } from "music-engines/dist/Base";
+import { Base } from "music-engines";
 import { downloadOptions } from "ytdl-core"
 import { dbObject } from "../../../../types/database";
 import Client from "../../../Classes/Client";
