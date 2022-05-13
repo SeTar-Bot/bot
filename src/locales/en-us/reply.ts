@@ -23,7 +23,12 @@ const en_usReplies: localeReplies = {
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
         .setColor(6203346),
-        loop: (mode: "all" | "one" | "none") => new EmbedBuilder().setDescription(mode)
+        loop: (mode: "all" | "one" | "none") => new EmbedBuilder()
+        .setDescription(mode)
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        })
+        .setColor(6203346),
     },
 
     info: (client: Client): EmbedBuilder => new EmbedBuilder()
