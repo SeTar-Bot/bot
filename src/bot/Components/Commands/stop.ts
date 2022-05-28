@@ -31,7 +31,7 @@ const stopCommand: Command = new Command({
         if(!client.audioClient.client.connections.has(ctx.guild.id))
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
             
-        client.audioClient.client.connections.get(ctx.guild.id)?.disconnect()
+        client.audioClient.stop(ctx.guild.id)
         return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.end().toOBJECT())
     }
 })
