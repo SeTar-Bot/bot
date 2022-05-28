@@ -96,6 +96,7 @@ const InteractionEvent = new Event({
                     await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));
             }
         } catch (e) {
+            await intc.deferReply();
             const error: Error = e;
             await intc.editReply(client.localeManager.getLocale(localeList.ENGLISH).error.internal().toOBJECT({ ephemeral: true }));
             console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs\nError: ${error.message}\nStack: ${error.stack}\n${chalk.bgRed(`----- ERROR -----`)}`)
