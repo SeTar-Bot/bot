@@ -7,7 +7,7 @@ import { BotPermissions, localeList } from "../../../typings/enums"
 
 const basicInfo = {
     name: 'pause',
-    description: 'Pause the playing music (BETA VERSION)'
+    description: 'Pause the playing music'
 }
 const pauseCommand: Command = new Command({
     ...basicInfo,

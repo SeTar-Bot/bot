@@ -65,6 +65,16 @@ const en_usReplies: localeReplies = {
             ])
             : new EmbedBuilder(),
         
+        queueUpdate: (): EmbedBuilder => 
+            new EmbedBuilder()
+                .setAuthor({
+                    name: 'Queue Updated'
+                })
+                .setDescription('Music added to the Queue.')
+                .setFooter({
+                    text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+                }),
+
         end: (data?: VoiceMetadata, byUser?: boolean): EmbedBuilder =>
             (byUser) ? 
                 new EmbedBuilder()

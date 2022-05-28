@@ -6,10 +6,10 @@ import Command from "../../../Classes/Command"
 import { BotPermissions, localeList } from "../../../typings/enums"
 
 const basicInfo = {
-    name: 'resume',
-    description: 'Resume the playing music'
+    name: 'stop',
+    description: 'Stops the whole Music Player & destroys Queue.'
 }
-const resumeCommand: Command = new Command({
+const pauseCommand: Command = new Command({
     ...basicInfo,
     isAvailable: true,
     permission: BotPermissions.ALL,
@@ -31,12 +31,13 @@ const resumeCommand: Command = new Command({
         if(!client.audioClient.client.connections.has(ctx.guild.id))
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
 
-        if(!client.audioClient.client.connections.get(ctx.guild.id)?.dispatcher?.paused)
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.player.AlreadyResumed().toOBJECT());
+        if(client.audioClient.client.connections.get(ctx.guild.id)?.dispatcher?.paused)
+            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.player.AlreadyPaused().toOBJECT());
         
-        client.audioClient.resume(ctx.guild.id);
-        return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.resume().toOBJECT())
+            
+        client.audioClient.client.connections.get(ctx.guild.id)?.disconnect()
+        return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.end().toOBJECT())
     }
 })
 
-export default resumeCommand;
+export default pauseCommand;

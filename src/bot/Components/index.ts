@@ -1,4 +1,4 @@
-import musicInfoButton from "./Buttons/musicInfo"
+import musicPausePlay from "./Buttons/musicPausePlay"
 import evalCommand from "./Commands/eval";
 import infoCommand from "./Commands/info";
 import inviteCommand from "./Commands/invite";
@@ -11,7 +11,7 @@ import liveEndpoint from "./Endpoints/Live";
 
 
 const Buttons = {
-    musicInfo: musicInfoButton,
+    musicPP: musicPausePlay,
 
 };
 
