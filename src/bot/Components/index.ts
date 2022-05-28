@@ -1,4 +1,4 @@
-import refreshStatsButton from "./Buttons/refreshStats"
+import musicInfoButton from "./Buttons/musicInfo"
 import evalCommand from "./Commands/eval";
 import infoCommand from "./Commands/info";
 import inviteCommand from "./Commands/invite";
@@ -11,7 +11,7 @@ import liveEndpoint from "./Endpoints/Live";
 
 
 const Buttons = {
-    refreshStats: refreshStatsButton,
+    musicInfo: musicInfoButton,
 
 };
 

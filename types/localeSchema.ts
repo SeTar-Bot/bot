@@ -1,4 +1,4 @@
-import { User, PermissionResolvable, Guild } from "discord.js";
+import { User, PermissionResolvable, Guild, Modal } from "discord.js";
 import Client from "../src/Classes/Client";
 import EmbedBuilder from "../src/Classes/EmbedBuilder";
 import { BotPermissions, BotRoles, CacheTypes } from "../src/typings/enums";
@@ -38,8 +38,13 @@ export interface localeErrors {
     }
 }
 
+export interface localeModals {
+    info: () => Modal
+}
+
 export interface localeBase {
 
     reply: localeReplies;
     error: localeErrors;
+    modal: localeModals
 }

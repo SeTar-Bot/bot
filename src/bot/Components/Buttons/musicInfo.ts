@@ -4,17 +4,14 @@ import Button from "../../../Classes/Button";
 import Client from "../../../Classes/Client";
 import { BotPermissions, localeList } from "../../../typings/enums";
 
-const refreshStatsButton: Button = new Button({
-    name: 'refreshStats',
-    description: `Refresh the Stats`,
+const musicInfoButton: Button = new Button({
+    name: 'music_info',
+    description: `Show Music Modal`,
     isAvailable: false,
     permission: BotPermissions.ALL,
     run: async (client: Client, database: dbObject, ctx: ButtonInteraction): Promise<any> => {
-        const msg = client.localeManager.getLocale(database.guild.locale as localeList).reply.stats(client);
-        msg.ActionRows = [];
-        await ctx.deferUpdate();
-        await ctx.update(msg.toOBJECT())  
+          await ctx.showModal(client.localeManager.getLocale(database.guild.locale as localeList).modal.info())
     }
 });
 
-export default refreshStatsButton;
+export default musicInfoButton;

@@ -29,7 +29,9 @@ const en_usReplies: localeReplies = {
             .setImage(data.track.picture)
             .addComponent([
                 new MessageButton()
-                    .setCustomId('')
+                    .setCustomId('music_info')
+                    .setLabel('More...')
+                    .setStyle('SECONDARY')
             ])
             : new EmbedBuilder(),
         pause: (): EmbedBuilder => new EmbedBuilder()
