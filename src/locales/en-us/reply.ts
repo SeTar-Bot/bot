@@ -41,22 +41,26 @@ const en_usReplies: localeReplies = {
                 new MessageButton()
                     .setCustomId('music_stop')
                     .setLabel('Stop')
-                    .setEmoji('⏹'),
+                    .setEmoji('⏹')
+                    .setStyle('SECONDARY'),
 
                 new MessageButton()
                     .setCustomId('music_pp')
                     .setLabel('Pause/Resume')
-                    .setEmoji('⏯'),
+                    .setEmoji('⏯')
+                    .setStyle('SECONDARY'),
 
                 new MessageButton()
                     .setCustomId('music_skip')
                     .setLabel('Skip')
-                    .setEmoji('⏭'),
+                    .setEmoji('⏭')
+                    .setStyle('SECONDARY'),
 
                 new MessageButton()
                     .setCustomId('music_loop')
                     .setLabel('Loop')
-                    .setEmoji('🔃'),
+                    .setEmoji('🔃')
+                    .setStyle('SECONDARY'),
 
             ])
             : new EmbedBuilder(),
