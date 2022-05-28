@@ -54,13 +54,20 @@ const InteractionEvent = new Event({
                     try {
                         await button.run(client, databaseFetchedObj, interaction);
                     } catch (error) {
+                        await intc.deferReply()
                         await intc.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.internal().toOBJECT({ ephemeral: true }))
                         console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Buttons/${button.name}\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`)
                     }
                 else if(button.permission > uData.permission)
+                {
+                    await intc.deferReply()
                     await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.missingPerm(uData.permission).toOBJECT({ ephemeral: true }))    
+                }
                 else
+                {
+                    await intc.deferReply()
                     await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));
+                }
             }
             else if(interaction.isUserContextMenu())
             {
