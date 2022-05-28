@@ -1,22 +1,15 @@
-import { SlashCommandBuilder } from "@discordjs/builders"
-import { CommandInteraction } from "discord.js"
-import { dbObject } from "../../../../types/database"
-import Client from "../../../Classes/Client"
-import Command from "../../../Classes/Command"
-import { BotPermissions, localeList } from "../../../typings/enums"
+import { ButtonInteraction } from "discord.js";
+import { dbObject } from "../../../../types/database";
+import Button from "../../../Classes/Button";
+import Client from "../../../Classes/Client";
+import { BotPermissions, localeList } from "../../../typings/enums";
 
-const basicInfo = {
-    name: 'stop',
-    description: 'Stops the whole Music Player & destroys Queue.'
-}
-const pauseCommand: Command = new Command({
-    ...basicInfo,
+const musicPausePlay: Button = new Button({
+    name: 'music_stop',
+    description: `Stop/Destroy the Music Player`,
     isAvailable: true,
     permission: BotPermissions.ALL,
-    builder: new SlashCommandBuilder()
-        .setName(basicInfo.name)
-        .setDescription(basicInfo.description),
-    run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
+    run: async (client: Client, database: dbObject, ctx: ButtonInteraction): Promise<any> => {
         const member = await ctx.guild.members.fetch({
             user: ctx.user
         });
@@ -33,7 +26,8 @@ const pauseCommand: Command = new Command({
             
         client.audioClient.client.connections.get(ctx.guild.id)?.disconnect()
         return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.end().toOBJECT())
+        
     }
-})
+});
 
-export default pauseCommand;
+export default musicPausePlay;

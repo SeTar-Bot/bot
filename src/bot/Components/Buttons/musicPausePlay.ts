@@ -6,7 +6,7 @@ import { BotPermissions, localeList } from "../../../typings/enums";
 
 const musicPausePlay: Button = new Button({
     name: 'music_pp',
-    description: `Stop/Destroy the Music Player`,
+    description: `Pause or Plays the Music Player`,
     isAvailable: true,
     permission: BotPermissions.ALL,
     run: async (client: Client, database: dbObject, ctx: ButtonInteraction): Promise<any> => {

@@ -34,11 +34,6 @@ const en_usReplies: localeReplies = {
             .setImage(data.track.picture)
             .addComponent([
                 new MessageButton()
-                    .setCustomId('music_info')
-                    .setLabel('More...')
-                    .setStyle('SECONDARY'),
-                
-                new MessageButton()
                     .setCustomId('music_stop')
                     .setLabel('Stop')
                     .setEmoji('⏹')
