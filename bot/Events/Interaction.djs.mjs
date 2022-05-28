@@ -82,6 +82,7 @@ const InteractionEvent = new Event({
         }));
       }
     } catch (e) {
+      await intc.deferReply();
       const error = e;
       await intc.editReply(client.localeManager.getLocale(localeList.ENGLISH).error.internal().toOBJECT({
         ephemeral: true
