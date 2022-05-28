@@ -41,15 +41,22 @@ const InteractionEvent = new Event({
         if (button && button.isAvailable && button.permission <= uData.permission) try {
           await button.run(client, databaseFetchedObj, interaction);
         } catch (error) {
+          await intc.deferReply();
           await intc.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.internal().toOBJECT({
             ephemeral: true
           }));
           console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Buttons/${button.name}\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`);
-        } else if (button.permission > uData.permission) await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.missingPerm(uData.permission).toOBJECT({
-          ephemeral: true
-        }));else await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.noContent().toOBJECT({
-          ephemeral: true
-        }));
+        } else if (button.permission > uData.permission) {
+          await intc.deferReply();
+          await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.missingPerm(uData.permission).toOBJECT({
+            ephemeral: true
+          }));
+        } else {
+          await intc.deferReply();
+          await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale).error.noContent().toOBJECT({
+            ephemeral: true
+          }));
+        }
       } else if (interaction.isUserContextMenu()) {
         const userContexts = client.manager.contexts.filter(x => x.type == ContextTypes.USER);
         const context = userContexts.get(interaction.commandName);
