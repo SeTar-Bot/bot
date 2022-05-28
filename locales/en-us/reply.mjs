@@ -5,7 +5,17 @@ import EmbedBuilder from "../../Classes/EmbedBuilder.mjs";
 import { CacheTypes } from "../../typings/enums.mjs";
 const en_usReplies = {
   player: {
-    start: data => new EmbedBuilder().setDescription(data.track.platform),
+    start: data => data.track.isYoutube() || data.track.isSpotify() || data.track.isSoundcloud() || data.track.isDeezer() ? new EmbedBuilder().setAuthor({
+      iconURL: 'https://cdn.discordapp.com/attachments/677188998195839003/721441574784860211/music-gif-png-7-original.gif',
+      name: `Playing ${data.track.title}`,
+      url: data.track.url
+    }).addFields([{
+      name: `Duration`,
+      value: data.track.duration.format
+    }, {
+      name: `Played By`,
+      value: `<@${data.ctx.user.id}>`
+    }]).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('')]) : new EmbedBuilder(),
     pause: () => new EmbedBuilder().setDescription('⏸ | Music Paused!').setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }).setColor(6203346),
