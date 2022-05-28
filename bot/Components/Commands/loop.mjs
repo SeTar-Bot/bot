@@ -6,9 +6,9 @@ const basicInfo = {
   description: 'Enable Loop mode for playing Musics (BETA VERSION)'
 };
 const loopCommand = new Command({ ...basicInfo,
-  isAvailable: false,
+  isAvailable: true,
   permission: BotPermissions.ALL,
-  builder: new SlashCommandBuilder().addStringOption(new SlashCommandStringOption().addChoices([["All Queue", "all"], ["One Music", "one"], ["None (Disable)", "none"]])).setName(basicInfo.name).setDescription(basicInfo.description),
+  builder: new SlashCommandBuilder().addStringOption(new SlashCommandStringOption().addChoices([["All Queue", "all"], ["One Music", "one"], ["None", "none"]])).setName(basicInfo.name).setDescription(basicInfo.description),
   run: async (client, database, ctx) => {
     const member = await ctx.guild.members.fetch({
       user: ctx.user

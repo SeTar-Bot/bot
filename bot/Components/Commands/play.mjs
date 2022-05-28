@@ -63,7 +63,7 @@ const playCommand = new Command({ ...basicInfo,
       client.manager.loadEvent("error", "voice", dispatcher);
       client.manager.loadEvent("debug", "voice", dispatcher);
     } else {
-      ctx.editReply({
+      await ctx.editReply({
         content: 'ADDED TO QUEUE'
       });
     }

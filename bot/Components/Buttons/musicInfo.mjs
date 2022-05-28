@@ -3,7 +3,7 @@ import { BotPermissions } from "../../../typings/enums.mjs";
 const musicInfoButton = new Button({
   name: 'music_info',
   description: `Show Music Modal`,
-  isAvailable: false,
+  isAvailable: true,
   permission: BotPermissions.ALL,
   run: async (client, database, ctx) => {
     await ctx.showModal(client.localeManager.getLocale(database.guild.locale).modal.info());
