@@ -4,7 +4,7 @@ export default class Queue {
     private tracks: Base[] = [];
     private currentTrack: Base;
     private endedTracks: Base[] = [];
-    public loopMoode: "all" | "one" | "none" = "none";
+    public loopMode: "all" | "one" | "none" = "none";
     constructor(tracks?: Base[])
     {
         this.tracks = tracks ? tracks : [];
@@ -19,7 +19,7 @@ export default class Queue {
  
     setLoop(type: "all" | "none" | "one"): void
     {
-        this.loopMoode = type
+        this.loopMode = type
     }
 
     repeatAll(): void
@@ -49,9 +49,9 @@ export default class Queue {
     }
     private checkLoop()
     {
-        if(this.loopMoode == "all")
+        if(this.loopMode == "all")
             this.repeatAll();
-        else if(this.loopMoode == "one")
+        else if(this.loopMode == "one")
             this.repeatOne();
     }
     previousTracks(): Base[] {

@@ -106,12 +106,22 @@ const en_usReplies: localeReplies = {
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
         .setColor(6203346),
-        loop: (mode: "all" | "one" | "none") => new EmbedBuilder()
-        .setDescription(mode)
-        .setFooter({
-            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-        })
-        .setColor(6203346),
+        loop: (mode: "all" | "one" | "none", same?: boolean) => 
+        (typeof same == "boolean")
+        ?
+        new EmbedBuilder()
+            .setDescription(`Loop mode is already **${mode}**`)
+            .setFooter({
+                text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+            })
+            .setColor(6203346)
+        :
+        new EmbedBuilder()
+            .setDescription(`Loop mode changed to **${mode}**`)
+            .setFooter({
+                text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+            })
+            .setColor(6203346),
     },
 
     info: (client: Client): EmbedBuilder => new EmbedBuilder()

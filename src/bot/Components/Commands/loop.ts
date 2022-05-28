@@ -1,5 +1,7 @@
+/* eslint-disable */
 import { SlashCommandBuilder, SlashCommandStringOption } from "@discordjs/builders"
 import { CommandInteraction } from "discord.js"
+import e from "express"
 import { dbObject } from "../../../../types/database"
 import Client from "../../../Classes/Client"
 import Command from "../../../Classes/Command"
@@ -18,13 +20,17 @@ const loopCommand: Command = new Command({
         .setName(basicInfo.name)
         .setDescription(basicInfo.description)
         .addStringOption(new SlashCommandStringOption()
-            .addChoices([
+            .setName('loop_mode')
+            .setRequired(false)
+            .setDescription('Choose your loop mode.')
+            .setChoices([
                 ["Queue", "all"],
-                ["Current", "one"],
+                ["Current Music", "one"],
                 ["None", "none"]
             ])
         ) as SlashCommandBuilder,
     run: async (client: Client, database: dbObject, ctx: CommandInteraction) => {
+        const choice: "all" | "one" | "none" = ctx.options.getString("loop_mode") as "all" | "one" | "none" ?? "all"
         const member = await ctx.guild.members.fetch({
             user: ctx.user
         });
@@ -39,7 +45,14 @@ const loopCommand: Command = new Command({
         if(!client.audioClient.client.connections.has(ctx.guild.id))
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
 
-        client.audioClient.getQueue(ctx.guild.id);
+        const queue = client.audioClient.getQueue(ctx.guild.id);
+        if(queue.loopMode == choice)
+            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop(choice, true).toOBJECT())
+        else
+        {
+            queue.setLoop(choice)
+            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop(choice).toOBJECT())
+        }
     }
 })
 
