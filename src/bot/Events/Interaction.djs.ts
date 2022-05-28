@@ -55,7 +55,7 @@ const InteractionEvent = new Event({
                         await intc.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.internal().toOBJECT({ ephemeral: true }))
                         console.error(`${chalk.bgRed(`----- ERROR -----`)}\nError Location: Events/Interaction.djs -> Buttons/${button.name}\nError: ${error}\n${chalk.bgRed(`----- ERROR -----`)}`)
                     }
-                else if(button.permission !== uData.permission)
+                else if(! button.permission <= uData.permission)
                     await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.missingPerm(uData.permission).toOBJECT({ ephemeral: true }))    
                 else
                     await interaction.editReply(client.localeManager.getLocale(databaseFetchedObj.guild.locale as localeList).error.noContent().toOBJECT({ ephemeral: true }));

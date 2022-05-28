@@ -125,7 +125,7 @@ const playCommand: Command = new Command({
         }
         else
         {
-            ctx.editReply({content: 'ADDED TO QUEUE'})
+            await ctx.editReply({content: 'ADDED TO QUEUE'})
         }
     }
 })

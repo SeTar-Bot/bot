@@ -11,14 +11,14 @@ const basicInfo = {
 }
 const loopCommand: Command = new Command({
     ...basicInfo,
-    isAvailable: false,
+    isAvailable: true,
     permission: BotPermissions.ALL,
     builder: new SlashCommandBuilder()
         .addStringOption(new SlashCommandStringOption()
             .addChoices([
                 ["All Queue", "all"],
                 ["One Music", "one"],
-                ["None (Disable)", "none"]
+                ["None", "none"]
             ])
         )
         .setName(basicInfo.name)
