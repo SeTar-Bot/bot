@@ -6,10 +6,10 @@ import Command from "../../../Classes/Command"
 import { BotPermissions, localeList } from "../../../typings/enums"
 
 const basicInfo = {
-    name: 'stop',
-    description: 'Stops the whole Music Player & destroys Queue.'
+    name: 'skip',
+    description: 'Skip to the Next music in Queue'
 }
-const stopCommand: Command = new Command({
+const skipCommand: Command = new Command({
     ...basicInfo,
     isAvailable: true,
     permission: BotPermissions.ALL,
@@ -31,9 +31,16 @@ const stopCommand: Command = new Command({
         if(!client.audioClient.client.connections.has(ctx.guild.id))
             return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
             
-        client.audioClient.client.connections.get(ctx.guild.id)?.disconnect()
-        return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.end().toOBJECT())
+        const queue = client.audioClient.getQueue(ctx.guild.id);
+        if(queue.nextTracks().length > 0)
+        {
+            client.audioClient.client.connections.get(ctx.guild.id)?.dispatcher.stop()
+        }
+        else
+        {
+            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.player.NoNextTrack().toOBJECT())
+        }
     }
 })
 
-export default stopCommand;
+export default skipCommand;

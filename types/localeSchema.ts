@@ -37,6 +37,7 @@ export interface localeErrors {
     player: {
         AlreadyPaused: () => EmbedBuilder;
         AlreadyResumed: () => EmbedBuilder;
+        NoNextTrack: () => EmbedBuilder;
     }
 }
 

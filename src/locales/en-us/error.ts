@@ -116,6 +116,13 @@ const en_usErrors: localeErrors = {
             .setDescription(`Bot is already playing music, maybe turn the volume up? 🤔`)
             .setFooter({
                 text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+            }),
+
+        NoNextTrack: () => new EmbedBuilder()
+            .setTitle(`❌ Ooopsie...`)
+            .setDescription('There is no other music to skip to, maybe try adding more to the queue first.')
+            .setFooter({
+                text: `Setar-Bot © ${new Date().getFullYear().toString()}`
             })
     }
 
