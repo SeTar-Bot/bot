@@ -1,4 +1,4 @@
-import refreshStatsButton from "./Buttons/refreshStats.mjs";
+import musicInfoButton from "./Buttons/musicInfo.mjs";
 import evalCommand from "./Commands/eval.mjs";
 import infoCommand from "./Commands/info.mjs";
 import inviteCommand from "./Commands/invite.mjs";
@@ -9,7 +9,7 @@ import statsCommand from "./Commands/stats.mjs";
 import testContext from "./Contexts/testContext.mjs";
 import liveEndpoint from "./Endpoints/Live.mjs";
 const Buttons = {
-  refreshStats: refreshStatsButton
+  musicInfo: musicInfoButton
 };
 const Commands = {
   info: infoCommand,

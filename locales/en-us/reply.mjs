@@ -15,7 +15,7 @@ const en_usReplies = {
     }, {
       name: `Played By`,
       value: `<@${data.ctx.user.id}>`
-    }]).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('')]) : new EmbedBuilder(),
+    }]).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY')]) : new EmbedBuilder(),
     pause: () => new EmbedBuilder().setDescription('⏸ | Music Paused!').setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }).setColor(6203346),
