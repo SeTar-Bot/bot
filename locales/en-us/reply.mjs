@@ -19,7 +19,7 @@ const en_usReplies = {
       inline: true
     }]).setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-    }).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY'), new MessageButton().setCustomId('music_stop').setLabel('Stop').setEmoji('⏹'), new MessageButton().setCustomId('music_pp').setLabel('Pause/Resume').setEmoji('⏯'), new MessageButton().setCustomId('music_skip').setLabel('Skip').setEmoji('⏭'), new MessageButton().setCustomId('music_loop').setLabel('Loop').setEmoji('🔃')]) : new EmbedBuilder(),
+    }).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY'), new MessageButton().setCustomId('music_stop').setLabel('Stop').setEmoji('⏹').setStyle('SECONDARY'), new MessageButton().setCustomId('music_pp').setLabel('Pause/Resume').setEmoji('⏯').setStyle('SECONDARY'), new MessageButton().setCustomId('music_skip').setLabel('Skip').setEmoji('⏭').setStyle('SECONDARY'), new MessageButton().setCustomId('music_loop').setLabel('Loop').setEmoji('🔃').setStyle('SECONDARY')]) : new EmbedBuilder(),
     end: (data, byUser) => byUser ? new EmbedBuilder().setAuthor({
       iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
       name: 'Player Destroyed'
