@@ -19,8 +19,8 @@ const loopCommand: Command = new Command({
         .setDescription(basicInfo.description)
         .addStringOption(new SlashCommandStringOption()
             .addChoices([
-                ["All Queue", "all"],
-                ["One Music", "one"],
+                ["Queue", "all"],
+                ["Current", "one"],
                 ["None", "none"]
             ])
         ) as SlashCommandBuilder,
