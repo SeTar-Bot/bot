@@ -8,7 +8,7 @@ const basicInfo = {
 const loopCommand = new Command({ ...basicInfo,
   isAvailable: true,
   permission: BotPermissions.ALL,
-  builder: new SlashCommandBuilder().addStringOption(new SlashCommandStringOption().addChoices([["All Queue", "all"], ["One Music", "one"], ["None", "none"]])).setName(basicInfo.name).setDescription(basicInfo.description),
+  builder: new SlashCommandBuilder().setName(basicInfo.name).setDescription(basicInfo.description).addStringOption(new SlashCommandStringOption().addChoices([["All Queue", "all"], ["One Music", "one"], ["None", "none"]])),
   run: async (client, database, ctx) => {
     const member = await ctx.guild.members.fetch({
       user: ctx.user

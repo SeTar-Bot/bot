@@ -46,9 +46,7 @@ const TrackFinish = new Event({
       });
     } else {
       connection.disconnect();
-      return await ctx.editReply({
-        content: 'PLAYER ENDED'
-      });
+      return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.end().toOBJECT());
     }
   }
 });

@@ -11,11 +11,26 @@ const en_usReplies = {
       url: data.track.url
     }).addFields([{
       name: `Duration`,
-      value: data.track.duration.format
+      value: data.track.duration.format,
+      inline: true
     }, {
       name: `Played By`,
-      value: `<@${data.ctx.user.id}>`
-    }]).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY')]) : new EmbedBuilder(),
+      value: `<@${data.ctx.user.id}>`,
+      inline: true
+    }]).setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY'), new MessageButton().setCustomId('music_stop').setLabel('Stop').setEmoji('⏹'), new MessageButton().setCustomId('music_pp').setLabel('Pause/Resume').setEmoji('⏯'), new MessageButton().setCustomId('music_skip').setLabel('Skip').setEmoji('⏭'), new MessageButton().setCustomId('music_loop').setLabel('Loop').setEmoji('🔃')]) : new EmbedBuilder(),
+    end: (data, byUser) => byUser ? new EmbedBuilder().setAuthor({
+      iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
+      name: 'Player Destroyed'
+    }).setDescription(`Music player destoryed by <@${data.ctx.user.id}>`).setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }) : new EmbedBuilder().setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }).setAuthor({
+      iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
+      name: `Finished Queue`
+    }).setDescription('😉 See you at the next party.'),
     pause: () => new EmbedBuilder().setDescription('⏸ | Music Paused!').setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }).setColor(6203346),
