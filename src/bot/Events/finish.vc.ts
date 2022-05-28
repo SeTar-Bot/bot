@@ -7,6 +7,7 @@ import { VoiceData } from "../../../types/classes";
 import { dbObject } from "../../../types/database";
 import Client from "../../Classes/Client";
 import Event from "../../Classes/Event";
+import { localeList } from "../../typings/enums";
 
 const TrackFinish = new Event({
     name: 'finish',
@@ -71,7 +72,7 @@ const TrackFinish = new Event({
         else
         {
             connection.disconnect()
-            return await ctx.editReply({content: 'PLAYER ENDED'})
+            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.end().toOBJECT())
         }
     }
 })

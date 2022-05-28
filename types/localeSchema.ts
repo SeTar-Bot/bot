@@ -17,6 +17,7 @@ export interface localeReplies {
         pause: (data?: VoiceMetadata) => EmbedBuilder;
         resume: (data?: VoiceMetadata) => EmbedBuilder;
         loop: (mode: "all" | "one" | "none") => EmbedBuilder;
+        end: (data?: VoiceMetadata) => EmbedBuilder;
     },
     beta: () => EmbedBuilder;
 }
