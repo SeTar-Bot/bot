@@ -13,7 +13,7 @@ const musicPausePlay = new Button({
     if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
     if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel && ctx.guild.me.voice?.channel?.members?.size > 1) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.BotInUse().toOBJECT());
     if (!client.audioClient.client.connections.has(ctx.guild.id)) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NothingPlaying().toOBJECT());
-    client.audioClient.client.connections.get(ctx.guild.id)?.disconnect();
+    client.audioClient.stop(ctx.guild.id);
     return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.end().toOBJECT());
   }
 });
