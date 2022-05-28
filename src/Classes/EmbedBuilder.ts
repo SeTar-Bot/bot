@@ -3,14 +3,14 @@ import { EmbedBuilderObjOpts } from "../../types/classes";
 
 export default class EmbedBuilder extends MessageEmbed {
 
-    public ActionRows: [MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?] = [];
+    public ActionRows: [MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?] = [];
     public otherEmbeds: MessageEmbed[] | EmbedBuilder[] = [];
     constructor(data?: MessageEmbed | MessageEmbedOptions)
     {
         super(data);
     }
 
-    addComponent(btns: [MessageSelectMenu] | [MessageButton, MessageButton?, MessageButton?, MessageButton?, MessageButton?] | [MessageActionRow, MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?]): this
+    addComponent(btns: [MessageSelectMenu] | [MessageButton, MessageButton?, MessageButton?, MessageButton?, MessageButton?] | [MessageActionRow<any>, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?]): this
     {
         if(btns.length > 5 || (this.ActionRows.length + btns.length) > 5)
             throw new Error(`Content more than Supported Numbers.`);
@@ -28,9 +28,9 @@ export default class EmbedBuilder extends MessageEmbed {
         else
         {
             if(this.ActionRows.length == 0)
-                this.ActionRows = btns as [MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?];
+                this.ActionRows = btns as [MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?];
             else
-                this.ActionRows.concat(btns as [MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?, MessageActionRow?]);
+                this.ActionRows.concat(btns as [MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?, MessageActionRow<any>?]);
         }
         return this;
     }
