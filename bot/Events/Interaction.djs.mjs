@@ -38,7 +38,7 @@ const InteractionEvent = new Event({
         }));
       } else if (interaction.isButton()) {
         const button = client.manager.buttons.get(interaction.customId);
-        if (button && button.isAvailable && button.permission <= uData.permission) try {
+        if (client.manager.buttons.has(interaction.customId) && button && button.isAvailable && button.permission <= uData.permission) try {
           await button.run(client, databaseFetchedObj, interaction);
         } catch (error) {
           await intc.deferReply();

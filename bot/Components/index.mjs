@@ -1,4 +1,4 @@
-import musicInfoButton from "./Buttons/musicInfo.mjs";
+import musicPausePlay from "./Buttons/musicPausePlay.mjs";
 import evalCommand from "./Commands/eval.mjs";
 import infoCommand from "./Commands/info.mjs";
 import inviteCommand from "./Commands/invite.mjs";
@@ -9,7 +9,7 @@ import statsCommand from "./Commands/stats.mjs";
 import testContext from "./Contexts/testContext.mjs";
 import liveEndpoint from "./Endpoints/Live.mjs";
 const Buttons = {
-  musicInfo: musicInfoButton
+  musicPP: musicPausePlay
 };
 const Commands = {
   info: infoCommand,

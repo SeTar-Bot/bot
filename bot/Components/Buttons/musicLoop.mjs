@@ -1,14 +1,10 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
-import Command from "../../../Classes/Command.mjs";
+import Button from "../../../Classes/Button.mjs";
 import { BotPermissions } from "../../../typings/enums.mjs";
-const basicInfo = {
-  name: 'resume',
-  description: 'Resume the playing music'
-};
-const resumeCommand = new Command({ ...basicInfo,
+const musicPausePlay = new Button({
+  name: 'music_loop',
+  description: `Enable/Disable's the Loop`,
   isAvailable: true,
   permission: BotPermissions.ALL,
-  builder: new SlashCommandBuilder().setName(basicInfo.name).setDescription(basicInfo.description),
   run: async (client, database, ctx) => {
     const member = await ctx.guild.members.fetch({
       user: ctx.user
@@ -17,9 +13,15 @@ const resumeCommand = new Command({ ...basicInfo,
     if (!member.voice?.channel) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NoVoiceChannel().toOBJECT());
     if (ctx.guild.me.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel && ctx.guild.me.voice?.channel?.members?.size > 1) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.BotInUse().toOBJECT());
     if (!client.audioClient.client.connections.has(ctx.guild.id)) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.NothingPlaying().toOBJECT());
-    if (!client.audioClient.client.connections.get(ctx.guild.id)?.dispatcher?.paused) return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).error.player.AlreadyResumed().toOBJECT());
-    client.audioClient.resume(ctx.guild.id);
-    return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.resume().toOBJECT());
+    const queue = client.audioClient.getQueue(ctx.guild.id);
+
+    if (queue.loopMode == "all" || queue.loopMode == "one") {
+      queue.setLoop("none");
+      return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.loop("none").toOBJECT());
+    } else {
+      queue.setLoop("all");
+      return await ctx.editReply(client.localeManager.getLocale(database.guild.locale).reply.player.loop("all").toOBJECT());
+    }
   }
 });
-export default resumeCommand;
+export default musicPausePlay;

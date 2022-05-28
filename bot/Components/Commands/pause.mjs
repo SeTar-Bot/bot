@@ -3,7 +3,7 @@ import Command from "../../../Classes/Command.mjs";
 import { BotPermissions } from "../../../typings/enums.mjs";
 const basicInfo = {
   name: 'pause',
-  description: 'Pause the playing music (BETA VERSION)'
+  description: 'Pause the playing music'
 };
 const pauseCommand = new Command({ ...basicInfo,
   isAvailable: true,

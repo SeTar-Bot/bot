@@ -87,13 +87,7 @@ export default class Client extends DjsClient {
         messages = this.sweepers.sweepMessages(s => s instanceof Message);
         presences = this.sweepers.sweepPresences(s => s instanceof Presence);
         reactions = this.sweepers.sweepReactions(s => s instanceof MessageReaction);
-        /* eslint-disable */
-
-        /* @ts-ignore */
-
         stages = this.sweepers.sweepStageInstances(s => s instanceof StageInstance);
-        /* eslint-enable */
-
         threads = this.sweepers.sweepThreads(s => s instanceof ThreadChannel);
         threadMembers = this.sweepers.sweepThreadMembers(s => s instanceof ThreadMember);
         users = this.sweepers.sweepUsers(s => s instanceof User);
@@ -168,7 +162,7 @@ export default class Client extends DjsClient {
         break;
 
       case CacheTypes.STAGE:
-        stages = this.sweepers.sweepStageInstnaces(s => s instanceof StageInstance);
+        stages = this.sweepers.sweepStageInstances(s => s instanceof StageInstance);
         return {
           stages
         };

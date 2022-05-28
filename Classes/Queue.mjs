@@ -2,7 +2,7 @@ import { Base } from "music-engines";
 export default class Queue {
   tracks = [];
   endedTracks = [];
-  loopMoode = "none";
+  loopMode = "none";
 
   constructor(tracks) {
     this.tracks = tracks ? tracks : [];
@@ -15,7 +15,7 @@ export default class Queue {
   }
 
   setLoop(type) {
-    this.loopMoode = type;
+    this.loopMode = type;
   }
 
   repeatAll() {
@@ -39,7 +39,7 @@ export default class Queue {
   }
 
   checkLoop() {
-    if (this.loopMoode == "all") this.repeatAll();else if (this.loopMoode == "one") this.repeatOne();
+    if (this.loopMode == "all") this.repeatAll();else if (this.loopMode == "one") this.repeatOne();
   }
 
   previousTracks() {

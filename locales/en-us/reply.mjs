@@ -19,7 +19,12 @@ const en_usReplies = {
       inline: true
     }]).setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-    }).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_info').setLabel('More...').setStyle('SECONDARY'), new MessageButton().setCustomId('music_stop').setLabel('Stop').setEmoji('⏹').setStyle('SECONDARY'), new MessageButton().setCustomId('music_pp').setLabel('Pause/Resume').setEmoji('⏯').setStyle('SECONDARY'), new MessageButton().setCustomId('music_skip').setLabel('Skip').setEmoji('⏭').setStyle('SECONDARY'), new MessageButton().setCustomId('music_loop').setLabel('Loop').setEmoji('🔃').setStyle('SECONDARY')]) : new EmbedBuilder(),
+    }).setImage(data.track.picture).addComponent([new MessageButton().setCustomId('music_stop').setLabel('Stop').setEmoji('⏹').setStyle('SECONDARY'), new MessageButton().setCustomId('music_pp').setLabel('Pause/Resume').setEmoji('⏯').setStyle('SECONDARY'), new MessageButton().setCustomId('music_skip').setLabel('Skip').setEmoji('⏭').setStyle('SECONDARY'), new MessageButton().setCustomId('music_loop').setLabel('Loop').setEmoji('🔃').setStyle('SECONDARY')]) : new EmbedBuilder(),
+    queueUpdate: () => new EmbedBuilder().setAuthor({
+      name: 'Queue Updated'
+    }).setDescription('Music added to the Queue.').setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }),
     end: (data, byUser) => byUser ? new EmbedBuilder().setAuthor({
       iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
       name: 'Player Destroyed'
@@ -37,7 +42,9 @@ const en_usReplies = {
     resume: () => new EmbedBuilder().setDescription('▶️ | Music Resumed!').setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }).setColor(6203346),
-    loop: mode => new EmbedBuilder().setDescription(mode).setFooter({
+    loop: (mode, same) => typeof same == "boolean" ? new EmbedBuilder().setDescription(`Loop mode is already **${mode}**`).setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }).setColor(6203346) : new EmbedBuilder().setDescription(`Loop mode changed to **${mode}**`).setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }).setColor(6203346)
   },
