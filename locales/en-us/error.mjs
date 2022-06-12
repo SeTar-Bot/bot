@@ -3,7 +3,7 @@ import botOptions from "../../bot/Config/botOptions.mjs";
 import EmbedBuilder from "../../Classes/EmbedBuilder.mjs";
 import { BotPermissions } from "../../typings/enums.mjs";
 const en_usErrors = {
-  permission: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Sorry but looks like i have a missiong permission on this server,\nPlease try again and invite me with the Button below!`).setFooter({
+  permission: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`Sorry but looks like i have a missing permission on this server,\nPlease try again and invite me with the Button below!`).setFooter({
     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
   }).addComponent([new MessageButton().setStyle('LINK').setURL(botOptions.inviteURL).setLabel(`Invite`).setEmoji(`858816260418568223`)]),
   internal: () => new EmbedBuilder().setTitle(`❌ Ooopsie...`).setDescription(`**[500]** Internal Server error has accured\nError will be reported to Developers.`).setFooter({
