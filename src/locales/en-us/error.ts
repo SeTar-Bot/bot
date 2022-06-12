@@ -8,7 +8,7 @@ const en_usErrors: localeErrors = {
 
     permission: (): EmbedBuilder => new EmbedBuilder()
         .setTitle(`❌ Ooopsie...`)
-        .setDescription(`Sorry but looks like i have a missiong permission on this server,\nPlease try again and invite me with the Button below!`)
+        .setDescription(`Sorry but looks like i have a missing permission on this server,\nPlease try again and invite me with the Button below!`)
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
