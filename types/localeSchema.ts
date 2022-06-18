@@ -13,14 +13,17 @@ export interface localeReplies {
     cache: (c: CacheTypes, r: CacheTypeResult) => EmbedBuilder;
     eval: (code: string, result: string, isError: boolean, errorStack?: string) => EmbedBuilder;
     player: {
-        start: (data?: VoiceMetadata) => EmbedBuilder;
+        start: (data: VoiceMetadata) => EmbedBuilder;
         pause: (data?: VoiceMetadata) => EmbedBuilder;
         resume: (data?: VoiceMetadata) => EmbedBuilder;
+        stop: (data?: VoiceMetadata) => EmbedBuilder;
+        skip: (data?: VoiceMetadata) => EmbedBuilder;
         loop: (mode: "all" | "one" | "none", same?: boolean) => EmbedBuilder;
         end: (data?: VoiceMetadata) => EmbedBuilder;
         queueUpdate: (data?: VoiceMetadata) => EmbedBuilder;
     },
     beta: () => EmbedBuilder;
+    
 }
 
 export interface localeErrors {

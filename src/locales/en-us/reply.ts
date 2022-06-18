@@ -69,6 +69,7 @@ const en_usReplies: localeReplies = {
                 .setFooter({
                     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
                 }),
+                
 
         end: (data?: VoiceMetadata, byUser?: boolean): EmbedBuilder =>
             (byUser) ? 
@@ -77,7 +78,7 @@ const en_usReplies: localeReplies = {
                         iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
                         name: 'Player Destroyed'
                     })
-                    .setDescription(`Music player destoryed by <@${data.ctx.user.id}>`)
+                    .setDescription(`Music player destoryed by <@${data?.ctx.user.id}>`)
                     .setFooter({
                         text: `Setar-Bot © ${new Date().getFullYear().toString()}`
                     })
@@ -95,29 +96,46 @@ const en_usReplies: localeReplies = {
 
             ,
         pause: (): EmbedBuilder => new EmbedBuilder()
-        .setDescription('⏸ | Music Paused!')
+        .setDescription('<:pausebutton:980109904243204126> | Music Paused!')
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
         .setColor(6203346),
+        
+        stop: (): EmbedBuilder => new EmbedBuilder()  
+        .setDescription('<:stopbutton:980109900728385607>  | Music Stoped!')
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        })
+        .setColor(6203346),
+
+        skip: (): EmbedBuilder => new EmbedBuilder()  
+        .setDescription('<:nexttrackbutton:980109904490688602>  | Music Skiped!')
+        .setFooter({
+            text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+        })
+        .setColor(6203346),
+
         resume: (): EmbedBuilder => new EmbedBuilder()  
-        .setDescription('▶️ | Music Resumed!')
+        .setDescription('<:playorpausebutton:980109903190429716>  | Music Resumed!')
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
         .setColor(6203346),
+
+        
         loop: (mode: "all" | "one" | "none", same?: boolean) => 
         (typeof same == "boolean")
         ?
         new EmbedBuilder()
-            .setDescription(`Loop mode is already **${mode}**`)
+            .setDescription(`<:repeatbutton:980109903144292352> |  Loop mode is already **${mode}**`)
             .setFooter({
                 text: `Setar-Bot © ${new Date().getFullYear().toString()}`
             })
             .setColor(6203346)
         :
         new EmbedBuilder()
-            .setDescription(`Loop mode changed to **${mode}**`)
+            .setDescription(`<:repeatbutton:980109903144292352> | Loop mode changed to **${mode}**`)
             .setFooter({
                 text: `Setar-Bot © ${new Date().getFullYear().toString()}`
             })
@@ -125,13 +143,13 @@ const en_usReplies: localeReplies = {
     },
 
     info: (client: Client): EmbedBuilder => new EmbedBuilder()
-        .setDescription(`${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668>  **Bot Information**\n${client.user.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668> **Developer Information**\n**${client.user.username}-${botOptions.version}** Created by [BoyCode](https://github.com/EhsanFox) in **2022**\nand Originally founded in **2019** by [Setar-Team](https://github.com/SeTar-Bot/)`)
+        .setDescription(`${client?.user?.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668>  **Bot Information**\n${client?.user?.username} is a multi-language Music Bot in Discord with so many add-on features such as Downlaod and etc.\n\n<:Circle:901117372730052668> **Developer Information**\n**${client?.user?.username}-${botOptions.version}** Created by [BoyCode](https://github.com/EhsanFox) in **2022**\nand Originally founded in **2019** by [Setar-Team](https://github.com/SeTar-Bot/)`)
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
         })
         .setAuthor({
-            name: client.user.username,
-            iconURL: client.user.displayAvatarURL({ dynamic: true }),
+            name: `${client?.user?.username}`,
+            iconURL: `${client?.user?.displayAvatarURL({ dynamic: true })}`,
             url: botOptions.supportURL
         })
         .setColor(6203346)
@@ -164,8 +182,8 @@ const en_usReplies: localeReplies = {
                 text: `Setar-Bot © ${new Date().getFullYear().toString()}`
             })
             .setAuthor({
-                name: `${client.user.username} Stats`,
-                iconURL: client.user.displayAvatarURL({ dynamic: true })
+                name: `${client?.user?.username} Stats`,
+                iconURL: `${client?.user?.displayAvatarURL({ dynamic: true })}`
             })
             .setThumbnail('https://cdn.discordapp.com/attachments/842433957173133352/899251786160951317/server-status1.png');
     },
@@ -194,7 +212,7 @@ const en_usReplies: localeReplies = {
 
     language: (c: Client, g: Guild): EmbedBuilder => new EmbedBuilder()
         .setTitle(`✔ Done`)
-        .setDescription(`${g.name} language changed to **English**\n\nif you want to help ${c.user.username} Support more languages, feel free to join [Support Server](${botOptions.supportURL})`)
+        .setDescription(`${g.name} language changed to **English**\n\nif you want to help ${c?.user?.username} Support more languages, feel free to join [Support Server](${botOptions.supportURL})`)
         .setColor(6203346)
         .setFooter({
             text: `Setar-Bot © ${new Date().getFullYear().toString()}`
