@@ -25,6 +25,11 @@ const en_usReplies = {
     }).setDescription('Music added to the Queue.').setFooter({
       text: `Setar-Bot © ${new Date().getFullYear().toString()}`
     }),
+    music_pp: () => new EmbedBuilder().setAuthor({
+      name: 'music paused'
+    }).setDescription('test').setFooter({
+      text: `Setar-Bot © ${new Date().getFullYear().toString()}`
+    }),
     end: (data, byUser) => byUser ? new EmbedBuilder().setAuthor({
       iconURL: 'https://media.discordapp.net/attachments/639120531714473996/721471915398529024/action_032-block-prevent-stop-restrict-512.webp',
       name: 'Player Destroyed'
