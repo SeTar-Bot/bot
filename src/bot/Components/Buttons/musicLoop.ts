@@ -16,24 +16,24 @@ const musicPausePlay: Button = new Button({
 
         // Handle User Errors
         if(!member?.voice?.channel)
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
+            return await ctx.followUp(client.localeManager.getLocale(database.guild.locale as localeList).error.NoVoiceChannel().toOBJECT());
 
         if(ctx?.guild?.me?.voice?.channel && member.voice?.channel !== ctx.guild.me.voice?.channel && ctx.guild.me.voice?.channel?.members?.size > 1)
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.BotInUse().toOBJECT());
+            return await ctx.followUp(client.localeManager.getLocale(database.guild.locale as localeList).error.BotInUse().toOBJECT());
 
         if(!client.audioClient.client.connections.has(`${ctx?.guild?.id}`))
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
+            return await ctx.followUp(client.localeManager.getLocale(database.guild.locale as localeList).error.NothingPlaying().toOBJECT());
 
         const queue = client.audioClient.getQueue(`${ctx?.guild?.id}`);
         if(queue?.loopMode == "all" || queue?.loopMode == "one")
         {
             queue?.setLoop("none")
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop("none").toOBJECT())
+            return await ctx.followUp(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop("none").toOBJECT())
         }
         else
         {
             queue?.setLoop("all")
-            return await ctx.editReply(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop("all").toOBJECT())
+            return await ctx.followUp(client.localeManager.getLocale(database.guild.locale as localeList).reply.player.loop("all").toOBJECT())
         }
         
     }
