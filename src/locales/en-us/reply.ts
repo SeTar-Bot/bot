@@ -69,15 +69,7 @@ const en_usReplies: localeReplies = {
                 .setFooter({
                     text: `Setar-Bot © ${new Date().getFullYear().toString()}`
                 }),
-                music_pp: (): EmbedBuilder => 
-                new EmbedBuilder()
-                    .setAuthor({
-                        name: 'music paused'
-                    })
-                    .setDescription('test')
-                    .setFooter({
-                        text: `Setar-Bot © ${new Date().getFullYear().toString()}`
-                    }),
+                
 
         end: (data?: VoiceMetadata, byUser?: boolean): EmbedBuilder =>
             (byUser) ? 
