@@ -4,3 +4,5 @@ export * from './UserExist.excp';
 export * from './UserNotFound.excp';
 export * from './GuildExist.excp';
 export * from './GuildNotFound.excp';
+export * from './CommandExist.excp';
+export * from './CommandNotFound.excp';

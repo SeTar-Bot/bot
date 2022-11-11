@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { I18nModule } from 'nestjs-i18n';
 import GeneralConfig from './config';
 import { DiscordModule } from './discord/discord.module';
-import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
-import { MongooseModule } from '@nestjs/mongoose';
+import path from 'path';
 
 @Module({
   imports: [
@@ -13,8 +14,14 @@ import { MongooseModule } from '@nestjs/mongoose';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URL),
+    I18nModule.forRoot({
+      fallbackLanguage: 'en',
+      loaderOptions: {
+        path: path.join(__dirname, 'i18n'),
+        watch: true,
+      },
+    }),
     DiscordModule.forRoot(process.env.DISCORD_TOKEN),
-    ComponentsModule,
     DatabaseModule,
   ],
   controllers: [],

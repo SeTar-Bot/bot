@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { DiscordService } from './discord.service';
 import { DISCORD_SERVICE } from 'src/constants';
+import { ComponentsModule } from 'src/components/components.module';
 
 @Module({})
 export class DiscordModule {
@@ -13,7 +14,7 @@ export class DiscordModule {
     };
     return {
       module: DiscordModule,
-      imports: [ConfigModule],
+      imports: [ConfigModule, ComponentsModule],
       providers: [discordProvider],
       exports: [discordProvider],
       global: true,

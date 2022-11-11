@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { StatusCodes } from './StatusCode.enum';
 
-export class GuildExistException extends HttpException {
+export class CommandExistException extends HttpException {
   constructor(
     private readonly logData?: Error | string,
-    private readonly messaage: string = 'Guild already exist',
+    private readonly messaage: string = 'Command already exist',
     private readonly stats: HttpStatus | StatusCodes = HttpStatus.CONFLICT,
   ) {
     super(messaage, stats);

@@ -4,7 +4,7 @@ import { StatusCodes } from './StatusCode.enum';
 export class UserNotFoundException extends HttpException {
   constructor(
     private readonly logData?: Error | string,
-    private readonly messaage: string = 'User already exist',
+    private readonly messaage: string = 'User not found',
     private readonly stats: HttpStatus | StatusCodes = HttpStatus.NOT_FOUND,
   ) {
     super(messaage, stats);

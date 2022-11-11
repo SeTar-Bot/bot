@@ -2,14 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
+  CommandExistException,
+  CommandNotFoundException,
   GuildExistException,
   GuildNotFoundException,
   UserExistException,
   UserNotFoundException,
 } from 'src/exceptions';
 import { locales, permissions, roles } from 'src/types';
-import { GuildTypeDoc, UserTypeDoc } from './interfaces';
-import { DatabaseGuild, DatabaseUser } from './schemas';
+import { CommandTypeDoc, GuildTypeDoc, UserTypeDoc } from './interfaces';
+import { DatabaseCommand, DatabaseGuild, DatabaseUser } from './schemas';
 
 @Injectable()
 export class DatabaseService {
@@ -18,8 +20,11 @@ export class DatabaseService {
     private readonly guildModel: Model<GuildTypeDoc>,
     @InjectModel(DatabaseUser.name)
     private readonly userModel: Model<UserTypeDoc>,
+    @InjectModel(DatabaseCommand.name)
+    private readonly commandModel: Model<CommandTypeDoc>,
   ) {}
 
+  /* USER FUNCTIONS */
   async registerUser(_id: string) {
     const userExist = await this.userModel.findOne({ _id });
     if (userExist) throw new UserExistException();
@@ -52,7 +57,8 @@ export class DatabaseService {
 
     return await this.userModel.findByIdAndDelete(_id);
   }
-
+  /* --------------- */
+  /* GUILD FUNCTIONS */
   async registerGuild(_id: string) {
     const guildExist = await this.guildModel.findOne({ _id });
     if (guildExist) throw new GuildExistException();
@@ -88,5 +94,40 @@ export class DatabaseService {
     if (!guildExist) throw new GuildNotFoundException();
 
     return await this.guildModel.findByIdAndDelete(_id);
+  }
+  /* --------------- */
+  /* COMMAND FUNCTIONS */
+
+  async registerCommand(name: string, description: string, isAvailable = true) {
+    const commandExist = await this.commandModel.findOne({ name });
+    if (commandExist) throw new CommandExistException();
+
+    return new this.commandModel({ name, description, isAvailable }).save();
+  }
+
+  async updateCommand(name: string, description: string, isAvailable = true) {
+    return await this.commandModel.findOneAndUpdate(
+      { name },
+      { name, description, isAvailable },
+      { new: true, upsert: true },
+    );
+  }
+
+  async changeCommandStatus(name: string, status: boolean) {
+    const commandExist = await this.commandModel.findOne({ name });
+    if (!commandExist) throw new CommandNotFoundException();
+
+    return await this.commandModel.findByIdAndUpdate(
+      commandExist._id,
+      { isAvailable: status },
+      { new: true },
+    );
+  }
+
+  async removeCommand(name: string) {
+    const commandExist = await this.commandModel.findOne({ name });
+    if (!commandExist) throw new CommandNotFoundException();
+
+    return await this.commandModel.findByIdAndDelete(commandExist._id);
   }
 }

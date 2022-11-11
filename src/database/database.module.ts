@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseService } from './database.service';
 import {
+  CommandSchema,
+  DatabaseCommand,
   DatabaseGuild,
   DatabaseUser,
   GuildSchema,
@@ -18,6 +20,10 @@ import {
       {
         name: DatabaseUser.name,
         schema: UserSchema,
+      },
+      {
+        name: DatabaseCommand.name,
+        schema: CommandSchema,
       },
     ]),
   ],
