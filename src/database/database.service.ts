@@ -6,20 +6,9 @@ import {
   CommandNotFoundException,
   GuildExistException,
   GuildNotFoundException,
-  UserExistException,
-  UserNotFoundException,
 } from 'src/exceptions';
 import { Locale } from '../constants/enums/locale';
-import { Permission } from '../constants/enums/permission';
-import { Role } from '../constants/enums/role';
-import {
-  Command,
-  CommandDocument,
-  Guild,
-  GuildDocument,
-  User,
-  UserDocument,
-} from './schemas';
+import { Command, CommandDocument, Guild, GuildDocument } from './schemas';
 
 @Injectable()
 export class DatabaseService {
@@ -27,47 +16,10 @@ export class DatabaseService {
     @InjectModel(Guild.name)
     private readonly guildModel: Model<GuildDocument>,
 
-    @InjectModel(User.name)
-    private readonly userModel: Model<UserDocument>,
-
     @InjectModel(Command.name)
     private readonly commandModel: Model<CommandDocument>,
   ) {}
 
-  /* USER FUNCTIONS */
-  async registerUser(_id: string) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (userExist) throw new UserExistException();
-
-    const newUser = new this.userModel({ _id });
-    return await newUser.save();
-  }
-
-  async changeUserPermission(_id: string, permission: Permission) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
-    return await this.userModel.findByIdAndUpdate(
-      _id,
-      { permission },
-      { new: true },
-    );
-  }
-
-  async changeUserRole(_id: string, role: Role) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
-    return await this.userModel.findByIdAndUpdate(_id, { role }, { new: true });
-  }
-
-  async removeUser(_id: string) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
-    return await this.userModel.findByIdAndDelete(_id);
-  }
-  /* --------------- */
   /* GUILD FUNCTIONS */
   async registerGuild(_id: string) {
     const guildExist = await this.guildModel.findOne({ _id });
