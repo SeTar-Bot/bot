@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from '../database/schemas';
+import { User, UserSchema } from '../schemas';
 import { UsersService } from './users.service';
 
 @Module({

@@ -3,12 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
-import GeneralConfig from './config';
-import { DatabaseModule } from './database/database.module';
-import { DiscordModule } from './discord/discord.module';
-import { UsersModule } from './users/users.module';
-import { GuildsModule } from './guilds/guilds.module';
 import { CommandsModule } from './commands/commands.module';
+import GeneralConfig from './config';
+import { DiscordModule } from './discord/discord.module';
+import { GuildsModule } from './guilds/guilds.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,7 +22,6 @@ import { CommandsModule } from './commands/commands.module';
       }),
       inject: [ConfigService],
     }),
-    DatabaseModule,
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {

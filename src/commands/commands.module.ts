@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Command, CommandSchema } from '../database/schemas';
+import { Command, CommandSchema } from '../schemas';
 import { CommandsService } from './commands.service';
 
 @Module({

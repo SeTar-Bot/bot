@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Command, CommandDocument } from '../database/schemas';
 import { CommandExistException, CommandNotFoundException } from '../exceptions';
+import { Command, CommandDocument } from '../schemas';
 
 @Injectable()
 export class CommandsService {

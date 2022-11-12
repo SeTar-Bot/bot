@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Permission } from '../constants/enums/permission';
 import { Role } from '../constants/enums/role';
-import { User, UserDocument } from '../database/schemas';
 import { UserExistException, UserNotFoundException } from '../exceptions';
+import { User, UserDocument } from '../schemas';
 
 @Injectable()
 export class UsersService {

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { Locale } from '../../constants/enums/locale';
+import { Locale } from '../constants/enums/locale';
 
 export type GuildDocument = HydratedDocument<Guild>;
 

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Locale } from '../constants/enums/locale';
-import { Guild, GuildDocument } from '../database/schemas';
 import { GuildExistException, GuildNotFoundException } from '../exceptions';
+import { Guild, GuildDocument } from '../schemas';
 
 @Injectable()
 export class GuildsService {
