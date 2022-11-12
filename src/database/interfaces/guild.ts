@@ -1,9 +1,9 @@
 import { Document } from 'mongoose';
-import { locales } from 'src/types';
+import { Locale } from '../../constants/enums/locale';
 
 export interface GuildTypeDoc {
   _id: string;
-  locale: locales;
+  locale: Locale;
   vip: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -11,7 +11,7 @@ export interface GuildTypeDoc {
 
 export interface iGuild extends Document<string, unknown, GuildTypeDoc> {
   _id: string;
-  locale: locales;
+  locale: Locale;
   vip: boolean;
   createdAt: Date;
   updatedAt: Date;

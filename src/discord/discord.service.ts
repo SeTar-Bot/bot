@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Client, ClientOptions, REST } from 'discord.js';
 import { InvalidTokenException } from 'src/exceptions';
-import { iConfigService } from 'src/types';
+import { IConfigService } from '../config';
 
 @Injectable()
 export class DiscordService {
@@ -10,7 +10,7 @@ export class DiscordService {
   private readonly client: Client;
   constructor(
     private readonly token: string,
-    private readonly configService: ConfigService = new ConfigService<iConfigService>(),
+    private readonly configService: ConfigService = new ConfigService<IConfigService>(),
   ) {
     const clientOptions: ClientOptions =
       this.configService.get('discordOptions');

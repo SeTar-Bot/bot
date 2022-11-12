@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { locales } from 'src/types';
+import { Locale } from '../../constants/enums/locale';
 
 @Schema({ timestamps: true })
 export class DatabaseGuild {
@@ -8,11 +8,11 @@ export class DatabaseGuild {
 
   @Prop({
     type: String,
-    enum: locales,
+    enum: Locale,
     required: false,
-    default: locales.ENGLISH,
+    default: Locale.ENGLISH,
   })
-  locale: locales;
+  locale: Locale;
 
   @Prop({ type: Boolean, required: false, default: false })
   vip: boolean;

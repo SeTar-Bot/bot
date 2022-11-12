@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { iConfigService } from 'src/types';
+import { IConfigService } from '../../config';
 import { Command } from '../builders';
 import * as commands from './files';
 @Injectable()
 export class CommandsService {
   private readonly commands: Map<string, Command> = new Map();
 
-  constructor(private readonly configService: ConfigService<iConfigService>) {}
+  constructor(private readonly configService: ConfigService<IConfigService>) {}
 
   async loadCommands() {
-    const commadList = Object.keys(commands);
+    const cmdList = Object.keys(commands);
 
-    for (const i of commadList) {
+    for (const i of cmdList) {
       const command = commands[i] as Command;
       this.commands.set(i, command);
     }

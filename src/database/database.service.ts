@@ -9,7 +9,9 @@ import {
   UserExistException,
   UserNotFoundException,
 } from 'src/exceptions';
-import { locales, permissions, roles } from 'src/types';
+import { Locale } from '../constants/enums/locale';
+import { Permission } from '../constants/enums/permission';
+import { Role } from '../constants/enums/role';
 import { CommandTypeDoc, GuildTypeDoc, UserTypeDoc } from './interfaces';
 import { DatabaseCommand, DatabaseGuild, DatabaseUser } from './schemas';
 
@@ -33,7 +35,7 @@ export class DatabaseService {
     return await newUser.save();
   }
 
-  async changeUserPermission(_id: string, permission: permissions) {
+  async changeUserPermission(_id: string, permission: Permission) {
     const userExist = await this.userModel.findOne({ _id });
     if (!userExist) throw new UserNotFoundException();
 
@@ -44,7 +46,7 @@ export class DatabaseService {
     );
   }
 
-  async changeUserRole(_id: string, role: roles) {
+  async changeUserRole(_id: string, role: Role) {
     const userExist = await this.userModel.findOne({ _id });
     if (!userExist) throw new UserNotFoundException();
 
@@ -78,7 +80,7 @@ export class DatabaseService {
     );
   }
 
-  async changeGuildLocale(_id: string, locale: locales) {
+  async changeGuildLocale(_id: string, locale: Locale) {
     const userExist = await this.guildModel.findOne({ _id });
     if (!userExist) throw new GuildNotFoundException();
 

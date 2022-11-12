@@ -6,10 +6,10 @@ export class DatabaseCommand {
   name: string;
 
   @Prop({ type: String, required: true })
-  description: string;
+  desc: string;
 
   @Prop({ type: Boolean, required: false, default: true })
-  isAvailable: boolean;
+  available: boolean;
 }
 
 export const CommandSchema = SchemaFactory.createForClass(DatabaseCommand);

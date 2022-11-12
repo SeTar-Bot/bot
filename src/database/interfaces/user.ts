@@ -1,18 +1,19 @@
 import { Document } from 'mongoose';
-import { permissions, roles } from 'src/types';
+import { Permission } from '../../constants/enums/permission';
+import { Role } from '../../constants/enums/role';
 
 export interface UserTypeDoc {
   _id: string;
-  permission: permissions;
-  role: roles;
+  permission: Permission;
+  role: Role;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface iUser extends Document<string, unknown, UserTypeDoc> {
   _id: string;
-  permission: permissions;
-  role: roles;
+  permission: Permission;
+  role: Role;
   createdAt: Date;
   updatedAt: Date;
 }

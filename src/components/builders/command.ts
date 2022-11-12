@@ -4,7 +4,7 @@ import {
   GuildResolvable,
   SlashCommandBuilder,
 } from 'discord.js';
-import { permissions } from 'src/types';
+import { Permission } from '../../constants/enums/permission';
 
 export class Command {
   constructor(
@@ -17,7 +17,7 @@ export class Command {
       ctx: CommandInteraction,
       ...args: unknown[]
     ) => Promise<void> | void,
-    readonly permission: permissions = permissions.MEMBER,
+    readonly permission: Permission = Permission.MEMBER,
     readonly guild?: GuildResolvable,
   ) {}
 

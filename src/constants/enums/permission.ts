@@ -1,4 +1,4 @@
-export enum permissions {
+export enum Permission {
   BAN = 0,
   MEMBER = 1,
   SUPPORT = 2,

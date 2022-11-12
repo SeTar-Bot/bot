@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { permissions, roles } from 'src/types';
+import { Permission } from '../../constants/enums/permission';
+import { Role } from '../../constants/enums/role';
 
 @Schema({ timestamps: true })
 export class DatabaseUser {
@@ -8,14 +9,14 @@ export class DatabaseUser {
 
   @Prop({
     type: Number,
-    enum: permissions,
+    enum: Permission,
     required: false,
-    default: permissions.MEMBER,
+    default: Permission.MEMBER,
   })
-  permission: permissions;
+  permission: Permission;
 
-  @Prop({ type: String, enum: roles, required: false, default: roles.MEMBER })
-  role: roles;
+  @Prop({ type: String, enum: Role, required: false, default: Role.MEMBER })
+  role: Role;
 }
 
 export const UserSchema = SchemaFactory.createForClass(DatabaseUser);
