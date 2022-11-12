@@ -7,6 +7,7 @@ import GeneralConfig from './config';
 import { DatabaseModule } from './database/database.module';
 import { DiscordModule } from './discord/discord.module';
 import { UsersModule } from './users/users.module';
+import { GuildsModule } from './guilds/guilds.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { UsersModule } from './users/users.module';
     }),
     DiscordModule.forRoot(process.env.DISCORD_TOKEN),
     UsersModule,
+    GuildsModule,
   ],
   controllers: [],
   providers: [],
