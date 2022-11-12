@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 import { Locale } from '../../constants/enums/locale';
 
+export type GuildDocument = HydratedDocument<Guild>;
+
 @Schema({ timestamps: true })
-export class DatabaseGuild {
+export class Guild {
   @Prop({ type: String, unique: true, required: true })
   _id: string;
 
@@ -18,4 +21,4 @@ export class DatabaseGuild {
   vip: boolean;
 }
 
-export const GuildSchema = SchemaFactory.createForClass(DatabaseGuild);
+export const GuildSchema = SchemaFactory.createForClass(Guild);

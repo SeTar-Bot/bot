@@ -1,7 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
+
+export type CommandDocument = HydratedDocument<Command>;
 
 @Schema({ timestamps: true })
-export class DatabaseCommand {
+export class Command {
   @Prop({ type: String, required: true, unique: true })
   name: string;
 
@@ -12,4 +15,4 @@ export class DatabaseCommand {
   available: boolean;
 }
 
-export const CommandSchema = SchemaFactory.createForClass(DatabaseCommand);
+export const CommandSchema = SchemaFactory.createForClass(Command);

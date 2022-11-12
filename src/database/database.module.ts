@@ -3,9 +3,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseService } from './database.service';
 import {
   CommandSchema,
-  DatabaseCommand,
-  DatabaseGuild,
-  DatabaseUser,
+  Command,
+  Guild,
+  User,
   GuildSchema,
   UserSchema,
 } from './schemas';
@@ -14,15 +14,15 @@ import {
   imports: [
     MongooseModule.forFeature([
       {
-        name: DatabaseGuild.name,
+        name: Guild.name,
         schema: GuildSchema,
       },
       {
-        name: DatabaseUser.name,
+        name: User.name,
         schema: UserSchema,
       },
       {
-        name: DatabaseCommand.name,
+        name: Command.name,
         schema: CommandSchema,
       },
     ]),

@@ -12,18 +12,26 @@ import {
 import { Locale } from '../constants/enums/locale';
 import { Permission } from '../constants/enums/permission';
 import { Role } from '../constants/enums/role';
-import { CommandTypeDoc, GuildTypeDoc, UserTypeDoc } from './interfaces';
-import { DatabaseCommand, DatabaseGuild, DatabaseUser } from './schemas';
+import {
+  Command,
+  CommandDocument,
+  Guild,
+  GuildDocument,
+  User,
+  UserDocument,
+} from './schemas';
 
 @Injectable()
 export class DatabaseService {
   constructor(
-    @InjectModel(DatabaseGuild.name)
-    private readonly guildModel: Model<GuildTypeDoc>,
-    @InjectModel(DatabaseUser.name)
-    private readonly userModel: Model<UserTypeDoc>,
-    @InjectModel(DatabaseCommand.name)
-    private readonly commandModel: Model<CommandTypeDoc>,
+    @InjectModel(Guild.name)
+    private readonly guildModel: Model<GuildDocument>,
+
+    @InjectModel(User.name)
+    private readonly userModel: Model<UserDocument>,
+
+    @InjectModel(Command.name)
+    private readonly commandModel: Model<CommandDocument>,
   ) {}
 
   /* USER FUNCTIONS */

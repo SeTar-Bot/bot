@@ -1,9 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 import { Permission } from '../../constants/enums/permission';
 import { Role } from '../../constants/enums/role';
 
+export type UserDocument = HydratedDocument<User>;
+
 @Schema({ timestamps: true })
-export class DatabaseUser {
+export class User {
   @Prop({ type: String, unique: true, required: true })
   _id: string;
 
@@ -19,4 +22,4 @@ export class DatabaseUser {
   role: Role;
 }
 
-export const UserSchema = SchemaFactory.createForClass(DatabaseUser);
+export const UserSchema = SchemaFactory.createForClass(User);
