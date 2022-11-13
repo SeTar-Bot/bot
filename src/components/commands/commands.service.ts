@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { IConfigService } from '../../config';
 import { Command } from '../builders';
 import * as commands from './files';
+
 @Injectable()
 export class CommandsService {
   private readonly commands: Map<string, Command> = new Map();

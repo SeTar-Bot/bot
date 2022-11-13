@@ -1,11 +1,13 @@
+import { DiscordModule } from '@discord-nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GatewayIntentBits } from 'discord.js';
 import { I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
+import { BotModule } from './bot/bot.module';
 import { CommandsModule } from './commands/commands.module';
 import GeneralConfig from './config';
-import { DiscordModule } from './discord/discord.module';
 import { GuildsModule } from './guilds/guilds.module';
 import { UsersModule } from './users/users.module';
 
@@ -18,7 +20,7 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri: configService.getOrThrow<string>('MONGODB_URI'),
       }),
       inject: [ConfigService],
     }),
@@ -29,12 +31,26 @@ import { UsersModule } from './users/users.module';
         watch: true,
       },
     }),
-    DiscordModule.forRoot(process.env.DISCORD_TOKEN),
     UsersModule,
     GuildsModule,
     CommandsModule,
+    DiscordModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        token: configService.getOrThrow('DISCORD_TOKEN'),
+        discordClientOptions: {
+          intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+        },
+        registerCommandOptions: [
+          {
+            forGuild: configService.get('GUILD_ID_WITH_COMMANDS'),
+            removeCommandsBefore: true,
+          },
+        ],
+      }),
+      inject: [ConfigService],
+    }),
+    BotModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

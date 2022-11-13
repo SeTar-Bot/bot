@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Guild, GuildSchema } from '../schemas';
+import { Guild, GuildSchema } from '../schemas/guild';
 import { GuildsService } from './guilds.service';
 
 @Module({

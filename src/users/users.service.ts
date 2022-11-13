@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { Permission } from '../constants/enums/permission';
 import { Role } from '../constants/enums/role';
 import { UserExistException, UserNotFoundException } from '../exceptions';
-import { User, UserDocument } from '../schemas';
+import { User, UserDocument } from '../schemas/user';
 
 @Injectable()
 export class UsersService {

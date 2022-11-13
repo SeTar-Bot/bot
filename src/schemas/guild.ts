@@ -6,9 +6,6 @@ export type GuildDocument = HydratedDocument<Guild>;
 
 @Schema({ timestamps: true })
 export class Guild {
-  @Prop({ type: String, unique: true, required: true })
-  _id: string;
-
   @Prop({
     type: String,
     enum: Locale,
