@@ -1,8 +1,6 @@
-import { DiscordModule } from '@discord-nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { GatewayIntentBits } from 'discord.js';
 import { I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
 import { BotModule } from './bot/bot.module';
@@ -34,22 +32,6 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     GuildsModule,
     CommandsModule,
-    DiscordModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        token: configService.getOrThrow('DISCORD_TOKEN'),
-        discordClientOptions: {
-          intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
-        },
-        registerCommandOptions: [
-          {
-            forGuild: configService.get('GUILD_ID_WITH_COMMANDS'),
-            removeCommandsBefore: true,
-          },
-        ],
-      }),
-      inject: [ConfigService],
-    }),
     BotModule,
   ],
 })
