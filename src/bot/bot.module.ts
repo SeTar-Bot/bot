@@ -14,7 +14,8 @@ import { PlayService } from './services/play.service';
     DiscordModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        token: configService.getOrThrow('DISCORD_TOKEN'),
+        token: configService.getOrThrow('DISCORD_BOT_TOKEN'),
+        prefix: configService.getOrThrow('DISCORD_BOT_PREFIX'),
         discordClientOptions: {
           intents: [
             GatewayIntentBits.Guilds,
@@ -26,7 +27,7 @@ import { PlayService } from './services/play.service';
         },
         registerCommandOptions: [
           {
-            forGuild: configService.get('GUILD_ID_WITH_COMMANDS'),
+            forGuild: configService.get('DISCORD_GUILD_ID_WITH_COMMANDS'),
             removeCommandsBefore: true,
           },
         ],
@@ -36,15 +37,18 @@ import { PlayService } from './services/play.service';
     DiscordModule.forFeature(),
   ],
   providers: [
+    // Root service
     BotGateway,
 
     // Services
     PlayService,
 
-    // Commands
+    // Slash commands
     PlayCommand,
     PlaylistCommand,
     BaseInfoCommand,
+
+    // Prefix commands
     StatsCommand,
   ],
 })
