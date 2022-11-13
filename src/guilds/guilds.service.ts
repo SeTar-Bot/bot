@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Locale } from '../constants/enums/locale';
-import { GuildExistException, GuildNotFoundException } from '../exceptions';
 import { Guild, GuildDocument } from '../schemas/guild';
 
 @Injectable()
@@ -12,29 +11,15 @@ export class GuildsService {
     private readonly guildModel: Model<GuildDocument>,
   ) {}
 
-  async register(_id: string) {
-    const guildExist = await this.guildModel.findOne({ _id });
-    if (guildExist) throw new GuildExistException();
-
-    const newGuild = new this.guildModel({ _id });
-    return await newGuild.save();
+  async register(guildId: string) {
+    return await this.guildModel.create({ guildId });
   }
 
-  async makeVIP(_id: string) {
-    const guildExist = await this.guildModel.findOne({ _id });
-    if (!guildExist) throw new GuildNotFoundException();
-
-    return await this.guildModel.findByIdAndUpdate(
-      _id,
-      { vip: !guildExist.vip },
-      { new: true },
-    );
+  async updateVIPStatus(_id: string, vip: boolean) {
+    return await this.guildModel.findByIdAndUpdate(_id, { vip }, { new: true });
   }
 
-  async updateLocale(_id: string, locale: Locale) {
-    const userExist = await this.guildModel.findOne({ _id });
-    if (!userExist) throw new GuildNotFoundException();
-
+  async updateLocale(_id: mongoose.ObjectId, locale: Locale) {
     return await this.guildModel.findByIdAndUpdate(
       _id,
       { locale },
@@ -42,10 +27,7 @@ export class GuildsService {
     );
   }
 
-  async remove(_id: string) {
-    const guildExist = await this.guildModel.findOne({ _id });
-    if (!guildExist) throw new GuildNotFoundException();
-
+  async remove(_id: mongoose.ObjectId) {
     return await this.guildModel.findByIdAndDelete(_id);
   }
 }
