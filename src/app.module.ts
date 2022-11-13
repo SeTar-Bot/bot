@@ -5,20 +5,21 @@ import { I18nModule } from 'nestjs-i18n';
 import { join } from 'path';
 import { BotModule } from './bot/bot.module';
 import { CommandsModule } from './commands/commands.module';
-import GeneralConfig from './config';
+import { configuration, validationSchema } from './config/configuration';
 import { GuildsModule } from './guilds/guilds.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [GeneralConfig],
       isGlobal: true,
+      load: [configuration],
+      validationSchema,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.getOrThrow<string>('MONGODB_URI'),
+        uri: configService.get('mongo.uri'),
       }),
       inject: [ConfigService],
     }),
