@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { Locale } from '../constants/enums/locale';
 import { Guild, GuildDocument } from '../schemas/guild';
 
@@ -15,19 +15,23 @@ export class GuildsService {
     return await this.guildModel.create({ guildId });
   }
 
-  async updateVIPStatus(_id: string, vip: boolean) {
-    return await this.guildModel.findByIdAndUpdate(_id, { vip }, { new: true });
+  async changeVIPStatus(guildId: string, vip: boolean) {
+    return await this.guildModel.findByIdAndUpdate(
+      { guildId },
+      { vip },
+      { new: true },
+    );
   }
 
-  async updateLocale(_id: mongoose.ObjectId, locale: Locale) {
+  async updateLocale(guildId: string, locale: Locale) {
     return await this.guildModel.findByIdAndUpdate(
-      _id,
+      { guildId },
       { locale },
       { new: true },
     );
   }
 
-  async remove(_id: mongoose.ObjectId) {
-    return await this.guildModel.findByIdAndDelete(_id);
+  async remove(guildId: string) {
+    return await this.guildModel.findByIdAndDelete({ guildId });
   }
 }

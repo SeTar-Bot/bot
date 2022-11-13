@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Permission } from '../constants/enums/permission';
 import { Role } from '../constants/enums/role';
-import { UserExistException, UserNotFoundException } from '../exceptions';
 import { User, UserDocument } from '../schemas/user';
 
 @Injectable()
@@ -13,36 +12,27 @@ export class UsersService {
     private readonly userModel: Model<UserDocument>,
   ) {}
 
-  async register(_id: string) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (userExist) throw new UserExistException();
-
-    const newUser = new this.userModel({ _id });
-    return await newUser.save();
+  async register(userId: string) {
+    return await this.userModel.create({ userId });
   }
 
-  async changePermission(_id: string, permission: Permission) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
+  async changePermission(userId: string, permission: Permission) {
     return await this.userModel.findByIdAndUpdate(
-      _id,
+      { userId },
       { permission },
       { new: true },
     );
   }
 
-  async updateRole(_id: string, role: Role) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
-    return await this.userModel.findByIdAndUpdate(_id, { role }, { new: true });
+  async updateRole(userId: string, role: Role) {
+    return await this.userModel.findByIdAndUpdate(
+      { userId },
+      { role },
+      { new: true },
+    );
   }
 
-  async remove(_id: string) {
-    const userExist = await this.userModel.findOne({ _id });
-    if (!userExist) throw new UserNotFoundException();
-
-    return await this.userModel.findByIdAndDelete(_id);
+  async remove(userId: string) {
+    return await this.userModel.findByIdAndDelete({ userId });
   }
 }

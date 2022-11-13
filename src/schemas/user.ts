@@ -7,6 +7,9 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema({ timestamps: true })
 export class User {
+  @Prop({ type: String, unique: true, index: true })
+  userId: string;
+
   @Prop({
     type: Number,
     enum: Permission,
